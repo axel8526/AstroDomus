@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+
+
+        android:height="@dimen/alto_spinner_1">
+        <shape>
+
+            <solid android:color="@color/gris"></solid>
+        </shape>
+
+    </item>
+    <item
+        android:height="@dimen/tam_icon1"
+        android:width="@dimen/tam_icon1"
+        android:drawable="@drawable/icon_flecha_abajo"
+        android:gravity="end"
+        >
+
+    </item>
+
+</layer-list>

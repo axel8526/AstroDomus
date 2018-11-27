@@ -1,0 +1,118 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+
+    <style name="edit_text_1">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/tam_letras_edit_text</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColorHint">@color/hint</item>
+        <item name="android:textColor">@color/colorPrincipalOscuro</item>
+
+        <item name="android:inputType">text</item>
+
+
+    </style>
+    <style name="contenedor_edit_text1">
+        <item name="android:textColorHint">@color/hint</item>
+        <item name="android:textColor">@color/colorPrincipalOscuro</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+
+    </style>
+
+
+    <style name="contenedor_linear_edit_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_weight">10</item>
+        <item name="android:layout_marginTop">7dp</item>
+        <item name="android:layout_marginBottom">7dp</item>
+    </style>
+    <style name="icon_1">
+        <item name="android:layout_width">@dimen/tam_icon1</item>
+        <item name="android:layout_height">@dimen/tam_icon1</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:padding">7dp</item>
+
+    </style>
+
+
+    <style name="boton_1">
+        <item name="android:layout_width">140dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:background">@drawable/anim_boton</item>
+        <item name="android:textColor">@color/c_text_boton</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="link_1">
+
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">45dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/gris</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="boton_home">
+        <item name="android:layout_width">@dimen/botones_home</item>
+        <item name="android:layout_height">@dimen/botones_home</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">10dp</item>
+
+    </style>
+
+    <style name="boton_flecha">
+
+
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">end</item>
+        <item name="android:src">@drawable/icon_next</item>
+        <item name="android:background">@color/negro_transparente2</item>
+
+
+
+    </style>
+
+    <style name="texto_user_informacion">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">7dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/texto_info</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+
+
+
+
+
+
+
+</resources>

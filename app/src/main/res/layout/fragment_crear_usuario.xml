@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/fondo_app"
+    tools:context=".fragments.UsuariosFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+       <android.support.design.widget.CoordinatorLayout
+           android:layout_width="match_parent"
+           android:layout_marginBottom="4dp"
+           android:layout_height="wrap_content">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_margin="25dp"
+                    android:background="@drawable/fondo_formulario"
+                    android:orientation="vertical"
+                    android:layout_gravity="center|bottom"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="55dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+
+                    android:layout_height="wrap_content">
+
+                    <Spinner
+                        android:padding="5dp"
+                        android:layout_marginBottom="7dp"
+                        android:id="@+id/spinner_rol"
+                        android:background="@color/blanco_transparente2"
+
+                        android:backgroundTint="@android:color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"></Spinner>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+
+                        <ImageView
+                            style="@style/icon_1"
+                            android:src="@drawable/icon_user2"
+                            />
+
+                        <android.support.design.widget.TextInputLayout
+                            style="@style/contenedor_edit_text1">
+
+
+                            <EditText
+                                android:id="@+id/cu_correo"
+                                style="@style/edit_text_1"
+                                android:inputType="textEmailAddress"
+                                android:hint="Correo electronico"/>
+                        </android.support.design.widget.TextInputLayout>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+
+                        >
+
+                        <ImageView
+                            style="@style/icon_1"
+                            android:src="@drawable/icon_id_"
+                            />
+
+                        <android.support.design.widget.TextInputLayout
+                            style="@style/contenedor_edit_text1"
+                            android:backgroundTint="@android:color/black">
+
+
+                            <EditText
+                                android:id="@+id/cu_id"
+                                style="@style/edit_text_1"
+                                android:inputType="number"
+                                android:hint="Cedula"
+                                android:backgroundTint="@android:color/black"/>
+                        </android.support.design.widget.TextInputLayout>
+
+
+                    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+                </LinearLayout>
+
+
+
+
+           <Button
+               android:id="@+id/cu_bton_crear"
+               style="@style/boton_1"
+
+               android:text="crear usuario"
+               android:layout_gravity="bottom|center"
+
+               />
+       </android.support.design.widget.CoordinatorLayout>
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/link_lista_usuarios"
+            style="@style/link_1"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:text="Ver usuarios registrados"/>
+
+
+    </LinearLayout>
+
+
+
+</FrameLayout>

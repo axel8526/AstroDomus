@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:width="@dimen/tam_icon_user_list"
+        android:height="@dimen/tam_icon_user_list"
+        android:gravity="center"
+        >
+
+        <shape >
+
+            <solid android:color="@android:color/white"/>
+            <corners android:radius="2dp"/>
+        </shape>
+    </item>
+    <item
+        android:width="@dimen/tam_icon_user_list1"
+        android:height="@dimen/tam_icon_user_list1"
+        android:gravity="center"
+        >
+        <shape
+            >
+            <solid android:color="@color/azul1"/>
+            <corners android:radius="2dp"/>
+
+        </shape>
+
+    </item>
+    <item
+        android:width="@dimen/tam_icon_user_list2"
+        android:height="@dimen/tam_icon_user_list2"
+        android:drawable="@drawable/icon_search"
+        android:gravity="center"
+        >
+
+
+    </item>
+
+</layer-list>

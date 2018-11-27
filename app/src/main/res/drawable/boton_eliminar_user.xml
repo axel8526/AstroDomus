@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:width="@dimen/tam_boton_eliminar_user_list"
+        android:height="@dimen/tam_boton_eliminar_user_list"
+        >
+
+        <shape>
+
+            <stroke android:color="@color/gosth" android:width="1dp"/>
+            <solid android:color="@android:color/transparent"/>
+            <corners android:bottomLeftRadius="10dp"/>
+        </shape>
+
+
+    </item>
+
+
+</layer-list>

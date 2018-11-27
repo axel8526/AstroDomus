@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_usuarios"
+            android:icon="@drawable/icon_usuarios"
+            android:title="Usuarios" />
+        <item
+            android:id="@+id/nav_controles"
+            android:icon="@drawable/icon_control"
+            android:title="Controles" />
+        <item
+            android:id="@+id/nav_perfiles"
+            android:icon="@drawable/icon_perfil"
+            android:title="Perfiles" />
+        <item
+            android:id="@+id/nav_componentes"
+            android:icon="@drawable/icon_edit_componentes"
+            android:title="Componentes" />
+        <item
+            android:id="@+id/nav_reportes"
+            android:icon="@drawable/icon_reportes"
+            android:title="Reportes" />
+    </group>
+
+    <item android:title="Configuración">
+        <menu>
+            <item
+                android:id="@+id/nav_datos_person"
+                android:icon="@drawable/icon_user2"
+                android:title="Datos personales" />
+            <item
+                android:id="@+id/nav_seguridad"
+                android:icon="@drawable/icon_password2"
+                android:title="Seguridad" />
+        </menu>
+    </item>
+
+</menu>

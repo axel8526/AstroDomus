@@ -1,0 +1,22 @@
+<resources>
+
+    <style name="edit_text_1">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/tam_letras_edit_text</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColorHint">@color/hint</item>
+        <item name="android:textColor">@color/colorPrincipalOscuro</item>
+        <item name="android:backgroundTint">@color/colorPrincipalOscuro</item>
+
+        <item name="android:inputType">text</item>
+
+    </style>
+
+    <style name="contenedor_edit_text1">
+        <item name="android:textColorHint">@color/hint</item>
+        <item name="android:textColor">@color/colorPrincipalOscuro</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:backgroundTint">@color/colorPrincipalOscuro</item>
+    </style>
+</resources>

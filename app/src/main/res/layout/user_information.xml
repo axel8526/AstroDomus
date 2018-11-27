@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/ui_contenedor_datos"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#5a6d8e"
+        android:orientation="vertical"
+        android:layout_height="150dp">
+        <Button
+            android:layout_marginLeft="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:drawableStart="@drawable/icon_back"
+            android:id="@+id/ui_bton_atras"
+            android:background="@android:color/transparent"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_usuario_lista_big"
+            android:layout_marginBottom="10dp"
+
+            />
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            >
+            <TextView
+                android:id="@+id/ui_nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:layout_gravity="center"
+                android:textColor="@android:color/white"
+                android:text="Johan alexander casanova riascos"/>
+            <TextView
+                android:id="@+id/ui_rol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:layout_gravity="center"
+
+                android:textColor="@color/gris"
+                android:text="ADMINISTRADOR"/>
+
+
+
+
+            <TextView
+                android:id="@+id/h_id_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@android:color/white"
+                android:text=""/>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/con_datos"
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/fondo_formulario"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:padding="12dp"
+
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    style="@style/contenedor_edit_text1"
+                    >
+
+                    <ImageView
+                        style="@style/icon_1"
+                        android:src="@drawable/icon_user2"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/ui_id"
+                        style="@style/texto_user_informacion"
+                        android:text="texto informacion"/>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/contenedor_edit_text1"
+                    >
+
+                    <ImageView
+                        style="@style/icon_1"
+                        android:src="@drawable/icon_mail"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/ui_correo"
+                        style="@style/texto_user_informacion"
+                        android:text="texto informacion"/>
+                </LinearLayout>
+                <LinearLayout
+                    style="@style/contenedor_edit_text1"
+                    >
+
+                    <ImageView
+                        style="@style/icon_1"
+                        android:src="@drawable/icon_movil"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/ui_movil"
+                        style="@style/texto_user_informacion"
+                        android:text="texto informacion"/>
+                </LinearLayout>
+                <LinearLayout
+                style="@style/contenedor_edit_text1"
+                >
+
+                <ImageView
+                    style="@style/icon_1"
+                    android:src="@drawable/icon_direccion"
+
+                    />
+
+                <TextView
+                    android:id="@+id/ui_direccion"
+                    style="@style/texto_user_informacion"
+                    android:text="texto informacion"/>
+            </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/ui_bton_borrar"
+        style="@style/boton_1"
+        android:layout_gravity="center"
+        android:layout_height="30dp"
+        android:layout_width="100dp"
+        android:drawableStart="@drawable/icon_borrar"
+        android:textSize="12sp"
+        android:text="eliminar"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@id/con_datos"
+
+        />
+
+
+</LinearLayout>

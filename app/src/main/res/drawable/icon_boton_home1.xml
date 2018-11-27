@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:width="@dimen/tam_bton_home2"
+        android:height="@dimen/tam_bton_home2"
+        android:gravity="center"
+        >
+
+        <shape android:shape="oval">
+
+            <solid android:color="@color/rojo2"/>
+        </shape>
+    </item>
+    <item
+        android:width="@dimen/tam_bton_home"
+        android:height="@dimen/tam_bton_home"
+        android:gravity="center"
+        >
+        <shape
+            android:shape="oval"
+            >
+            <solid android:color="@color/rojo1"/>
+
+        </shape>
+
+    </item>
+    <item
+        android:width="@dimen/tam_bton_home0"
+        android:height="@dimen/tam_bton_home0"
+        android:drawable="@drawable/icon_control"
+        android:gravity="center"
+        >
+
+
+    </item>
+
+</layer-list>

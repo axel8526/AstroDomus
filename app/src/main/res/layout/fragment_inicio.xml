@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ghost"
+
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.InicioFragment"
+    >
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
+
+        >
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                card_view:cardCornerRadius="3dp"
+                android:layout_margin="10dp"
+                card_view:cardElevation="10dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@color/azul3"
+
+
+                    android:id="@+id/home_bton_user"
+
+                    >
+                    <TextView
+                        style="@style/boton_home"
+                        android:background="@drawable/icon_boton_home3"
+                        />
+                    <TextView
+                        style="@style/boton_home"
+                        android:textColor="@android:color/white"
+                        android:text="Usuarios"/>
+                    <android.support.design.widget.CoordinatorLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                           style="@style/boton_flecha"
+                            />
+                    </android.support.design.widget.CoordinatorLayout>
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                card_view:cardCornerRadius="3dp"
+                android:layout_margin="10dp"
+                card_view:cardElevation="10dp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/home_bton_control"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@color/rojo3"
+                    >
+                    <TextView
+                        style="@style/boton_home"
+                        android:background="@drawable/icon_boton_home1"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        style="@style/boton_home"
+                        android:text="Controles"/>
+
+                    <android.support.design.widget.CoordinatorLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            style="@style/boton_flecha"
+                            />
+                    </android.support.design.widget.CoordinatorLayout>
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                card_view:cardCornerRadius="3dp"
+                android:layout_margin="10dp"
+                card_view:cardElevation="10dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/home_bton_perfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@color/morado3"
+
+
+
+                    >
+                    <TextView
+                        style="@style/boton_home"
+                        android:background="@drawable/icon_boton_home5"
+                        />
+                    <TextView
+                        style="@style/boton_home"
+                        android:textColor="@android:color/white"
+                        android:text="Perfiles"/>
+                    <android.support.design.widget.CoordinatorLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            style="@style/boton_flecha"
+                            />
+                    </android.support.design.widget.CoordinatorLayout>
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                card_view:cardCornerRadius="3dp"
+                card_view:cardElevation="10dp"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/home_bton_componente"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/amarillo3"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        style="@style/boton_home"
+                        android:background="@drawable/icon_boton_home2"
+                        />
+                    <TextView
+                        style="@style/boton_home"
+                        android:layout_width="wrap_content"
+                        android:text="Componentes"/>
+                    <android.support.design.widget.CoordinatorLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            style="@style/boton_flecha"
+                            />
+                    </android.support.design.widget.CoordinatorLayout>
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                card_view:cardCornerRadius="3dp"
+                card_view:cardElevation="10dp"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content">
+
+
+
+                <LinearLayout
+                    android:id="@+id/home_bton_reporte"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@color/verde3"
+                    >
+                    <TextView
+                        style="@style/boton_home"
+                        android:background="@drawable/icon_boton_home4"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        style="@style/boton_home"
+                        android:text="Reportes"/>
+                    <android.support.design.widget.CoordinatorLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            style="@style/boton_flecha"
+                            />
+                    </android.support.design.widget.CoordinatorLayout>
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

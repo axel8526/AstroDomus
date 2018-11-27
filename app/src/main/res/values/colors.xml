@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0cb1a2</color>
+    <color name="colorPrimaryDark">#048377</color>ro
+    <color name="colorPrincipalOscuro">#007469</color>
+    <!--#9ae4de color accent anterior-->
+    <color name="colorAccent">#55aca5</color>
+    <color name="colorGeneral1">#19ffe9</color>
+    <color name="colorGeneral">#00453e</color>
+    <color name="verde_transparente">#69022322</color>
+    <color name="negro_tranparente">#700a3a74</color>
+    <color name="color_barra_notificacion">#2c3239</color>
+    <color name="boton_basico">#08c4b3</color>
+
+    <color name="icon_oscuro">#3b7974</color>
+    <color name="hint">#55aca5</color>
+    <color name="fondo_dialog_oscuro">#18000000</color>
+
+    <color name="gris">#7bcec7</color>
+    <color name="ghost">#e4e4e4</color>
+
+
+    <color name="c_letrar_formulario">#3d3c3c</color>
+    <color name="c_letras_hin_formulario">#688380</color>
+    <color name="c_text_boton">#FFF</color>
+
+    <color name="rojo1">#c61f1f</color>
+    <color name="rojo2">#df6060</color>
+    <color name="rojo3">#932020</color>
+
+    <color name="amarillo1">#c6aa1f</color>
+    <color name="amarillo2">#dfc860</color>
+    <color name="amarillo3">#97800a</color>
+
+    <color name="verde1">#1fc665</color>
+    <color name="verde2">#60df75</color>
+    <color name="verde3">#25844d</color>
+
+    <color name="morado1">#6d1fc6</color>
+    <color name="morado2">#9560df</color>
+    <color name="morado3">#452584</color>
+
+    <color name="azul1">#1f6ac6</color>
+    <color name="azul2">#60bfdf</color>
+    <color name="azul3">#0a3a74</color>
+
+    <color name="gosth">#f5f5f5</color>
+
+    <color name="negro_transparente2">#22000000</color>
+    <color name="blanco_transparente2">#c1ffffff</color>
+    <color name="texto_info">#688380</color>
+</resources>

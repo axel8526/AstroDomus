@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="300dp"
+    android:layout_gravity="center"
+    android:background="@color/ghost"
+    android:layout_height="450dp">
+
+
+    <include layout="@layout/user_information"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="7dp"
+                android:layout_marginLeft="6dp"
+                android:background="@drawable/marco_delgado_negro"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/lu_edit_buscar"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:inputType="text"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="12dp"
+                    android:backgroundTint="@android:color/transparent"
+                    android:hint="correo o identificacion"/>
+
+                <TextView
+                    android:id="@+id/lu_bton_clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginRight="7dp"
+                    android:textStyle="bold"
+                    android:textSize="22sp"/>
+            </LinearLayout>
+
+
+
+            <Button
+                android:id="@+id/lu_bton_buscar"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:background="@drawable/icon_buscador"/>
+        </LinearLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_usuarios"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>
