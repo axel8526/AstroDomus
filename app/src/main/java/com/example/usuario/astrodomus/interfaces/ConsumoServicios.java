@@ -1,5 +1,6 @@
 package com.example.usuario.astrodomus.interfaces;
 
+import com.example.usuario.astrodomus.models.Ambiente;
 import com.example.usuario.astrodomus.models.Rol;
 import com.example.usuario.astrodomus.models.Usuario;
 
@@ -51,4 +52,12 @@ public interface ConsumoServicios {
     @GET("change_password.php")
     Call<ResponseBody> updatePassword(@Query("password") String password,
                                       @Query("correo") String correo);
+
+
+    @GET("get_ambientes.php")
+    Call<List<Ambiente>> getAmbientes(@Query("rol") String rol);
+
+    @GET("cambiar_estado_ambientes.php")
+    Call<ResponseBody> cambiarEstadoAmbiente(@Query("id_ambiente") String idAmbiente,
+                                             @Query("estado_ac") String estadoAc);
 }

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.usuario.astrodomus.R;
 import com.example.usuario.astrodomus.activities.InicioSesionActivity;
 import com.example.usuario.astrodomus.control.ManagerRetrofit;
+import com.example.usuario.astrodomus.dialogs.ConfirmarAccionDialog;
 import com.example.usuario.astrodomus.holders.HolderUser;
 import com.example.usuario.astrodomus.interfaces.ConsumoServicios;
 import com.example.usuario.astrodomus.interfaces.ListenerListaUsuarios;
@@ -51,8 +52,8 @@ public class AdapterUsuarios extends RecyclerView.Adapter<HolderUser> {
 
 
     @Override
-    public void onBindViewHolder(@NonNull HolderUser holder, int position) {
-            Usuario user=usuarios.get(position);
+    public void onBindViewHolder(@NonNull final HolderUser holder, int position) {
+            final Usuario user=usuarios.get(position);
 
 
 
@@ -65,7 +66,15 @@ public class AdapterUsuarios extends RecyclerView.Adapter<HolderUser> {
             holder.getNombreUser().setText(user.getCorreo());
             holder.getRolUser().setText(user.getRol());
 
-            eliminarUsuario(holder.getBotonElinimar(),user.getId());
+
+            //eliminarUsuario(holder.getBotonElinimar(),user.getId());
+
+            holder.getBotonElinimar().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   eliminarUsuario2(user);
+                }
+            });
 
             clickUsuario(holder.getContenedor(),user);
 
@@ -78,6 +87,33 @@ public class AdapterUsuarios extends RecyclerView.Adapter<HolderUser> {
             }
         });
     }
+
+    public void eliminarUsuario2(final Usuario usuario){
+        final ConfirmarAccionDialog confirmarAccionDialog=new ConfirmarAccionDialog(context,
+                "¿Eliminar usuario?",
+                        "Esta acción eliminara esta cuenta");
+
+        confirmarAccionDialog.abrirDialog();
+
+
+        confirmarAccionDialog.getBtonConfirmar().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                eliminar(usuario.getId());
+                confirmarAccionDialog.cerrarDialog();
+            }
+        });
+        confirmarAccionDialog.getBtonCancelar().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                confirmarAccionDialog.cerrarDialog();
+
+
+            }
+        });
+    }
+
+
 
     public void eliminarUsuario(ImageView view, final String id){
         view.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +141,7 @@ public class AdapterUsuarios extends RecyclerView.Adapter<HolderUser> {
             }
         });
     }
+
     public void eliminar(String id){
         ConsumoServicios servicio =new ManagerRetrofit(context).getConsumoServicio();
         Call<ResponseBody> res=servicio.eliminarUsuario(id);

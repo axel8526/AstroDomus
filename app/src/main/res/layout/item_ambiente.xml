@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
 
             android:background="#5a6d8e"
-            android:id="@+id/h_contenedor_item"
+            android:id="@+id/amb_contenedor_item"
             android:orientation="horizontal"
             android:layout_height="@dimen/alto_item_user_list">
             <ImageView
@@ -39,7 +39,7 @@
 
                 >
                 <TextView
-                    android:id="@+id/h_nombre_user"
+                    android:id="@+id/amb_nombre_ambiente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/white"
@@ -54,7 +54,7 @@
                     >
 
                     <TextView
-                        android:id="@+id/h_rol_user"
+                        android:id="@+id/amb_estado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="10sp"
@@ -80,6 +80,7 @@
 
 
                 <ImageView
+                    android:id="@+id/amb_power"
                     android:layout_width="30dp"
                     android:background="@drawable/boton_eliminar_user"
                     android:paddingLeft="3dp"
@@ -91,14 +92,11 @@
                     android:layout_height="30dp" />
 
                 <Switch
+                    android:id="@+id/amb_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
                     android:layout_gravity="end|bottom"/>
-
-
-
-
 
 
             </android.support.design.widget.CoordinatorLayout>

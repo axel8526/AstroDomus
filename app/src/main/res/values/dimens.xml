@@ -25,6 +25,10 @@
     <dimen name="big_icon_user_list1">57dp</dimen>
     <dimen name="big_icon_user_list2">53dp</dimen>
 
+    <dimen name="big_icon_dg">50dp</dimen>
+    <dimen name="big_icon_dg1">43dp</dimen>
+    <dimen name="big_icon_dg2">43dp</dimen>
+
     <dimen name="alto_item_user_list">70dp</dimen>
 
     <dimen name="tam_boton_eliminar_user_list">30dp</dimen>

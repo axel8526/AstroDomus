@@ -33,6 +33,7 @@ import com.example.usuario.astrodomus.activities.InicioSesionActivity;
 import com.example.usuario.astrodomus.adapters.AdapterUsuarios;
 import com.example.usuario.astrodomus.control.EnviarMail;
 import com.example.usuario.astrodomus.control.ManagerRetrofit;
+import com.example.usuario.astrodomus.dialogs.ConfirmarAccionDialog;
 import com.example.usuario.astrodomus.interfaces.ConsumoServicios;
 import com.example.usuario.astrodomus.interfaces.ListenerListaUsuarios;
 import com.example.usuario.astrodomus.interfaces.MensajeEnviado;
@@ -406,26 +407,27 @@ public class UsuariosFragment extends Fragment implements ListenerListaUsuarios,
 
     public void eliminarUsuario(final String id){
 
-                final Dialog dialog=new Dialog(getActivity());
-                dialog.setContentView(R.layout.dialog_eliminar_user);
+        final ConfirmarAccionDialog confirmarAccionDialog=new ConfirmarAccionDialog(getActivity(),
+                "¿Eliminar usuario?","Esta acción eliminara esta cuenta");
 
-                dialog.findViewById(R.id.dg_bton_aceptar).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        eliminar(id);
-                        abrirLista();
-                        dialog.dismiss();
-                    }
-                });
+        confirmarAccionDialog.abrirDialog();
 
-                dialog.findViewById(R.id.dg_bton_cancelar).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
+        confirmarAccionDialog.getBtonCancelar().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                confirmarAccionDialog.cerrarDialog();
+            }
+        });
 
-                dialog.show();
+        confirmarAccionDialog.getBtonConfirmar().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                eliminar(id);
+                abrirLista();
+
+                confirmarAccionDialog.cerrarDialog();
+            }
+        });
 
     }
     public void eliminar(String id){

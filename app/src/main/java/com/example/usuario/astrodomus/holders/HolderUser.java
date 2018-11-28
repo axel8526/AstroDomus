@@ -1,6 +1,6 @@
 package com.example.usuario.astrodomus.holders;
 
-import android.support.v7.widget.CardView;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,6 +15,7 @@ public class HolderUser extends RecyclerView.ViewHolder {
     private ImageView botonElinimar;
     private LinearLayout contenedor;
 
+
     public HolderUser(View itemView) {
         super(itemView);
         nombreUser=itemView.findViewById(R.id.h_nombre_user);
@@ -22,6 +23,7 @@ public class HolderUser extends RecyclerView.ViewHolder {
         botonElinimar=itemView.findViewById(R.id.h_bton_eliminar);
         rolUser=itemView.findViewById(R.id.h_rol_user);
         contenedor=itemView.findViewById(R.id.h_contenedor_item);
+
     }
 
     public LinearLayout getContenedor() {
@@ -63,4 +65,6 @@ public class HolderUser extends RecyclerView.ViewHolder {
     public void setBotonElinimar(ImageView botonElinimar) {
         this.botonElinimar = botonElinimar;
     }
+
+
 }

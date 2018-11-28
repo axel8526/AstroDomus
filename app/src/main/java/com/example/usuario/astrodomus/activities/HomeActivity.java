@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.usuario.astrodomus.R;
+import com.example.usuario.astrodomus.fragments.ControlFragment;
 import com.example.usuario.astrodomus.fragments.UsuariosFragment;
 import com.example.usuario.astrodomus.fragments.InicioFragment;
 import com.example.usuario.astrodomus.interfaces.ComunicaFragment;
@@ -201,6 +202,7 @@ public class HomeActivity extends AppCompatActivity
         Bundle datos=new Bundle();
         datos.putString(InicioSesionActivity.KEY_CORREO,correo);
         datos.putString(InicioSesionActivity.KEY_ID,id);
+        datos.putString(InicioSesionActivity.KEY_ROL,rol);
         fragment.setArguments(datos);
 
 
@@ -210,7 +212,7 @@ public class HomeActivity extends AppCompatActivity
     public Fragment getFragment(int frag){
         switch (frag){
             case FRAG_USER:return new UsuariosFragment();
-            case FRAG_CONTROL:return new UsuariosFragment();
+            case FRAG_CONTROL:return new ControlFragment();
             case FRAG_PERFIL: return new UsuariosFragment();
             case FRAG_COMPONENE: return new UsuariosFragment();
             case FRAG_REPORTE: return new UsuariosFragment();
