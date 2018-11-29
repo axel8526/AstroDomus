@@ -1,6 +1,7 @@
 package com.example.usuario.astrodomus.interfaces;
 
 import com.example.usuario.astrodomus.models.Ambiente;
+import com.example.usuario.astrodomus.models.Componente;
 import com.example.usuario.astrodomus.models.Rol;
 import com.example.usuario.astrodomus.models.Usuario;
 
@@ -60,4 +61,18 @@ public interface ConsumoServicios {
     @GET("cambiar_estado_ambientes.php")
     Call<ResponseBody> cambiarEstadoAmbiente(@Query("id_ambiente") String idAmbiente,
                                              @Query("estado_ac") String estadoAc);
+
+
+    @GET("get_componentes.php")
+    Call<List<Componente>> getComponentes(@Query("id_ambiente") String idAmbiente);
+
+    @GET("get_atributos.php")
+    Call<List<Componente>> getAtributos(@Query("id_componente") String idComponente);
+
+
+    @GET("set_estados_componente.php")
+    Call<ResponseBody> enviarEstadoAtributo(@Query("estado") String estado,
+                                            @Query("id_ambiente") String idAmbiente,
+                                            @Query("id_componente") String idComponente,
+                                            @Query("id_atributo") String idAtributo);
 }

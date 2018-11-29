@@ -27,6 +27,11 @@ public class AdapterAmbientes extends RecyclerView.Adapter<HolderAmbiente> {
     private String rol;
     private Fragment fragment;
 
+    public static final String DISPONIBLE="disponible";
+    public static final String DEFECTUOSO="defectuoso";
+    public static final String OCUPADO="ocupado";
+    private static final String ADMINISTRADOR="ADMINISTRADOR";
+
     public AdapterAmbientes(Context context, ArrayList<Ambiente> ambientes, String rol, Fragment fragment) {
         this.context = context;
         this.ambientes = ambientes;
@@ -50,11 +55,13 @@ public class AdapterAmbientes extends RecyclerView.Adapter<HolderAmbiente> {
         holder.getViewEstado().setText(ambiente.getEstado());
 
 
-        if(ambiente.getEstado().equalsIgnoreCase("defectuoso")){
+        if(ambiente.getEstado().equalsIgnoreCase(DEFECTUOSO)){
+
             holder.getBtonSwitch().setChecked(false);
             holder.getViewEstado().setTextColor(context.getResources().getColor(R.color.rojo1));
             holder.getBtonPower().setVisibility(View.INVISIBLE);
-        }else if(ambiente.getEstado().equalsIgnoreCase("disponible")){
+        }else if(ambiente.getEstado().equalsIgnoreCase(DISPONIBLE)){
+
             holder.getBtonSwitch().setChecked(true);
             holder.getViewEstado().setTextColor(context.getResources().getColor(R.color.gris));
             holder.getBtonSwitch().setEnabled(true);
@@ -69,7 +76,7 @@ public class AdapterAmbientes extends RecyclerView.Adapter<HolderAmbiente> {
 
 
 
-        if(!rol.equalsIgnoreCase("ADMINISTRADOR")) {
+        if(!rol.equalsIgnoreCase(ADMINISTRADOR)) {
             holder.getBtonPower().setVisibility(View.INVISIBLE);
             holder.getBtonSwitch().setVisibility(View.INVISIBLE);
 
@@ -78,7 +85,7 @@ public class AdapterAmbientes extends RecyclerView.Adapter<HolderAmbiente> {
 
         }else{
 
-            if(ambiente.getEstado().equalsIgnoreCase("ocupado")) {
+            if(ambiente.getEstado().equalsIgnoreCase(OCUPADO)) {
 
 
                 holder.getBtonPower().setOnClickListener(new View.OnClickListener() {
@@ -96,7 +103,7 @@ public class AdapterAmbientes extends RecyclerView.Adapter<HolderAmbiente> {
                         dialogConfirmar.getBtonConfirmar().setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                ((ListenerListaAmbiente) fragment).apagarAmbiente(ambiente);
+                                ((ListenerListaAmbiente) fragment).onOffAmbiente(ambiente,"1");
                                 dialogConfirmar.cerrarDialog();
                             }
                         });
@@ -141,7 +148,17 @@ public class AdapterAmbientes extends RecyclerView.Adapter<HolderAmbiente> {
             });
         }
 
-
+        if(!ambiente.getEstado().equalsIgnoreCase(DEFECTUOSO))
+        holder.getContenedor().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(ambiente.getEstado().equalsIgnoreCase(DISPONIBLE)){
+                    ((ListenerListaAmbiente)fragment).onOffAmbiente(ambiente,"2");
+                }else{
+                    ((ListenerListaAmbiente)fragment).iniciarAmbiente(ambiente);
+                }
+            }
+        });
 
     }
 

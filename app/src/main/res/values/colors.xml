@@ -49,4 +49,9 @@
     <color name="negro_transparente2">#22000000</color>
     <color name="blanco_transparente2">#c1ffffff</color>
     <color name="texto_info">#688380</color>
+
+    <color name="titulos_letras_componente">#acacac</color>
+
+    <color name="comp_deshabilitado">#e8868686</color>
+    <color name="comp_habilitado">#c7202631</color>
 </resources>
