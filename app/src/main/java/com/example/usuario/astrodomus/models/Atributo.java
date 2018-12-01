@@ -13,10 +13,15 @@ public class Atributo {
     @Expose
     private String nombreAtributo;
 
+    @SerializedName("estado")
+    @Expose
+    private String estadoAtributo;
 
-    public Atributo(String idAtributo, String nombreAtributo) {
+
+    public Atributo(String idAtributo, String nombreAtributo, String estadoAtributo) {
         this.idAtributo = idAtributo;
         this.nombreAtributo = nombreAtributo;
+        this.estadoAtributo = estadoAtributo;
     }
 
     public String getIdAtributo() {

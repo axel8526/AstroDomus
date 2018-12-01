@@ -65,8 +65,4 @@ public class InicioFragment extends Fragment {
         }
     }
 
-    public void botonesFragmentAdmin(View v){
-
-    }
-
 }

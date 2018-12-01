@@ -3,6 +3,7 @@ package com.example.usuario.astrodomus.control;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 import com.example.usuario.astrodomus.interfaces.ConsumoServicios;
 import com.example.usuario.astrodomus.models.Usuario;
@@ -28,9 +29,10 @@ public class ManagerRetrofit {
 
     public ManagerRetrofit(Context context){
 
-        this.context=context;
+
         SharedPreferences datos= PreferenceManager.getDefaultSharedPreferences(context);
         ip_pc=datos.getString(KEY_IP,"10.103.68.103");
+        //Toast.makeText(context, ip_pc, Toast.LENGTH_SHORT).show();
 
     }
 

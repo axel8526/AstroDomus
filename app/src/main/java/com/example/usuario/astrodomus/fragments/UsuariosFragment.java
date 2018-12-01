@@ -408,7 +408,7 @@ public class UsuariosFragment extends Fragment implements ListenerListaUsuarios,
     public void eliminarUsuario(final String id){
 
         final ConfirmarAccionDialog confirmarAccionDialog=new ConfirmarAccionDialog(getActivity(),
-                "¿Eliminar usuario?","Esta acción eliminara esta cuenta");
+                "¿Eliminar usuario?","Esta acción eliminara esta cuenta",false);
 
         confirmarAccionDialog.abrirDialog();
 

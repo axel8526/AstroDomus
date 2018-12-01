@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.usuario.astrodomus.R;
 import com.example.usuario.astrodomus.control.EnviarMail;
 import com.example.usuario.astrodomus.control.ManagerRetrofit;
+import com.example.usuario.astrodomus.dialogs.ConfirmarAccionDialog;
 import com.example.usuario.astrodomus.interfaces.ConsumoServicios;
 import com.example.usuario.astrodomus.interfaces.MensajeEnviado;
 import com.example.usuario.astrodomus.models.Usuario;
@@ -50,7 +51,7 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
 
 
 
-
+    public static final String ADMINISTRADOR_ROL="ADMINISTRADOR";
     public static final String KEY_CORREO="CORREO";
     public static final String KEY_ID="ID";
     public static final String KEY_ROL="ROL";
@@ -68,6 +69,7 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
 
         progressBar.getIndeterminateDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY);
         mostrarDatos();
+
 
     }
     public void onResume(){
@@ -94,6 +96,7 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
 
         guarda.apply();
     }
+
 
 
 
@@ -188,43 +191,35 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
         }
     }
 
-    public void restablecerPassword(View v){
+    public void restablecerPassword(View v) {
 
-        if(id.getText().toString().equalsIgnoreCase("")){
+        if (id.getText().toString().equalsIgnoreCase("")) {
             Toast.makeText(this, "Ingrese correo electronico", Toast.LENGTH_SHORT).show();
             return;
         }
-        abrirDialogConfimarCorreo();
-
-
+        abrirDialogEnviarCorreo(id.getText().toString().trim());
 
     }
-    public void abrirDialogConfimarCorreo(){
-        final Dialog dialog=new Dialog(this);
-        dialog.setContentView(R.layout.diaglo_confirmar_correo);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    public void abrirDialogEnviarCorreo(String correo){
+        final ConfirmarAccionDialog dialog=new ConfirmarAccionDialog(this,
+                "¿Enviar código?",correo,false);
 
+        dialog.abrirDialog();
+        dialog.setTextBtonConfirmar("enviar");
+        dialog.setTheme(R.drawable.icon_dialog_bien,R.drawable.icon_correcto,R.color.colorPrimary);
 
-        TextView tCorreo=dialog.findViewById(R.id.dg_confirmar_correo);
-        tCorreo.setText(id.getText().toString());
+        dialog.cerrarDialog2();
 
-        dialog.findViewById(R.id.confirmar_bton_enviar).setOnClickListener(new View.OnClickListener() {
+        dialog.getBtonConfirmar().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 comprobarCorreo();
-                dialog.dismiss();
+                mostrarProgressBar();
+                dialog.cerrarDialog();
             }
         });
-
-        dialog.findViewById(R.id.confirmar_bton_cancelar).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
     }
+
     public void comprobarCorreo() {
 
 
@@ -235,6 +230,7 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
             @Override
             public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
                 if(response.body()==null || response.body().size()==0){
+                    mostrarDatos();
                     Toast.makeText(InicioSesionActivity.this, "Correo no registrado en AstroDomus", Toast.LENGTH_LONG).show();
                 }else{
 
@@ -275,27 +271,32 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
 
     }
     public void abrirDialogCodigo(){
-        Dialog dialog=new Dialog(this);
-        dialog.setContentView(R.layout.dialog_ingrese_codigo);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setCanceledOnTouchOutside(false);
 
-        final EditText editCodigo=dialog.findViewById(R.id.c_dg_edit);
+        final ConfirmarAccionDialog dialog=new ConfirmarAccionDialog(this,
+                "Ingrese código","",true);
 
-        dialog.findViewById(R.id.c_dg_bton_confirmar).setOnClickListener(new View.OnClickListener() {
+        dialog.cancelarAlTocarFuera(false);
+        dialog.abrirDialog();
+        dialog.setTextBtonConfirmar("aceptar");
+        dialog.setTheme(R.drawable.icon_dialog_bien,R.drawable.icon_correcto,R.color.colorPrimary);
+
+
+        dialog.cerrarDialog2();
+
+        dialog.getBtonConfirmar().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(editCodigo.getText().toString().equalsIgnoreCase("")){
+                if(dialog.getEditText().getText().toString().equalsIgnoreCase("")){
                     Toast.makeText(InicioSesionActivity.this, "Ingrese codigo", Toast.LENGTH_SHORT).show();
-                }else if(editCodigo.getText().toString().trim().equals(codigoVerificar)){
+
+                }else if(dialog.getEditText().getText().toString().trim().equals(codigoVerificar)){
                     cambiarPassword();
                 }else{
                     Toast.makeText(InicioSesionActivity.this, "Código incorrecto", Toast.LENGTH_SHORT).show();
+                    dialog.cerrarDialog();
                 }
             }
         });
-
-        dialog.show();
     }
 
     public void cambiarPassword(){

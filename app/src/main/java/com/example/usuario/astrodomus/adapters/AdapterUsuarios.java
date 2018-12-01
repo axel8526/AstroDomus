@@ -91,7 +91,7 @@ public class AdapterUsuarios extends RecyclerView.Adapter<HolderUser> {
     public void eliminarUsuario2(final Usuario usuario){
         final ConfirmarAccionDialog confirmarAccionDialog=new ConfirmarAccionDialog(context,
                 "¿Eliminar usuario?",
-                        "Esta acción eliminara esta cuenta");
+                        "Esta acción eliminara esta cuenta",false);
 
         confirmarAccionDialog.abrirDialog();
 

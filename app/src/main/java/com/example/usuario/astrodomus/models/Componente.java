@@ -27,13 +27,26 @@ public class Componente {
     @Expose
     private String power;
 
+    @SerializedName("atributos")
+    @Expose
+    private ArrayList<Atributo> atributos;
 
-    public Componente(String id_ubi, String nombreAmbiente, String nombreComponente, String estado, String power) {
+
+    public Componente(String id_ubi, String nombreAmbiente, String nombreComponente, String estado, String power, ArrayList<Atributo> atributos) {
         this.id_ubi = id_ubi;
         this.nombreAmbiente = nombreAmbiente;
         this.nombreComponente = nombreComponente;
         this.estado = estado;
         this.power = power;
+        this.atributos = atributos;
+    }
+
+    public ArrayList<Atributo> getAtributos() {
+        return atributos;
+    }
+
+    public void setAtributos(ArrayList<Atributo> atributos) {
+        this.atributos = atributos;
     }
 
     public String getPower() {

@@ -75,4 +75,7 @@ public interface ConsumoServicios {
                                             @Query("id_ambiente") String idAmbiente,
                                             @Query("id_componente") String idComponente,
                                             @Query("id_atributo") String idAtributo);
+
+    @GET("apagar_ambiente.php")
+    Call<ResponseBody> apagarAmbiente(@Query("id_ambiente") String idAmbiente);
 }

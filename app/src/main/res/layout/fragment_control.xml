@@ -5,13 +5,31 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ControlFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <android.support.v7.widget.RecyclerView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:id="@+id/control_recycler"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/control_recycler"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
 
 
-    </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.RecyclerView>
+
+        <Button
+            android:id="@+id/control_bton_apagar"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/anim_boton"
+            android:text="apagar todo"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+    <!-- TODO: Update blank fragment layout -->
+
 
 </FrameLayout>

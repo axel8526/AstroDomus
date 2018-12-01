@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.usuario.astrodomus.R;
 import com.example.usuario.astrodomus.fragments.ControlFragment;
+import com.example.usuario.astrodomus.fragments.InicioUsuarioFragment;
 import com.example.usuario.astrodomus.fragments.UsuariosFragment;
 import com.example.usuario.astrodomus.fragments.InicioFragment;
 import com.example.usuario.astrodomus.interfaces.ComunicaFragment;
@@ -217,7 +218,9 @@ public class HomeActivity extends AppCompatActivity
             case FRAG_COMPONENE: return new UsuariosFragment();
             case FRAG_REPORTE: return new UsuariosFragment();
 
-                default: return new InicioFragment();
+                default:
+                    if(rol.equalsIgnoreCase(InicioSesionActivity.ADMINISTRADOR_ROL)) return new InicioFragment();
+                    else return new InicioUsuarioFragment();
         }
     }
 

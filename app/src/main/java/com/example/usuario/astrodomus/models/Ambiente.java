@@ -16,7 +16,7 @@ public class Ambiente {
     @Expose
     private String nombreAmbiente;
 
-    @SerializedName("estado")
+    @SerializedName("id_ac")
     @Expose
     private String estado;
 

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.usuario.astrodomus.R;
 import com.example.usuario.astrodomus.dialogs.ConfirmarAccionDialog;
+import com.example.usuario.astrodomus.fragments.ControlFragment;
 import com.example.usuario.astrodomus.holders.HolderAmbiente;
 import com.example.usuario.astrodomus.interfaces.ListenerListaAmbiente;
 import com.example.usuario.astrodomus.models.Ambiente;
@@ -27,9 +28,9 @@ public class AdapterAmbientes extends RecyclerView.Adapter<HolderAmbiente> {
     private String rol;
     private Fragment fragment;
 
-    public static final String DISPONIBLE="disponible";
-    public static final String DEFECTUOSO="defectuoso";
-    public static final String OCUPADO="ocupado";
+    public static final String DISPONIBLE="DISPONIBLE";
+    public static final String DEFECTUOSO="INHABILITADO";
+    public static final String OCUPADO="OCUPADO";
     private static final String ADMINISTRADOR="ADMINISTRADOR";
 
     public AdapterAmbientes(Context context, ArrayList<Ambiente> ambientes, String rol, Fragment fragment) {
@@ -52,15 +53,23 @@ public class AdapterAmbientes extends RecyclerView.Adapter<HolderAmbiente> {
         final Ambiente ambiente=ambientes.get(position);
 
         holder.getViewNombre().setText(ambiente.getNombreAmbiente());
-        holder.getViewEstado().setText(ambiente.getEstado());
+
+        if(ambiente.getEstado().equalsIgnoreCase(ControlFragment.DISP)){
+            holder.getViewEstado().setText(DISPONIBLE);
+        }else  if(ambiente.getEstado().equalsIgnoreCase(ControlFragment.OCUP)){
+            holder.getViewEstado().setText(OCUPADO);
+        }else{
+            holder.getViewEstado().setText(DEFECTUOSO);
+        }
 
 
-        if(ambiente.getEstado().equalsIgnoreCase(DEFECTUOSO)){
+
+        if(ambiente.getEstado().equalsIgnoreCase(ControlFragment.DEFEC)){
 
             holder.getBtonSwitch().setChecked(false);
             holder.getViewEstado().setTextColor(context.getResources().getColor(R.color.rojo1));
             holder.getBtonPower().setVisibility(View.INVISIBLE);
-        }else if(ambiente.getEstado().equalsIgnoreCase(DISPONIBLE)){
+        }else if(ambiente.getEstado().equalsIgnoreCase(ControlFragment.DISP)){
 
             holder.getBtonSwitch().setChecked(true);
             holder.getViewEstado().setTextColor(context.getResources().getColor(R.color.gris));
@@ -85,7 +94,7 @@ public class AdapterAmbientes extends RecyclerView.Adapter<HolderAmbiente> {
 
         }else{
 
-            if(ambiente.getEstado().equalsIgnoreCase(OCUPADO)) {
+            if(ambiente.getEstado().equalsIgnoreCase(ControlFragment.OCUP)) {
 
 
                 holder.getBtonPower().setOnClickListener(new View.OnClickListener() {
@@ -96,14 +105,16 @@ public class AdapterAmbientes extends RecyclerView.Adapter<HolderAmbiente> {
                         final ConfirmarAccionDialog dialogConfirmar = new ConfirmarAccionDialog(
                                 context,
                                 "¿Apagar ambiente?",
-                                "se apagaran todos los componentes en el ambiente"
+                                "se apagaran todos los componentes en el ambiente",
+                                false
                         );
                         dialogConfirmar.abrirDialog();
 
                         dialogConfirmar.getBtonConfirmar().setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                ((ListenerListaAmbiente) fragment).onOffAmbiente(ambiente,"1");
+                                ambiente.setEstado(ControlFragment.DISP);
+                                ((ListenerListaAmbiente) fragment).onOffAmbiente(ambiente,true);
                                 dialogConfirmar.cerrarDialog();
                             }
                         });
@@ -124,7 +135,9 @@ public class AdapterAmbientes extends RecyclerView.Adapter<HolderAmbiente> {
                     if(!estado) {
                         final ConfirmarAccionDialog dialogConfirmar = new ConfirmarAccionDialog(context,
                                 "¿Ambiente defectuoso?",
-                                "Se pondra el estado del ambiente en defectuoso");
+                                "Se pondra el estado del ambiente en defectuoso",
+                                false
+                        );
                         dialogConfirmar.abrirDialog();
                         dialogConfirmar.getBtonConfirmar().setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -148,14 +161,17 @@ public class AdapterAmbientes extends RecyclerView.Adapter<HolderAmbiente> {
             });
         }
 
-        if(!ambiente.getEstado().equalsIgnoreCase(DEFECTUOSO))
+        if(!ambiente.getEstado().equalsIgnoreCase(ControlFragment.DEFEC))
         holder.getContenedor().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ambiente.getEstado().equalsIgnoreCase(DISPONIBLE)){
-                    ((ListenerListaAmbiente)fragment).onOffAmbiente(ambiente,"2");
+                if(ambiente.getEstado().equalsIgnoreCase(ControlFragment.DISP)){
+                    ambiente.setEstado(ControlFragment.OCUP);
+                    ((ListenerListaAmbiente)fragment).onOffAmbiente(ambiente,true);
+
                 }else{
                     ((ListenerListaAmbiente)fragment).iniciarAmbiente(ambiente);
+
                 }
             }
         });

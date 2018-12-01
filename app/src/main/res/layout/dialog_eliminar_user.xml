@@ -20,6 +20,7 @@
 
 
         <TextView
+            android:id="@+id/accion_dg_barra_superior"
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:background="@color/rojo1"
@@ -55,6 +56,16 @@
                 android:text="¿Eliminar usuario?"
 
                 />
+
+            <EditText
+                android:id="@+id/accion_dg_edittext"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:inputType="number"
+                android:background="@drawable/marco_delgado_negro"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -128,6 +139,7 @@
             android:layout_height="3dp"
             android:background="@color/rojo1"
             android:text="x"
+            android:id="@+id/action_dg_barra_inferior"
 
             android:layout_centerHorizontal="true"
             android:gravity="center"
@@ -145,16 +157,17 @@
 
 
 
-    <TextView
+    <ImageView
+        android:id="@+id/accion_dg_icono_grande"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/icon_confirmar_accion"
-        android:text="x"
+        android:src="@drawable/icon_x"
+        android:padding="10dp"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:textColor="@android:color/white"
         android:textSize="30sp"
-        android:paddingBottom="3dp"
         android:textStyle="bold"
         />
 

@@ -1,6 +1,7 @@
 package com.example.usuario.astrodomus.fragments;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -12,13 +13,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.usuario.astrodomus.R;
+import com.example.usuario.astrodomus.activities.HomeActivity;
 import com.example.usuario.astrodomus.activities.InicioSesionActivity;
 import com.example.usuario.astrodomus.adapters.AdapterAmbientes;
 import com.example.usuario.astrodomus.adapters.AdapterComponentes;
+import com.example.usuario.astrodomus.control.ControlAmbiente;
 import com.example.usuario.astrodomus.control.ManagerRetrofit;
+import com.example.usuario.astrodomus.interfaces.ComunicaFragment;
 import com.example.usuario.astrodomus.interfaces.ConsumoServicios;
 import com.example.usuario.astrodomus.interfaces.ListenerListaAmbiente;
 import com.example.usuario.astrodomus.interfaces.ListenerListaComponente;
@@ -46,7 +51,12 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
     private String rol;
     private Ambiente ambiente;
     private View viewFragment;
-    private ArrayList<Componente> componentes;
+    private ControlAmbiente ctrolAmbiente;
+
+
+    public static final String DISP="1";
+    public static final String DEFEC="3";
+    public static final String OCUP="2";
 
 
     public ControlFragment() {
@@ -60,7 +70,7 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
         // Inflate the layout for this fragment
 
         viewFragment=inflater.inflate(R.layout.fragment_control, container, false);
-        findViews(viewFragment);
+
 
         if(getArguments()!=null){
             rol=getArguments().getString(InicioSesionActivity.KEY_ROL);
@@ -68,40 +78,15 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
         if(getActivity()!=null){
             abrirListaAmbientes();
+            ctrolAmbiente=new ControlAmbiente(getActivity(),this,rol);
+            //Toast.makeText(getActivity(), ""+rol, Toast.LENGTH_SHORT).show();
+            ctrolAmbiente.consultarDatosAmbiente();
+
         }
 
 
         return viewFragment;
     }
-    public void findViews(View v){
-
-    }
-
-    public void consultarDatosComponentes(){
-        ConsumoServicios servicio=new ManagerRetrofit(getActivity()).getConsumoServicio();
-        Call<List<Componente>> res=servicio.getComponentes(ambiente.getIdAmbiente());
-
-        res.enqueue(new Callback<List<Componente>>() {
-            @Override
-            public void onResponse(Call<List<Componente>> call, Response<List<Componente>> response) {
-                cargarDatosComponentes((ArrayList)response.body());
-            }
-
-            @Override
-            public void onFailure(Call<List<Componente>> call, Throwable t) {
-
-            }
-        });
-    }
-    public void cargarDatosComponentes(ArrayList<Componente> componentes){
-        RecyclerView rv=viewFragment.findViewById(R.id.control_recycler);
-        LinearLayoutManager llm=new LinearLayoutManager(getActivity());
-        AdapterComponentes adapter=new AdapterComponentes(getActivity(),componentes,this);
-
-        rv.setLayoutManager(llm);
-        rv.setAdapter(adapter);
-    }
-
 
     public void abrirListaAmbientes(){
         dgListaAmbientes=new Dialog(getActivity());
@@ -109,7 +94,7 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
         dgListaAmbientes.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dgListaAmbientes.setCanceledOnTouchOutside(false);
 
-        consultarDatosAmbiente();
+        //consultarDatosAmbiente();
 
         dgListaAmbientes.show();
 
@@ -123,50 +108,45 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
 
     }
-    public void consultarDatosAmbiente(){
-        ConsumoServicios servicio=new ManagerRetrofit(getActivity()).getConsumoServicio();
 
-        Call<List<Ambiente>> res=servicio.getAmbientes(rol);
-
-        res.enqueue(new Callback<List<Ambiente>>() {
-            @Override
-            public void onResponse(Call<List<Ambiente>> call, Response<List<Ambiente>> response) {
-                cargarDatosAmbiente((ArrayList)response.body());
-            }
-
-            @Override
-            public void onFailure(Call<List<Ambiente>> call, Throwable t) {
-
-            }
-        });
-    }
-
-    public void cargarDatosAmbiente(ArrayList<Ambiente> ambientes){
+    @Override
+    public void ambientes(ArrayList<Ambiente> ambientes) {
         AdapterAmbientes adapterAmbientes=new AdapterAmbientes(getActivity(),ambientes,rol,this);
         LinearLayoutManager llm=new LinearLayoutManager(getActivity());
 
         RecyclerView rv=dgListaAmbientes.findViewById(R.id.m_ambientes_recycler);
         rv.setLayoutManager(llm);
         rv.setAdapter(adapterAmbientes);
-
-    }
-
-
-
-
-    @Override
-    public void estadoAmbiente(boolean estado, Ambiente ambiente) {
-        cambiarEstadoAmbiente(ambiente.getIdAmbiente(),estado?"1":"3");
-
     }
 
     @Override
-    public void onOffAmbiente(Ambiente ambiente, String estadoAc) {
-        cambiarEstadoAmbiente(ambiente.getIdAmbiente(),estadoAc);
-        if(estadoAc.equalsIgnoreCase("2")){
+    public void iniciarAmbiente(Ambiente ambiente) {
+        this.ambiente=ambiente;
+        if(ambiente!=null) {
+            //metodo nuevo
+            ctrolAmbiente.consultarDatosComponentes(ambiente);
+
+            //metodo anterior comentado
+            // consultarDatosComponentes();
+            dgListaAmbientes.dismiss();
+        }
+    }
+
+    @Override
+    public void onOffAmbiente(Ambiente ambiente, boolean lista) {
+
+
+        //metodo anterior comentado
+        //cambiarEstadoAmbiente(ambiente);
+        ctrolAmbiente.cambiarEstadoAmbiente(ambiente,lista);
+
+        if(ambiente.getEstado().equalsIgnoreCase(OCUP)){
             iniciarAmbiente(ambiente);
         }else{
+            //metodo parara agapar el ambiente desde el boton, se comenta porque tiene errores
+            //apagarAmbiente();
             iniciarAmbiente(null);
+
 
         }
 
@@ -174,59 +154,58 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
     }
 
     @Override
-    public void iniciarAmbiente(Ambiente ambiente) {
-        this.ambiente=ambiente;
-        if(ambiente!=null) {
-            consultarDatosComponentes();
-            dgListaAmbientes.dismiss();
-        }
-    }
+    public void componentes(ArrayList<Componente> componentes) {
+        RecyclerView rv=viewFragment.findViewById(R.id.control_recycler);
+        LinearLayoutManager llm=new LinearLayoutManager(getActivity());
+        AdapterComponentes adapter=new AdapterComponentes(getActivity(),componentes,this);
 
+        rv.setLayoutManager(llm);
+        rv.setAdapter(adapter);
 
-    public void cambiarEstadoAmbiente(String idAmbiente, String estadoAc){
-        ConsumoServicios servicio=new ManagerRetrofit(getActivity()).getConsumoServicio();
+        listenerApagarAmbiente();
 
-        Call<ResponseBody> res=servicio.cambiarEstadoAmbiente(idAmbiente,estadoAc);
-
-        res.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                consultarDatosAmbiente();
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
-    }
-
-    @Override
-    public void mostrarAtributos(Componente componente) {
-        Toast.makeText(getActivity(), "mostrarAtributos", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void componenteOnOff(Componente componente, boolean power) {
-        changeStateAtriComp(power?"0":"1",ambiente.getIdAmbiente(),componente.getId_ubi(),"1");
+
+        //metodo comentado
+        //changeStateAtriComp(power?"0":"1",ambiente,componente.getId_ubi(),"1");
+
+        ctrolAmbiente.changeStateAtriComp(power?"0":"1",ambiente,componente.getId_ubi(),"1");
     }
 
-    public void changeStateAtriComp(String estado,String idAmbiente, String idComponente, String idAtributo){
-        ConsumoServicios servicio=new ManagerRetrofit(getActivity()).getConsumoServicio();
 
-        Call<ResponseBody> res=servicio.enviarEstadoAtributo(estado,idAmbiente,idComponente,idAtributo);
 
-        res.enqueue(new Callback<ResponseBody>() {
+
+    private void listenerApagarAmbiente(){
+        viewFragment.findViewById(R.id.control_bton_apagar).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    consultarDatosComponentes();
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+            public void onClick(View view) {
+                ambiente.setEstado(DISP);
+                onOffAmbiente(ambiente,false);
             }
         });
+
     }
+
+
+
+    @Override
+    public void estadoAmbiente(boolean estado, Ambiente ambiente) {
+
+        ambiente.setEstado(estado?DISP:DEFEC);
+        ctrolAmbiente.cambiarEstadoAmbiente(ambiente,true);
+        //metodo anterior comentado
+        //cambiarEstadoAmbiente(ambiente);
+
+    }
+
+    @Override
+    public void mostrarAtributos(Componente componente) {
+        Toast.makeText(getActivity(), ""+componente.getAtributos().get(0).getNombreAtributo(), Toast.LENGTH_SHORT).show();
+    }
+
+
 }
 
