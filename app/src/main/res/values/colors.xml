@@ -54,4 +54,8 @@
 
     <color name="comp_deshabilitado">#e8868686</color>
     <color name="comp_habilitado">#c7202631</color>
+
+    <color name="color_app1">#0cb1a2</color>
+    <color name="color_app2">#048377</color>
+    <color name="color_app3">#076159</color>
 </resources>

@@ -6,13 +6,17 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.usuario.astrodomus.R;
+import com.example.usuario.astrodomus.utils.AnimDialog;
 
 public class ConfirmarAccionDialog {
 
@@ -24,6 +28,9 @@ public class ConfirmarAccionDialog {
     private ImageView viewIcono;
     private Context context;
     private EditText editText;
+    private RelativeLayout contenedor;
+    private Animation animation;
+    private AnimDialog animDialog;
 
 
 
@@ -38,12 +45,20 @@ public class ConfirmarAccionDialog {
 
         findViews(dialog);
         mostrarEditText(mostrarEditText);
+        animDialog=new AnimDialog(context,dialog);
 
+    }
+    private void animarEntrada(){
+        animDialog.animarEntrada(contenedor);
+    }
+    private void animarSalida(){
+        animDialog.animarSalida(contenedor);
     }
 
 
     public void abrirDialog(){
         cargarDatos();
+        animarEntrada();
         dialog.show();
 
     }
@@ -57,6 +72,7 @@ public class ConfirmarAccionDialog {
         viewBarraSuperior=dialog.findViewById(R.id.accion_dg_barra_superior);
         viewIcono=dialog.findViewById(R.id.accion_dg_icono_grande);
         editText=dialog.findViewById(R.id.accion_dg_edittext);
+        contenedor=dialog.findViewById(R.id.accion_dg_contenedor);
     }
     private void mostrarEditText(boolean mostrar){
 
@@ -76,13 +92,13 @@ public class ConfirmarAccionDialog {
         btonCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
+                animarSalida();
             }
         });
     }
 
     public void cerrarDialog(){
-        dialog.dismiss();
+        animarSalida();
     }
     private void cargarDatos(){
         viewTitulo.setText(titulo);

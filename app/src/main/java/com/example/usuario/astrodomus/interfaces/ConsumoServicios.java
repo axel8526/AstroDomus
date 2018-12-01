@@ -66,8 +66,6 @@ public interface ConsumoServicios {
     @GET("get_componentes.php")
     Call<List<Componente>> getComponentes(@Query("id_ambiente") String idAmbiente);
 
-    @GET("get_atributos.php")
-    Call<List<Componente>> getAtributos(@Query("id_componente") String idComponente);
 
 
     @GET("set_estados_componente.php")

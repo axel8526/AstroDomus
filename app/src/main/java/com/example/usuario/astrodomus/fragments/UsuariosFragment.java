@@ -1,27 +1,23 @@
 package com.example.usuario.astrodomus.fragments;
 
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -39,6 +35,7 @@ import com.example.usuario.astrodomus.interfaces.ListenerListaUsuarios;
 import com.example.usuario.astrodomus.interfaces.MensajeEnviado;
 import com.example.usuario.astrodomus.models.Rol;
 import com.example.usuario.astrodomus.models.Usuario;
+import com.example.usuario.astrodomus.utils.AnimDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +44,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -103,7 +98,11 @@ public class UsuariosFragment extends Fragment implements ListenerListaUsuarios,
             public void onClick(View view) {
                 dgListUser=new Dialog(getActivity());
                 dgListUser.setContentView(R.layout.dialog_usuarios_registrados);
+                dgListUser.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 rv=dgListUser.findViewById(R.id.rv_usuarios);
+
+                final LinearLayout contenedor=dgListUser.findViewById(R.id.dg_contenedor_usuarios);
+                final AnimDialog animDialog=new AnimDialog(getActivity(),dgListUser);
                 busqueda="";
                 abrirLista();
 
@@ -133,6 +132,8 @@ public class UsuariosFragment extends Fragment implements ListenerListaUsuarios,
                     }
                 });
 
+
+                animDialog.animarEntrada(contenedor);
                 dgListUser.show();
             }
         });
@@ -373,6 +374,11 @@ public class UsuariosFragment extends Fragment implements ListenerListaUsuarios,
         LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         conInfo.setLayoutParams(lp);
 
+        Animation animation= AnimationUtils.loadAnimation(getActivity(),R.anim.aparecer__top);
+        animation.setFillAfter(true);
+        conInfo.startAnimation(animation);
+
+
         dgListUser.findViewById(R.id.ui_bton_atras).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -391,9 +397,31 @@ public class UsuariosFragment extends Fragment implements ListenerListaUsuarios,
 
     public void abrirLista(){
         cargarDatosUsuarios();
-        LinearLayout conInfo=dgListUser.findViewById(R.id.ui_contenedor_datos);
-        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0);
-        conInfo.setLayoutParams(lp);
+        final LinearLayout conInfo=dgListUser.findViewById(R.id.ui_contenedor_datos);
+        Animation animation= AnimationUtils.loadAnimation(getActivity(),R.anim.desaparecer_top);
+        animation.setFillAfter(true);
+        conInfo.startAnimation(animation);
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0);
+                conInfo.setLayoutParams(lp);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+
+
 
     }
 

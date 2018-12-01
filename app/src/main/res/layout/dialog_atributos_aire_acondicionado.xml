@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@android:color/transparent"
+    android:id="@+id/ll_dg_contenedor"
+
+    android:layout_height="wrap_content">
+
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:background="@android:color/white"
+        android:layout_marginTop="39dp"
+        android:orientation="vertical"
+        android:id="@+id/dg_contenedor_info"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            style="@style/dg_atributos_linea"
+            />
+
+
+        <LinearLayout
+            style="@style/dg_atributos_cont_atrib"
+            >
+
+            <TextView
+                style="@style/dg_atributos_titulo"
+                android:text="Aire acondicionado"
+
+                />
+
+
+            <TextView
+                style="@style/dg_atributos_subtitulo"
+                android:text="Temteratura"
+                android:layout_margin="0dp"
+
+                />
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
+
+                <Button
+                    android:id="@+id/dg_atri_bton_menos"
+                    style="@style/dg_atrituboos_bton_listo"
+                    android:layout_margin="0dp"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:padding="0dp"
+                    android:gravity="center"
+                    android:text="-"
+                    android:textSize="40sp"/>
+
+                <TextView
+                    android:id="@+id/dg_atri_text_temperatura"
+                    style="@style/dg_atributos_titulo"
+                    android:text="23 c°"
+                    android:layout_margin="12dp"
+                    android:textSize="25dp"/>
+                <Button
+                    android:id="@+id/dg_atri_bton_mas"
+                    style="@style/dg_atrituboos_bton_listo"
+                    android:layout_margin="0dp"
+                    android:layout_width="40dp"
+                    android:paddingBottom="10dp"
+                    android:layout_height="50dp"
+                    android:padding="0dp"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textSize="40sp"/>
+
+            </LinearLayout>
+
+
+
+
+
+                <Switch
+                    android:id="@+id/dg_atri_switch1"
+                    android:layout_marginTop="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Percianas "/>
+
+
+
+            <Button
+                android:id="@+id/ll_dg_bton_listo"
+                style="@style/dg_atrituboos_bton_listo"
+                />
+
+        </LinearLayout>
+
+
+
+
+        <TextView
+            style="@style/dg_atributos_linea"
+            android:layout_height="3dp"
+            android:layout_gravity="bottom"
+            />
+
+
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+
+    <RelativeLayout
+        style="@style/dg_atributos_cont_icono">
+
+        <ImageView
+            style="@style/dg_atributos_fondo_icono"
+            />
+        <ImageView
+            style="@style/dg_atributos_icono"
+            android:src="@drawable/icon_aire_acomd"/>
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

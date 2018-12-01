@@ -24,6 +24,10 @@ public class Atributo {
         this.estadoAtributo = estadoAtributo;
     }
 
+    public String getEstadoAtributo() {
+        return estadoAtributo;
+    }
+
     public String getIdAtributo() {
         return idAtributo;
     }

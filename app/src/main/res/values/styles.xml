@@ -111,7 +111,91 @@
 
 
 
+    <!--Estilos para dialog android:id="@+id/accion_dg_barra_superior"
+          android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginRight="14dp"
+
+    -->
+    <style name="dg_atributos_cont_atrib">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_marginLeft">14dp</item>
+        <item name="android:layout_marginTop">45dp</item>
+        <item name="android:layout_marginRight">14dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="dg_atributos_icono">
+        <item name="android:padding">20dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+
+    </style>
+    <style name="dg_atributos_fondo_icono">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:src">@drawable/icon_dialog_bien</item>
+
+    </style>
+    <style name="dg_atributos_cont_icono">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">80dp</item>
+    </style>
+    <style name="dg_atributos_titulo">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@android:color/black</item>
+
+    </style>
+
+    <style name="dg_atributos_subtitulo">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginLeft">9dp</item>
+        <item name="android:layout_marginRight">9dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/c_letras_hin_formulario</item>
+
+    </style>
+
+
+    <style name="dg_atrituboos_bton_listo">
+        <item name="android:background">@color/color_app1</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:text">listo</item>
+        <item name="android:paddingRight">6dp</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">22dp</item>
+        <item name="android:layout_marginBottom">14dp</item>
+    </style>
+
+    <style name="dg_atributos_linea">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:background">@color/color_app1</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:paddingBottom">3dp</item>
+    </style>
+
+
+
+    <!--Estilos para dialog -->
 
 
 

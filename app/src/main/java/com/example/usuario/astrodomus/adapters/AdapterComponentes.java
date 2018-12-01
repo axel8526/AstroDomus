@@ -79,6 +79,8 @@ public class AdapterComponentes extends RecyclerView.Adapter<HolderComponente> {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 ((ListenerListaComponente)fragment).componenteOnOff(componente,b);
+
+
             }
         });
 

@@ -31,44 +31,65 @@
 
             <TextView
                 style="@style/dg_atributos_titulo"
-                android:text="Luz led"
+                android:text="Ventilador"
 
                 />
 
 
             <TextView
                 style="@style/dg_atributos_subtitulo"
-                android:text="Intensidad de la luz"
+                android:text="Velocidad"
+                android:layout_margin="0dp"
 
                 />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:gravity="center"
                 >
 
-                <SeekBar
-                    android:layout_width="150dp"
-                    android:id="@+id/ll_dg_seekbar"
-                    android:layout_height="40dp"
-                    android:scaleX="1.4"
-                    android:max="100"
-                    android:scaleY="1.4"/>
+                <Button
+                    android:id="@+id/dg_atri_bton_menos"
+                    style="@style/dg_atrituboos_bton_listo"
+                    android:layout_margin="0dp"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:padding="0dp"
+                    android:gravity="center"
+                    android:text="-"
+                    android:textSize="40sp"/>
+
                 <TextView
-                    android:id="@+id/dg_atributo_porcentaje"
+                    android:id="@+id/dg_atri_text_temperatura"
                     style="@style/dg_atributos_titulo"
-                    android:text="100%"/>
+                    android:text="23 c°"
+                    android:layout_margin="12dp"
+                    android:textSize="25dp"/>
+                <Button
+                    android:id="@+id/dg_atri_bton_mas"
+                    style="@style/dg_atrituboos_bton_listo"
+                    android:layout_margin="0dp"
+                    android:layout_width="40dp"
+                    android:paddingBottom="10dp"
+                    android:layout_height="50dp"
+                    android:padding="0dp"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textSize="40sp"/>
+
             </LinearLayout>
 
 
 
 
-                <Button
-                    android:id="@+id/ll_dg_bton_listo"
-                    style="@style/dg_atrituboos_bton_listo"
-                    />
+
+
+            <Button
+                android:id="@+id/ll_dg_bton_listo"
+                style="@style/dg_atrituboos_bton_listo"
+                />
 
         </LinearLayout>
 
@@ -96,7 +117,7 @@
             />
         <ImageView
             style="@style/dg_atributos_icono"
-            android:src="@drawable/icon_bombillo"/>
+            android:src="@drawable/icon_ventilador"/>
     </RelativeLayout>
 
 

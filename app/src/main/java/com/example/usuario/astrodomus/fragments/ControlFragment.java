@@ -21,8 +21,14 @@ import com.example.usuario.astrodomus.activities.HomeActivity;
 import com.example.usuario.astrodomus.activities.InicioSesionActivity;
 import com.example.usuario.astrodomus.adapters.AdapterAmbientes;
 import com.example.usuario.astrodomus.adapters.AdapterComponentes;
+import com.example.usuario.astrodomus.constantes.AtributosId;
+import com.example.usuario.astrodomus.constantes.ComponentesId;
 import com.example.usuario.astrodomus.control.ControlAmbiente;
 import com.example.usuario.astrodomus.control.ManagerRetrofit;
+import com.example.usuario.astrodomus.control.componentes.CtrolAireAcondicionado;
+import com.example.usuario.astrodomus.control.componentes.CtrolLuzLed;
+import com.example.usuario.astrodomus.control.componentes.CtrolVentilador;
+import com.example.usuario.astrodomus.dialogs.atributos.LuzLedDialog;
 import com.example.usuario.astrodomus.interfaces.ComunicaFragment;
 import com.example.usuario.astrodomus.interfaces.ConsumoServicios;
 import com.example.usuario.astrodomus.interfaces.ListenerListaAmbiente;
@@ -32,6 +38,7 @@ import com.example.usuario.astrodomus.models.Ambiente;
 import com.example.usuario.astrodomus.models.Atributo;
 import com.example.usuario.astrodomus.models.Componente;
 import com.example.usuario.astrodomus.models.Usuario;
+import com.example.usuario.astrodomus.utils.AnimDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,17 +100,24 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
         dgListaAmbientes.setContentView(R.layout.dialog_mostar_ambientes);
         dgListaAmbientes.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dgListaAmbientes.setCanceledOnTouchOutside(false);
-
+        final AnimDialog animDialog=new AnimDialog(getActivity(),dgListaAmbientes);
         //consultarDatosAmbiente();
 
+        animDialog.animarEntrada(dgListaAmbientes.findViewById(R.id.dg_cont_ctrol_ambientes));
         dgListaAmbientes.show();
 
         dgListaAmbientes.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialogInterface) {
+                animDialog.animarSalida(dgListaAmbientes.findViewById(R.id.dg_cont_ctrol_ambientes));
                 getActivity().onBackPressed();
             }
         });
+
+
+
+
+
 
 
 
@@ -128,7 +142,9 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
             //metodo anterior comentado
             // consultarDatosComponentes();
-            dgListaAmbientes.dismiss();
+            AnimDialog animDialog=new AnimDialog(getActivity(),dgListaAmbientes);
+            animDialog.animarSalida(dgListaAmbientes.findViewById(R.id.dg_cont_ctrol_ambientes));
+
         }
     }
 
@@ -203,8 +219,69 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
     @Override
     public void mostrarAtributos(Componente componente) {
-        Toast.makeText(getActivity(), ""+componente.getAtributos().get(0).getNombreAtributo(), Toast.LENGTH_SHORT).show();
+
+        switch (componente.getId_ubi()){
+            case ComponentesId.LUCES_LED:
+                luzLed(componente);
+                break;
+            case ComponentesId.AIRE_ACONDICIONADO:
+                aireAcondicionado(componente);
+                break;
+            case ComponentesId.VENTILADOR:
+                ventilador(componente);
+                break;
+        }
+        //Toast.makeText(getActivity(), ""+componente.getAtributos().get(0).getNombreAtributo(), Toast.LENGTH_SHORT).show();
     }
+
+
+
+
+    ///metodos para el control de los atributos de cada componente
+
+    private void luzLed(Componente componente){
+        Atributo atributo=getAtributoComponente(componente,AtributosId.INTENCIDAD_LUZ);
+
+        CtrolLuzLed ctrolLuzLed=new CtrolLuzLed(getActivity());
+        ctrolLuzLed.abrirDialog();
+        ctrolLuzLed.listenerBotonListoControles(ctrolAmbiente,ambiente);
+        ctrolLuzLed.listenerSeekbar(ambiente,componente, atributo);
+    }
+    private void aireAcondicionado(Componente componente){
+
+        CtrolAireAcondicionado ctrolAire=new CtrolAireAcondicionado(getActivity());
+        ctrolAire.abrirDialog();
+
+        ctrolAire.listenerBtonMas(ambiente, componente, getAtributoComponente(componente,AtributosId.TEMPERATURA));
+        ctrolAire.listenerBtonMenos(ambiente,componente,getAtributoComponente(componente,AtributosId.TEMPERATURA));
+        ctrolAire.listenerSwicth(ambiente,componente,getAtributoComponente(componente,AtributosId.PERCIANAS));
+        ctrolAire.listenerBotonListoControles(ctrolAmbiente,ambiente);
+    }
+    private void ventilador(Componente componente){
+
+        CtrolVentilador ctrolVentilador=new CtrolVentilador(getActivity());
+        ctrolVentilador.abrirDialog();
+
+        ctrolVentilador.listenerBtonMas(ambiente, componente, getAtributoComponente(componente,AtributosId.VELOCIDAD));
+        ctrolVentilador.listenerBtonMenos(ambiente,componente,getAtributoComponente(componente,AtributosId.VELOCIDAD));
+        ctrolVentilador.listenerBotonListoControles(ctrolAmbiente,ambiente);
+    }
+
+
+
+
+    public Atributo getAtributoComponente(Componente componente, String tipoAtributo){
+        Atributo atributo=null;
+
+        for(int i=0;i<componente.getAtributos().size();i++){
+            if(componente.getAtributos().get(i).getIdAtributo().equals(tipoAtributo)){
+                atributo=componente.getAtributos().get(i);
+            }
+        }
+        return atributo;
+    }
+
+
 
 
 }
