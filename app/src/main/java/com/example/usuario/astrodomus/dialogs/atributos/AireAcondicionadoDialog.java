@@ -83,7 +83,7 @@ public class AireAcondicionadoDialog extends Dialog{
         });
     }
     public void setTextTemperatura(String text){
-        textTemperatura.setText(text+"C°");
+        textTemperatura.setText(text+" C°");
     }
 
     public Button getBtonMenos() {

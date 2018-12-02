@@ -114,6 +114,7 @@ public class AdapterAmbientes extends RecyclerView.Adapter<HolderAmbiente> {
                             @Override
                             public void onClick(View view) {
                                 ambiente.setEstado(ControlFragment.DISP);
+                                ambiente.setIdUser(null);
                                 ((ListenerListaAmbiente) fragment).onOffAmbiente(ambiente,true);
                                 dialogConfirmar.cerrarDialog();
                             }
@@ -170,7 +171,7 @@ public class AdapterAmbientes extends RecyclerView.Adapter<HolderAmbiente> {
                     ((ListenerListaAmbiente)fragment).onOffAmbiente(ambiente,true);
 
                 }else{
-                    ((ListenerListaAmbiente)fragment).iniciarAmbiente(ambiente);
+                    ((ListenerListaAmbiente)fragment).iniciarAmbiente(ambiente,ControlFragment.OCUP);
 
                 }
             }

@@ -20,14 +20,25 @@ public class Ambiente {
     @Expose
     private String estado;
 
+    @SerializedName("iduser")
+    @Expose
+    private String idUser;
 
-    public Ambiente(String idAmbiente, String nombreAmbiente, String estado) {
+
+    public Ambiente(String idAmbiente, String nombreAmbiente, String estado, String idUser) {
         this.idAmbiente = idAmbiente;
         this.nombreAmbiente = nombreAmbiente;
         this.estado = estado;
+        this.idUser = idUser;
     }
 
+    public String getIdUser() {
+        return idUser;
+    }
 
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
 
     public String getIdAmbiente() {
         return idAmbiente;

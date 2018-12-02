@@ -38,7 +38,7 @@
 
             <TextView
                 style="@style/dg_atributos_subtitulo"
-                android:text="Temteratura"
+                android:text="Temperatura"
                 android:layout_margin="0dp"
 
                 />

@@ -6,6 +6,7 @@
 
     android:layout_gravity="center"
     android:gravity="center"
+
     android:background="@android:color/transparent"
     android:id="@+id/ll_dg_contenedor"
 
@@ -151,14 +152,13 @@
             </LinearLayout>
 
 
+        <TextView
+            android:id="@+id/dg_perfiles_bton_continuar"
+            android:layout_marginTop="12dp"
+            style="@style/dg_atributos_subtitulo"
+            android:text="Continuar sin perfil"
+            android:textSize="14sp"/>
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Continuar sin perfil"
-                android:layout_margin="12dp"
-                android:textSize="14sp"/>
 
         </LinearLayout>
 
@@ -166,7 +166,6 @@
 
 
         <TextView
-            android:id="@+id/dg_perfiles_bton_continuar"
             style="@style/dg_atributos_linea"
             android:layout_height="3dp"
             android:layout_gravity="bottom"

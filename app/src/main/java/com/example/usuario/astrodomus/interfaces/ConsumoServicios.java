@@ -60,7 +60,8 @@ public interface ConsumoServicios {
 
     @GET("cambiar_estado_ambientes.php")
     Call<ResponseBody> cambiarEstadoAmbiente(@Query("id_ambiente") String idAmbiente,
-                                             @Query("estado_ac") String estadoAc);
+                                             @Query("estado_ac") String estadoAc,
+                                             @Query("iduser") String idUser);
 
 
     @GET("get_componentes.php")
@@ -76,4 +77,10 @@ public interface ConsumoServicios {
 
     @GET("apagar_ambiente.php")
     Call<ResponseBody> apagarAmbiente(@Query("id_ambiente") String idAmbiente);
+
+
+    @GET("cargar_perfil.php")
+    Call<ResponseBody> cargarPerfil(@Query("id_user") String idUser,
+                                    @Query("id_ambiente") String idAmbiente,
+                                    @Query("id_jornada") String jornada);
 }

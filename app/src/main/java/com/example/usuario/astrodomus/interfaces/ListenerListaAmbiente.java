@@ -8,7 +8,7 @@ public interface ListenerListaAmbiente {
 
     void estadoAmbiente(boolean estado,Ambiente ambiente);
     void onOffAmbiente(Ambiente ambiente, boolean lista);
-    void iniciarAmbiente(Ambiente ambiente);
+    void iniciarAmbiente(Ambiente ambiente, String estadoAnterior);
     void ambientes(ArrayList<Ambiente> ambientes);
 
 }

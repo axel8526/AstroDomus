@@ -4,9 +4,11 @@ package com.example.usuario.astrodomus.fragments;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +30,7 @@ import com.example.usuario.astrodomus.control.ManagerRetrofit;
 import com.example.usuario.astrodomus.control.componentes.CtrolAireAcondicionado;
 import com.example.usuario.astrodomus.control.componentes.CtrolLuzLed;
 import com.example.usuario.astrodomus.control.componentes.CtrolVentilador;
+import com.example.usuario.astrodomus.dialogs.EscogePerfilDialog;
 import com.example.usuario.astrodomus.dialogs.atributos.LuzLedDialog;
 import com.example.usuario.astrodomus.interfaces.ComunicaFragment;
 import com.example.usuario.astrodomus.interfaces.ConsumoServicios;
@@ -55,15 +58,18 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
 
     private Dialog dgListaAmbientes;
-    private String rol;
-    private Ambiente ambiente;
+    private String rol, idUser;
+    private Ambiente ambiente, ambienteCargado;
     private View viewFragment;
     private ControlAmbiente ctrolAmbiente;
+    private EscogePerfilDialog dialogEscogePerfil;
 
 
     public static final String DISP="1";
     public static final String DEFEC="3";
     public static final String OCUP="2";
+
+    public static final String KEY_AMBIENTE_CARGADO="AMBIENTE_CARGADO";
 
 
     public ControlFragment() {
@@ -81,19 +87,27 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
         if(getArguments()!=null){
             rol=getArguments().getString(InicioSesionActivity.KEY_ROL);
+            idUser=getArguments().getString(InicioSesionActivity.KEY_ID);
         }
 
         if(getActivity()!=null){
-            abrirListaAmbientes();
+
+
             ctrolAmbiente=new ControlAmbiente(getActivity(),this,rol);
-            //Toast.makeText(getActivity(), ""+rol, Toast.LENGTH_SHORT).show();
-            ctrolAmbiente.consultarDatosAmbiente();
+
+                abrirListaAmbientes();
+                //Toast.makeText(getActivity(), ""+rol, Toast.LENGTH_SHORT).show();
+                ctrolAmbiente.consultarDatosAmbiente();
+
+
+
 
         }
 
 
         return viewFragment;
     }
+
 
     public void abrirListaAmbientes(){
         dgListaAmbientes=new Dialog(getActivity());
@@ -134,16 +148,36 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
     }
 
     @Override
-    public void iniciarAmbiente(Ambiente ambiente) {
+    public void iniciarAmbiente(Ambiente ambiente, String estadoAnterior) {
         this.ambiente=ambiente;
+
+        if(estadoAnterior.equals(ControlFragment.DISP)){
+            ambienteCargado=ambiente;
+            ambiente.setIdUser(idUser);
+            ctrolAmbiente.cambiarEstadoAmbiente(ambiente,true);
+            //el cambiarAmbiente se coloca aqui porque aqui es la unica parde donde le enviamos
+            //el iduser al ambiente, de resto se envia null por si se apaga el ambienete
+            /*cuando inicie el administrador cuando este ocupado, es estado anterior sera
+            * OCU asi que no ingresara a este condicional donde se le asigna usuario al ambiente*/
+
+        }else{
+
+            ambienteCargado=null;
+        }
+
         if(ambiente!=null) {
-            //metodo nuevo
-            ctrolAmbiente.consultarDatosComponentes(ambiente);
+            //metodo nuevo... se comemnta para abrir el dialog de cargar perfil
+           // ctrolAmbiente.consultarDatosComponentes(ambiente);
 
             //metodo anterior comentado
             // consultarDatosComponentes();
             AnimDialog animDialog=new AnimDialog(getActivity(),dgListaAmbientes);
             animDialog.animarSalida(dgListaAmbientes.findViewById(R.id.dg_cont_ctrol_ambientes));
+
+                dialogEscogePerfil = new EscogePerfilDialog(getActivity());
+                dialogEscogePerfil.showDialog();
+                dialogEscogePerfil.cargarPerfil(ctrolAmbiente, idUser, ambiente);
+
 
         }
     }
@@ -154,16 +188,15 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
         //metodo anterior comentado
         //cambiarEstadoAmbiente(ambiente);
-        ctrolAmbiente.cambiarEstadoAmbiente(ambiente,lista);
+
 
         if(ambiente.getEstado().equalsIgnoreCase(OCUP)){
-            iniciarAmbiente(ambiente);
+            iniciarAmbiente(ambiente,DISP);
         }else{
             //metodo parara agapar el ambiente desde el boton, se comenta porque tiene errores
             //apagarAmbiente();
-            iniciarAmbiente(null);
-
-
+            this.ambiente=null;
+            ctrolAmbiente.cambiarEstadoAmbiente(ambiente,lista);
         }
 
         //Toast.makeText(getActivity(), "se apago "+ambiente.getNombreAmbiente(), Toast.LENGTH_SHORT).show();
@@ -199,6 +232,7 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
             @Override
             public void onClick(View view) {
                 ambiente.setEstado(DISP);
+                ambiente.setIdUser(null);
                 onOffAmbiente(ambiente,false);
             }
         });

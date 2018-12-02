@@ -77,7 +77,7 @@ public class ControlAmbiente {
     public void cambiarEstadoAmbiente(final Ambiente ambiente, final boolean lista){
         ConsumoServicios servicio=new ManagerRetrofit(context).getConsumoServicio();
 
-        Call<ResponseBody> res=servicio.cambiarEstadoAmbiente(ambiente.getIdAmbiente(),ambiente.getEstado());
+        Call<ResponseBody> res=servicio.cambiarEstadoAmbiente(ambiente.getIdAmbiente(),ambiente.getEstado(),ambiente.getIdUser());
 
         res.enqueue(new Callback<ResponseBody>() {
             @Override
