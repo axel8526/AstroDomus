@@ -42,6 +42,7 @@ public class ConfirmarAccionDialog {
         dialog=new Dialog(context);
         dialog.setContentView(R.layout.dialog_eliminar_user);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCanceledOnTouchOutside(false);
 
         findViews(dialog);
         mostrarEditText(mostrarEditText);

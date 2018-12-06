@@ -1,11 +1,14 @@
 package com.example.usuario.astrodomus.control;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.example.usuario.astrodomus.activities.HomeActivity;
 import com.example.usuario.astrodomus.activities.InicioSesionActivity;
+import com.example.usuario.astrodomus.fragments.ControlFragment;
 import com.example.usuario.astrodomus.interfaces.ComunicaFragment;
 import com.example.usuario.astrodomus.interfaces.ConsumoServicios;
+import com.example.usuario.astrodomus.interfaces.ListenerAmbiente;
 import com.example.usuario.astrodomus.interfaces.ListenerListaAmbiente;
 import com.example.usuario.astrodomus.interfaces.ListenerListaComponente;
 import com.example.usuario.astrodomus.models.Ambiente;
@@ -35,6 +38,32 @@ public class ControlAmbiente {
         this.rol=rol;
         this.object=clase;
 
+    }
+
+    //contructor solo para cambiar el estado del ambiente
+    public ControlAmbiente(Context context){
+        servicio=new ManagerRetrofit(context).getConsumoServicio();
+        this.context=context;
+    }
+
+    public void usuarioAlojado(String idUser){
+        Call<Ambiente> res=servicio.usuarioAlojado(idUser);
+
+        res.enqueue(new Callback<Ambiente>() {
+            @Override
+            public void onResponse(Call<Ambiente> call, Response<Ambiente> response) {
+
+                ((ListenerAmbiente)object).ambienteAlojado(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<Ambiente> call, Throwable t) {
+
+                ((ListenerAmbiente)object).ambienteAlojado(null);
+
+            }
+        });
     }
 
 
@@ -125,9 +154,19 @@ public class ControlAmbiente {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                if(!lista){
-                    ((ComunicaFragment)context).activarFragment(HomeActivity.FRAG_CONTROL);
-                }
+
+                /*Se comenta por que el codigo ya es obsoleto, lo que hacia es vefiricar si la lista estata
+                desactivada para volver a cargar el fragment desde home, pero como se coloco un hilo, que esta verificando
+                . Ese mismo hilo se encarga de abrir la lista*/
+                /*if(!lista){
+                    try {
+                       // ((ComunicaFragment) context).activarFragment(HomeActivity.FRAG_CONTROL);
+                    }catch(Exception e){
+                        Toast.makeText(context, "ok", Toast.LENGTH_SHORT).show();
+                    }
+                }*/
+
+                Toast.makeText(context, "ok", Toast.LENGTH_SHORT).show();
 
             }
 

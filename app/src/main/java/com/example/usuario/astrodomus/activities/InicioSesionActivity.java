@@ -20,11 +20,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.usuario.astrodomus.R;
+import com.example.usuario.astrodomus.control.ControlAmbiente;
 import com.example.usuario.astrodomus.control.EnviarMail;
 import com.example.usuario.astrodomus.control.ManagerRetrofit;
+import com.example.usuario.astrodomus.control.NotificacionAmbiente;
 import com.example.usuario.astrodomus.dialogs.ConfirmarAccionDialog;
+import com.example.usuario.astrodomus.fragments.ControlFragment;
 import com.example.usuario.astrodomus.interfaces.ConsumoServicios;
 import com.example.usuario.astrodomus.interfaces.MensajeEnviado;
+import com.example.usuario.astrodomus.models.Ambiente;
 import com.example.usuario.astrodomus.models.Usuario;
 
 import java.util.ArrayList;
@@ -67,8 +71,34 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
         setContentView(R.layout.activity_inicio_sesion);
         findViews();
 
+
+        if(getIntent().getAction()!=null) {
+            apagarAmbiente();
+        }
+
         progressBar.getIndeterminateDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY);
         mostrarDatos();
+
+
+    }
+    public void apagarAmbiente(){
+        switch (getIntent().getAction()){
+            case NotificacionAmbiente.APAGAR_:
+
+
+                Ambiente ambiente=new Ambiente(null,null,null,null);
+
+                Bundle datos=getIntent().getExtras();
+                ambiente.setIdAmbiente(datos.getString(NotificacionAmbiente.KEY_AMBIENTE));
+                Toast.makeText(this, "apagar", Toast.LENGTH_SHORT).show();
+                ambiente.setEstado(ControlFragment.DISP);
+
+                ControlAmbiente ctrolAmbiente=new ControlAmbiente(this);
+                ctrolAmbiente.cambiarEstadoAmbiente(ambiente,false);
+
+
+                break;
+        }
 
 
     }
@@ -81,6 +111,7 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
             checkBox.setChecked(datos.getBoolean(KEY_RECORDAR,false));
             id.setText(datos.getString(KEY_CORREO,""));
             password.setText(datos.getString(KEY_PASSWORD,""));
+
             iniciarSesion(null);
         }
     }
@@ -94,8 +125,11 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
         guarda.putString(KEY_PASSWORD,textPass);
         guarda.putBoolean(KEY_RECORDAR,checkBox.isChecked());
 
+
         guarda.apply();
     }
+
+
 
 
 

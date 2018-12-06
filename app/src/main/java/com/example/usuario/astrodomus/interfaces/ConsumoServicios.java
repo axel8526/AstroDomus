@@ -83,4 +83,7 @@ public interface ConsumoServicios {
     Call<ResponseBody> cargarPerfil(@Query("id_user") String idUser,
                                     @Query("id_ambiente") String idAmbiente,
                                     @Query("id_jornada") String jornada);
+
+    @GET("ambiente_alojado.php")
+    Call<Ambiente> usuarioAlojado(@Query("iduser") String idUser);
 }

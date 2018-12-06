@@ -27,13 +27,16 @@ import com.example.usuario.astrodomus.constantes.AtributosId;
 import com.example.usuario.astrodomus.constantes.ComponentesId;
 import com.example.usuario.astrodomus.control.ControlAmbiente;
 import com.example.usuario.astrodomus.control.ManagerRetrofit;
+import com.example.usuario.astrodomus.control.NotificacionAmbiente;
 import com.example.usuario.astrodomus.control.componentes.CtrolAireAcondicionado;
 import com.example.usuario.astrodomus.control.componentes.CtrolLuzLed;
 import com.example.usuario.astrodomus.control.componentes.CtrolVentilador;
 import com.example.usuario.astrodomus.dialogs.EscogePerfilDialog;
 import com.example.usuario.astrodomus.dialogs.atributos.LuzLedDialog;
+import com.example.usuario.astrodomus.hilos.EstadoAmbienteHilo;
 import com.example.usuario.astrodomus.interfaces.ComunicaFragment;
 import com.example.usuario.astrodomus.interfaces.ConsumoServicios;
+import com.example.usuario.astrodomus.interfaces.ListenerAmbiente;
 import com.example.usuario.astrodomus.interfaces.ListenerListaAmbiente;
 import com.example.usuario.astrodomus.interfaces.ListenerListaComponente;
 import com.example.usuario.astrodomus.interfaces.ListenerListaUsuarios;
@@ -54,11 +57,11 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ControlFragment extends Fragment implements ListenerListaAmbiente, ListenerListaComponente {
+public class ControlFragment extends Fragment implements ListenerListaAmbiente, ListenerListaComponente,ListenerAmbiente {
 
 
     private Dialog dgListaAmbientes;
-    private String rol, idUser;
+    private String rol, idUser, correo;
     private Ambiente ambiente, ambienteCargado;
     private View viewFragment;
     private ControlAmbiente ctrolAmbiente;
@@ -69,7 +72,9 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
     public static final String DEFEC="3";
     public static final String OCUP="2";
 
-    public static final String KEY_AMBIENTE_CARGADO="AMBIENTE_CARGADO";
+    private EstadoAmbienteHilo ambienteHilo;
+    private Activity activity;
+
 
 
     public ControlFragment() {
@@ -85,21 +90,27 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
         viewFragment=inflater.inflate(R.layout.fragment_control, container, false);
 
 
+        bListaAmbiente=false;
         if(getArguments()!=null){
             rol=getArguments().getString(InicioSesionActivity.KEY_ROL);
             idUser=getArguments().getString(InicioSesionActivity.KEY_ID);
+            correo=getArguments().getString(InicioSesionActivity.KEY_CORREO);
         }
 
         if(getActivity()!=null){
-
-
+            activity=getActivity();
             ctrolAmbiente=new ControlAmbiente(getActivity(),this,rol);
+            if(ambienteHilo!=null){
+                ambienteHilo.terminar();
+            }
+            ambienteHilo=new EstadoAmbienteHilo(ctrolAmbiente,idUser);
+            ambienteHilo.start();
 
-                abrirListaAmbientes();
+           // ctrolAmbiente.usuarioAlojado(idUser);
+
+                //abrirListaAmbientes();
+                //ctrolAmbiente.consultarDatosAmbiente();
                 //Toast.makeText(getActivity(), ""+rol, Toast.LENGTH_SHORT).show();
-                ctrolAmbiente.consultarDatosAmbiente();
-
-
 
 
         }
@@ -108,13 +119,38 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
         return viewFragment;
     }
 
+    private boolean bListaAmbiente;
+
+
+
+    @Override
+    public void ambienteAlojado(final Ambiente ambiente) {
+            if(ambiente==null){
+
+                if(!bListaAmbiente) {
+                    abrirListaAmbientes();
+                    bListaAmbiente=true;
+                }
+                ctrolAmbiente.consultarDatosAmbiente();
+
+
+            }else{
+                bListaAmbiente=false;
+
+                this.ambiente=ambiente;
+                //Toast.makeText(getActivity(), ambiente.getNombreAmbiente(), Toast.LENGTH_SHORT).show();
+
+                ctrolAmbiente.consultarDatosComponentes(ambiente);
+            }
+    }
+
 
     public void abrirListaAmbientes(){
-        dgListaAmbientes=new Dialog(getActivity());
+        dgListaAmbientes=new Dialog(activity);
         dgListaAmbientes.setContentView(R.layout.dialog_mostar_ambientes);
         dgListaAmbientes.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dgListaAmbientes.setCanceledOnTouchOutside(false);
-        final AnimDialog animDialog=new AnimDialog(getActivity(),dgListaAmbientes);
+        final AnimDialog animDialog=new AnimDialog(activity,dgListaAmbientes);
         //consultarDatosAmbiente();
 
         animDialog.animarEntrada(dgListaAmbientes.findViewById(R.id.dg_cont_ctrol_ambientes));
@@ -124,23 +160,17 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
             @Override
             public void onCancel(DialogInterface dialogInterface) {
                 animDialog.animarSalida(dgListaAmbientes.findViewById(R.id.dg_cont_ctrol_ambientes));
-                getActivity().onBackPressed();
+                activity.onBackPressed();
             }
         });
-
-
-
-
-
-
 
 
     }
 
     @Override
     public void ambientes(ArrayList<Ambiente> ambientes) {
-        AdapterAmbientes adapterAmbientes=new AdapterAmbientes(getActivity(),ambientes,rol,this);
-        LinearLayoutManager llm=new LinearLayoutManager(getActivity());
+        AdapterAmbientes adapterAmbientes=new AdapterAmbientes(activity,ambientes,rol,this);
+        LinearLayoutManager llm=new LinearLayoutManager(activity);
 
         RecyclerView rv=dgListaAmbientes.findViewById(R.id.m_ambientes_recycler);
         rv.setLayoutManager(llm);
@@ -155,10 +185,18 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
             ambienteCargado=ambiente;
             ambiente.setIdUser(idUser);
             ctrolAmbiente.cambiarEstadoAmbiente(ambiente,true);
+
+
+
             //el cambiarAmbiente se coloca aqui porque aqui es la unica parde donde le enviamos
             //el iduser al ambiente, de resto se envia null por si se apaga el ambienete
-            /*cuando inicie el administrador cuando este ocupado, es estado anterior sera
+            /*cuando inicie el administrador cuando este ocupado, el estado anterior sera
             * OCU asi que no ingresara a este condicional donde se le asigna usuario al ambiente*/
+
+            NotificacionAmbiente not=new NotificacionAmbiente(activity,ambiente);
+            not.crearNotificacion(rol,idUser,correo);
+            not.mostrar();
+            //codigo para mostrar la notificacion cuando se inicia ambiente
 
         }else{
 
@@ -171,10 +209,14 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
             //metodo anterior comentado
             // consultarDatosComponentes();
-            AnimDialog animDialog=new AnimDialog(getActivity(),dgListaAmbientes);
+            AnimDialog animDialog=new AnimDialog(activity,dgListaAmbientes);
             animDialog.animarSalida(dgListaAmbientes.findViewById(R.id.dg_cont_ctrol_ambientes));
 
-                dialogEscogePerfil = new EscogePerfilDialog(getActivity());
+
+
+
+
+                dialogEscogePerfil = new EscogePerfilDialog(activity);
                 dialogEscogePerfil.showDialog();
                 dialogEscogePerfil.cargarPerfil(ctrolAmbiente, idUser, ambiente);
 
@@ -193,8 +235,7 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
         if(ambiente.getEstado().equalsIgnoreCase(OCUP)){
             iniciarAmbiente(ambiente,DISP);
         }else{
-            //metodo parara agapar el ambiente desde el boton, se comenta porque tiene errores
-            //apagarAmbiente();
+
             this.ambiente=null;
             ctrolAmbiente.cambiarEstadoAmbiente(ambiente,lista);
         }
@@ -205,8 +246,8 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
     @Override
     public void componentes(ArrayList<Componente> componentes) {
         RecyclerView rv=viewFragment.findViewById(R.id.control_recycler);
-        LinearLayoutManager llm=new LinearLayoutManager(getActivity());
-        AdapterComponentes adapter=new AdapterComponentes(getActivity(),componentes,this);
+        LinearLayoutManager llm=new LinearLayoutManager(activity);
+        AdapterComponentes adapter=new AdapterComponentes(activity,componentes,this);
 
         rv.setLayoutManager(llm);
         rv.setAdapter(adapter);
@@ -231,9 +272,20 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
         viewFragment.findViewById(R.id.control_bton_apagar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(rol.equals(InicioSesionActivity.ADMINISTRADOR_ROL) && idUser!=ambiente.getIdUser()){
+                    //entrara a este condicional siempre y cuando el id del usuario sea diference al id usuario del ambiente
+                    abrirListaAmbientes();
+                }
                 ambiente.setEstado(DISP);
                 ambiente.setIdUser(null);
                 onOffAmbiente(ambiente,false);
+
+
+
+
+                NotificacionAmbiente not=new NotificacionAmbiente(activity,ambiente);
+                not.cerrar();
             }
         });
 
@@ -276,14 +328,14 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
     private void luzLed(Componente componente){
         Atributo atributo=getAtributoComponente(componente,AtributosId.INTENCIDAD_LUZ);
 
-        CtrolLuzLed ctrolLuzLed=new CtrolLuzLed(getActivity());
+        CtrolLuzLed ctrolLuzLed=new CtrolLuzLed(activity);
         ctrolLuzLed.abrirDialog();
         ctrolLuzLed.listenerBotonListoControles(ctrolAmbiente,ambiente);
         ctrolLuzLed.listenerSeekbar(ambiente,componente, atributo);
     }
     private void aireAcondicionado(Componente componente){
 
-        CtrolAireAcondicionado ctrolAire=new CtrolAireAcondicionado(getActivity());
+        CtrolAireAcondicionado ctrolAire=new CtrolAireAcondicionado(activity);
         ctrolAire.abrirDialog();
 
         ctrolAire.listenerBtonMas(ambiente, componente, getAtributoComponente(componente,AtributosId.TEMPERATURA));
@@ -293,7 +345,7 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
     }
     private void ventilador(Componente componente){
 
-        CtrolVentilador ctrolVentilador=new CtrolVentilador(getActivity());
+        CtrolVentilador ctrolVentilador=new CtrolVentilador(activity);
         ctrolVentilador.abrirDialog();
 
         ctrolVentilador.listenerBtonMas(ambiente, componente, getAtributoComponente(componente,AtributosId.VELOCIDAD));
@@ -314,7 +366,6 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
         }
         return atributo;
     }
-
 
 
 

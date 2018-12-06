@@ -23,11 +23,14 @@
         <activity
             android:name=".activities.HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activities.DatosPersonalesActivity"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activities.ChangePasswordActivity"
             android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"
             ></activity>
     </application>
 

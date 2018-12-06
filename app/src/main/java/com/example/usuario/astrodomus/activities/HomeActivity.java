@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,14 +24,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.usuario.astrodomus.R;
+import com.example.usuario.astrodomus.control.ControlAmbiente;
+import com.example.usuario.astrodomus.control.NotificacionAmbiente;
 import com.example.usuario.astrodomus.fragments.ControlFragment;
 import com.example.usuario.astrodomus.fragments.InicioUsuarioFragment;
 import com.example.usuario.astrodomus.fragments.UsuariosFragment;
 import com.example.usuario.astrodomus.fragments.InicioFragment;
 import com.example.usuario.astrodomus.interfaces.ComunicaFragment;
+import com.example.usuario.astrodomus.interfaces.ListenerAmbiente;
+import com.example.usuario.astrodomus.models.Ambiente;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ComunicaFragment{
+        implements NavigationView.OnNavigationItemSelectedListener, ComunicaFragment, ListenerAmbiente{
 
     public static final int FRAG_REPORTE=5;
     public static final int FRAG_COMPONENE=4;
@@ -52,6 +57,8 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
          toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +92,11 @@ public class HomeActivity extends AppCompatActivity
 
 
         datosUsuario();
+        comprobarAmbienteUsuario();
         activarFragment(FRAG_HOME);
+
+
+
 
 
     }
@@ -187,6 +198,13 @@ public class HomeActivity extends AppCompatActivity
 
         }
     }
+    public void onResume(){
+        super.onResume();
+        SharedPreferences datos=PreferenceManager.getDefaultSharedPreferences(this);
+
+
+
+    }
     public boolean isAdmin(){
         if(rol.equalsIgnoreCase("administrador")){
             return true;
@@ -276,6 +294,10 @@ public class HomeActivity extends AppCompatActivity
         guarda.putBoolean(InicioSesionActivity.KEY_RECORDAR,false);
         guarda.apply();
 
+
+        NotificacionAmbiente not=new NotificacionAmbiente(this);
+        not.cerrar();
+
         startActivity(new Intent(this,InicioSesionActivity.class));
         finish();
     }
@@ -290,4 +312,18 @@ public class HomeActivity extends AppCompatActivity
         finish();
 
     }
+
+    @Override
+    public void ambienteAlojado(Ambiente ambiente) {
+        if(ambiente!=null) {
+            NotificacionAmbiente not = new NotificacionAmbiente(this,ambiente);
+            not.crearNotificacion(rol,id,correo);
+            not.mostrar();
+        }
+    }
+    public void comprobarAmbienteUsuario(){
+        ControlAmbiente ctrolAmb=new ControlAmbiente(getApplicationContext(),this, rol);
+        ctrolAmb.usuarioAlojado(id);
+    }
+
 }
