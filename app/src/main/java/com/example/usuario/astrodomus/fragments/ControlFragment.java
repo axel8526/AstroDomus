@@ -460,6 +460,7 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
                 }
                 ventanasEmergentes.clear();
 
+
             }
         }).start();
 
