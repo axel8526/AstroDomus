@@ -57,6 +57,10 @@ public class CtrolLuzLed {
         luzLedDialog.showDialog();
     }
 
+    public LuzLedDialog getLuzLedDialog() {
+        return luzLedDialog;
+    }
+
     public void listenerSeekbar(final Ambiente ambiente, final Componente componente, final Atributo atributo){
 
         luzLedDialog.getSeekBar().setProgress(Integer.parseInt(atributo.getEstadoAtributo()));

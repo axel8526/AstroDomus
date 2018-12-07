@@ -50,6 +50,10 @@ public class CtrolAireAcondicionado {
         });
     }
 
+    public AireAcondicionadoDialog getDialogAire() {
+        return aaDialog;
+    }
+
     public void abrirDialog(){
         aaDialog=new AireAcondicionadoDialog(context);
         aaDialog.showDialog();

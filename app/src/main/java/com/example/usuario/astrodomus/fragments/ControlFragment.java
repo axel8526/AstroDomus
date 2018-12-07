@@ -67,6 +67,10 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
     private ControlAmbiente ctrolAmbiente;
     private EscogePerfilDialog dialogEscogePerfil;
 
+    private ArrayList<Ambiente> ambientes;
+    private ArrayList<Dialog> ventanasEmergentes;
+
+
 
     public static final String DISP="1";
     public static final String DEFEC="3";
@@ -79,6 +83,7 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
     public ControlFragment() {
         // Required empty public constructor
+        ventanasEmergentes=new ArrayList<>();
     }
 
 
@@ -118,8 +123,14 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
         return viewFragment;
     }
+    public void onDestroyView() {
+        super.onDestroyView();
+        if(ambienteHilo!=null){
+            ambienteHilo.terminar();
+        }
+    }
 
-    private boolean bListaAmbiente;
+    private boolean bListaAmbiente, estadoLista;
 
 
 
@@ -128,21 +139,51 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
             if(ambiente==null){
 
                 if(!bListaAmbiente) {
+                    cerrarNotificacion();
                     abrirListaAmbientes();
+                    cerrarDialogs();
+
                     bListaAmbiente=true;
+
                 }
+
+
+
+                if(this.ambiente!=null && rol.equals(InicioSesionActivity.ADMINISTRADOR_ROL)){
+                    this.ambiente=actualizarAmbiente(this.ambiente);
+                    //si entra en este condicional es porque el administrador entro a un ambiente que ya estaba ocupado
+                    //Toast.makeText(activity, this.ambiente.getIdUser()+"//"+this.ambiente.getIdAmbiente(), Toast.LENGTH_SHORT).show();
+                    if(this.ambiente.getEstado().equals(OCUP)) {
+                        ctrolAmbiente.consultarDatosComponentes(this.ambiente);
+                       // Toast.makeText(activity, "entro if", Toast.LENGTH_SHORT).show();
+                    }else{
+                        //Toast.makeText(activity, "entro else", Toast.LENGTH_SHORT).show();
+                        this.ambiente=null;
+                        bListaAmbiente=false;
+
+
+                    }
+                    //condicional que comprueba cuando el usuario cerro el ambiente, y el administrador quedo dentro
+                    //lo que se hace es volver a abrir la lista de ambientes
+                }
+
                 ctrolAmbiente.consultarDatosAmbiente();
 
 
             }else{
                 bListaAmbiente=false;
 
+
                 this.ambiente=ambiente;
                 //Toast.makeText(getActivity(), ambiente.getNombreAmbiente(), Toast.LENGTH_SHORT).show();
 
+
+
                 ctrolAmbiente.consultarDatosComponentes(ambiente);
+                //Toast.makeText(activity, "padre else", Toast.LENGTH_SHORT).show();
             }
     }
+
 
 
     public void abrirListaAmbientes(){
@@ -160,7 +201,11 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
             @Override
             public void onCancel(DialogInterface dialogInterface) {
                 animDialog.animarSalida(dgListaAmbientes.findViewById(R.id.dg_cont_ctrol_ambientes));
+
+                ambienteHilo.terminar();
                 activity.onBackPressed();
+
+
             }
         });
 
@@ -169,12 +214,23 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
     @Override
     public void ambientes(ArrayList<Ambiente> ambientes) {
+        this.ambientes=ambientes;
+
         AdapterAmbientes adapterAmbientes=new AdapterAmbientes(activity,ambientes,rol,this);
         LinearLayoutManager llm=new LinearLayoutManager(activity);
 
         RecyclerView rv=dgListaAmbientes.findViewById(R.id.m_ambientes_recycler);
         rv.setLayoutManager(llm);
         rv.setAdapter(adapterAmbientes);
+    }
+
+    public Ambiente actualizarAmbiente(Ambiente ambiente){
+        for(Ambiente ambienteActual : ambientes){
+            if(ambiente.getIdAmbiente().equals(ambienteActual.getIdAmbiente())){
+                return ambienteActual;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -219,10 +275,21 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
                 dialogEscogePerfil = new EscogePerfilDialog(activity);
                 dialogEscogePerfil.showDialog();
                 dialogEscogePerfil.cargarPerfil(ctrolAmbiente, idUser, ambiente);
+                ventanasEmergentes.add(dialogEscogePerfil);
+
+
+
+
 
 
         }
     }
+
+
+
+
+
+
 
     @Override
     public void onOffAmbiente(Ambiente ambiente, boolean lista) {
@@ -273,13 +340,21 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
             @Override
             public void onClick(View view) {
 
-                if(rol.equals(InicioSesionActivity.ADMINISTRADOR_ROL) && idUser!=ambiente.getIdUser()){
+                if(rol.equals(InicioSesionActivity.ADMINISTRADOR_ROL) && !idUser.equals(ambiente.getIdUser())){
                     //entrara a este condicional siempre y cuando el id del usuario sea diference al id usuario del ambiente
-                    abrirListaAmbientes();
+                   // abrirListaAmbientes();
+                    bListaAmbiente=false;
                 }
-                ambiente.setEstado(DISP);
-                ambiente.setIdUser(null);
-                onOffAmbiente(ambiente,false);
+
+
+               /*Se coloca condicional ya que si el usuario hace dos click rapidos en el boton de apagar, la segunda vez
+               * el ambiente es nulo*/
+               if(ambiente!=null){
+                   ambiente.setEstado(DISP);
+                   ambiente.setIdUser(null);
+                   onOffAmbiente(ambiente,false);
+               }
+
 
 
 
@@ -330,6 +405,8 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
         CtrolLuzLed ctrolLuzLed=new CtrolLuzLed(activity);
         ctrolLuzLed.abrirDialog();
+        ventanasEmergentes.add(ctrolLuzLed.getLuzLedDialog());
+
         ctrolLuzLed.listenerBotonListoControles(ctrolAmbiente,ambiente);
         ctrolLuzLed.listenerSeekbar(ambiente,componente, atributo);
     }
@@ -337,6 +414,7 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
         CtrolAireAcondicionado ctrolAire=new CtrolAireAcondicionado(activity);
         ctrolAire.abrirDialog();
+        ventanasEmergentes.add(ctrolAire.getDialogAire());
 
         ctrolAire.listenerBtonMas(ambiente, componente, getAtributoComponente(componente,AtributosId.TEMPERATURA));
         ctrolAire.listenerBtonMenos(ambiente,componente,getAtributoComponente(componente,AtributosId.TEMPERATURA));
@@ -347,6 +425,9 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
         CtrolVentilador ctrolVentilador=new CtrolVentilador(activity);
         ctrolVentilador.abrirDialog();
+        ventanasEmergentes.add(ctrolVentilador.getAaDialog());
+
+
 
         ctrolVentilador.listenerBtonMas(ambiente, componente, getAtributoComponente(componente,AtributosId.VELOCIDAD));
         ctrolVentilador.listenerBtonMenos(ambiente,componente,getAtributoComponente(componente,AtributosId.VELOCIDAD));
@@ -365,6 +446,28 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
             }
         }
         return atributo;
+    }
+
+    public void cerrarDialogs(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(Dialog dialog : ventanasEmergentes){
+                    if(dialog.isShowing()){
+                        dialog.dismiss();
+                    }
+
+                }
+                ventanasEmergentes.clear();
+
+            }
+        }).start();
+
+    }
+
+    public void cerrarNotificacion(){
+        NotificacionAmbiente not=new NotificacionAmbiente(activity);
+        not.cerrar();
     }
 
 

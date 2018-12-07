@@ -55,6 +55,10 @@ public class CtrolVentilador {
         aaDialog.showDialog();
     }
 
+    public VentiladorDialog getAaDialog() {
+        return aaDialog;
+    }
+
     public void listenerBtonMas(final Ambiente ambiente, final Componente componente, final Atributo atributo) {
 
         estadoVent = Integer.parseInt(atributo.getEstadoAtributo() == null ? estadoVent + "" : atributo.getEstadoAtributo());
@@ -102,5 +106,9 @@ public class CtrolVentilador {
         });
 
 
+    }
+
+    public void cerrarDialog(){
+        aaDialog.animarSalida();
     }
 }
