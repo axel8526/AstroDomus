@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 
 import com.example.usuario.astrodomus.control.ControlAmbiente;
+import com.example.usuario.astrodomus.control.ControlPerfil;
 import com.example.usuario.astrodomus.control.ManagerRetrofit;
 import com.example.usuario.astrodomus.dialogs.atributos.AireAcondicionadoDialog;
 import com.example.usuario.astrodomus.interfaces.ConsumoServicios;
@@ -49,6 +50,24 @@ public class CtrolAireAcondicionado {
 
         });
     }
+    public void updateEstadoAtributoPerfil(Atributo atributo, String estado){
+        String[] datos=atributo.getIdAtributo().split("_");
+        String idEstados=datos[1];
+
+        Call<ResponseBody> res=servicio.update_perfil(idEstados,estado);
+
+        res.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
 
     public AireAcondicionadoDialog getDialogAire() {
         return aaDialog;
@@ -62,6 +81,8 @@ public class CtrolAireAcondicionado {
     public void listenerBtonMas(final Ambiente ambiente, final Componente componente, final Atributo atributo){
 
         estadoTemp=Integer.parseInt(atributo.getEstadoAtributo()==null?estadoTemp+"":atributo.getEstadoAtributo());
+        estadoTemp=estadoTemp==1?17:estadoTemp;
+
         aaDialog.setTextTemperatura(estadoTemp+"");
 
         aaDialog.getBtonMas().setOnClickListener(new View.OnClickListener() {
@@ -73,7 +94,11 @@ public class CtrolAireAcondicionado {
 
                     aaDialog.setTextTemperatura(estadoTemp+"");
 
-                    cambiarEstadoAtritutoComponente(ambiente,componente,atributo.getIdAtributo(),estadoTemp+"");
+                    if(ambiente!=null) {
+                        cambiarEstadoAtritutoComponente(ambiente, componente, atributo.getIdAtributo(), estadoTemp + "");
+                    }else{
+                        updateEstadoAtributoPerfil(atributo, estadoTemp+"");
+                    }
                 }
             }
         });
@@ -87,7 +112,11 @@ public class CtrolAireAcondicionado {
                     estadoTemp--;
                     aaDialog.setTextTemperatura(estadoTemp+"");
 
-                    cambiarEstadoAtritutoComponente(ambiente,componente,atributo.getIdAtributo(),estadoTemp+"");
+                    if(ambiente!=null) {
+                        cambiarEstadoAtritutoComponente(ambiente, componente, atributo.getIdAtributo(), estadoTemp + "");
+                    }else{
+                        updateEstadoAtributoPerfil(atributo,estadoTemp+"");
+                    }
                 }
             }
         });
@@ -105,8 +134,13 @@ public class CtrolAireAcondicionado {
         aaDialog.getSwitchPercianas().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                cambiarEstadoAtritutoComponente(ambiente,componente,atributo.getIdAtributo(),
-                        b?"0":"1");
+
+                if(ambiente!=null) {
+                    cambiarEstadoAtritutoComponente(ambiente, componente, atributo.getIdAtributo(),
+                            b ? "0" : "1");
+                }else{
+                    updateEstadoAtributoPerfil(atributo,b?"0":"1");
+                }
             }
         });
     }
@@ -120,6 +154,15 @@ public class CtrolAireAcondicionado {
         });
 
 
+    }
+    public void listenerBotonListoPerfiles(final ControlPerfil ctrolPerfil, final String user, final String jornada){
+        aaDialog.getBtonListo().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ctrolPerfil.cargarPerfiles(user,jornada);
+                aaDialog.animarSalida();
+            }
+        });
     }
 
 

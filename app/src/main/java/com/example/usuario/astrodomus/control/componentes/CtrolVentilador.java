@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.example.usuario.astrodomus.control.ControlAmbiente;
+import com.example.usuario.astrodomus.control.ControlPerfil;
 import com.example.usuario.astrodomus.control.ManagerRetrofit;
 import com.example.usuario.astrodomus.dialogs.atributos.VentiladorDialog;
 import com.example.usuario.astrodomus.interfaces.ConsumoServicios;
@@ -49,6 +50,24 @@ public class CtrolVentilador {
 
         });
     }
+    public void updateEstadoAtributoPerfil(Atributo atributo, String estado){
+        String[] datos=atributo.getIdAtributo().split("_");
+        String idEstados=datos[1];
+
+        Call<ResponseBody> res=servicio.update_perfil(idEstados,estado);
+
+        res.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
 
     public void abrirDialog() {
         aaDialog = new VentiladorDialog(context);
@@ -62,7 +81,8 @@ public class CtrolVentilador {
     public void listenerBtonMas(final Ambiente ambiente, final Componente componente, final Atributo atributo) {
 
         estadoVent = Integer.parseInt(atributo.getEstadoAtributo() == null ? estadoVent + "" : atributo.getEstadoAtributo());
-        aaDialog.setTextTemperatura(estadoVent + "");
+
+        aaDialog.setTextTemperatura(estadoVent+"");
 
         aaDialog.getBtonMas().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +93,11 @@ public class CtrolVentilador {
 
                     aaDialog.setTextTemperatura(estadoVent + "");
 
-                    cambiarEstadoAtritutoComponente(ambiente, componente, atributo.getIdAtributo(), estadoVent + "");
+                    if(ambiente!=null) {
+                        cambiarEstadoAtritutoComponente(ambiente, componente, atributo.getIdAtributo(), estadoVent + "");
+                    }else{
+                        updateEstadoAtributoPerfil(atributo, estadoVent+"");
+                    }
                 }
             }
         });
@@ -88,7 +112,13 @@ public class CtrolVentilador {
                     estadoVent--;
                     aaDialog.setTextTemperatura(estadoVent + "");
 
-                    cambiarEstadoAtritutoComponente(ambiente, componente, atributo.getIdAtributo(), estadoVent + "");
+                    if(ambiente!=null) {
+
+
+                        cambiarEstadoAtritutoComponente(ambiente, componente, atributo.getIdAtributo(), estadoVent + "");
+                    }else {
+                        updateEstadoAtributoPerfil(atributo,estadoVent+"");
+                    }
                 }
             }
         });
@@ -106,6 +136,16 @@ public class CtrolVentilador {
         });
 
 
+    }
+
+    public void listenerBotonListoPerfiles(final ControlPerfil ctrolPerfil, final String user, final String jornada){
+        aaDialog.getBtonListo().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ctrolPerfil.cargarPerfiles(user,jornada);
+                aaDialog.animarSalida();
+            }
+        });
     }
 
     public void cerrarDialog(){

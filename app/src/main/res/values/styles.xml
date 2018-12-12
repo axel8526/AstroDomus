@@ -194,8 +194,29 @@
     </style>
 
 
+    <style name="bton_perfil">
+        <item name="android:background">@color/color_app1</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@android:color/white</item>
 
-    <!--Estilos para dialog -->
+    </style>
+
+
+
+    <!--Estilos para dialog
+     <ImageView
+                    android:id="@+id/perfil_bton_noche"
+                    style="@style/dg_atrituboos_bton_listo"
+                    android:layout_margin="0dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:src="@drawable/icon_jornada_noche"
+                    android:gravity="center"
+                    android:text="-"
+                    android:textSize="40sp"/>
+     -->
 
 
 

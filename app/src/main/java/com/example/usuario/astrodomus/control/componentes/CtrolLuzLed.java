@@ -9,6 +9,7 @@ import android.widget.SeekBar;
 
 import com.example.usuario.astrodomus.R;
 import com.example.usuario.astrodomus.control.ControlAmbiente;
+import com.example.usuario.astrodomus.control.ControlPerfil;
 import com.example.usuario.astrodomus.control.ManagerRetrofit;
 import com.example.usuario.astrodomus.dialogs.atributos.LuzLedDialog;
 import com.example.usuario.astrodomus.interfaces.ConsumoServicios;
@@ -50,6 +51,24 @@ public class CtrolLuzLed {
             }
         });
     }
+    public void updateEstadoAtributoPerfil(Atributo atributo, String estado){
+        String[] datos=atributo.getIdAtributo().split("_");
+        String idEstados=datos[1];
+
+        Call<ResponseBody> res=servicio.update_perfil(idEstados,estado);
+
+        res.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
 
     public void abrirDialog(){
         luzLedDialog=new LuzLedDialog(context);
@@ -72,8 +91,10 @@ public class CtrolLuzLed {
                 if(ambiente!=null) {
                     cambiarEstadoAtritutoComponente(ambiente, componente, atributo.getIdAtributo(), i + "");
                 }else{
+                    updateEstadoAtributoPerfil(atributo, i+"");
                     //codigo perfiles
                 }
+
                 luzLedDialog.cargarPorcentaje(i+"");
             }
 
@@ -100,10 +121,12 @@ public class CtrolLuzLed {
 
 
     }
-    public void listenerBotonListoPerfiles(){
+    public void listenerBotonListoPerfiles(final ControlPerfil ctrolPerfil,final String user, final String jornada){
         luzLedDialog.getBtonListo().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ctrolPerfil.cargarPerfiles(user,jornada);
+                luzLedDialog.animarSalida();
             }
         });
     }

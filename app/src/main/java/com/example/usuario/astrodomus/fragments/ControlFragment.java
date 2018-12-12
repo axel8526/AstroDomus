@@ -16,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.usuario.astrodomus.R;
@@ -78,6 +80,8 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
     private EstadoAmbienteHilo ambienteHilo;
     private Activity activity;
+    private Button btonApagar;
+    private ProgressBar progressBar;
 
 
 
@@ -93,7 +97,7 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
         // Inflate the layout for this fragment
 
         viewFragment=inflater.inflate(R.layout.fragment_control, container, false);
-
+        findViews();
 
         bListaAmbiente=false;
         if(getArguments()!=null){
@@ -122,6 +126,17 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
 
         return viewFragment;
+    }
+    public void findViews(){
+        btonApagar=viewFragment.findViewById(R.id.control_bton_apagar);
+        progressBar=viewFragment.findViewById(R.id.control_progress_bar);
+    }
+    public void progressBarEstado(boolean estado){
+
+            progressBar.setLayoutParams(estado ?
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT) :
+                    new LinearLayout.LayoutParams(0, 0));
+
     }
     public void onDestroyView() {
         super.onDestroyView();
@@ -209,11 +224,16 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
             }
         });
 
+        progressBarEstado(false);
+
 
     }
 
     @Override
     public void ambientes(ArrayList<Ambiente> ambientes) {
+
+        ambientesDisponibles(!ambientes.isEmpty());
+
         this.ambientes=ambientes;
 
         AdapterAmbientes adapterAmbientes=new AdapterAmbientes(activity,ambientes,rol,this);
@@ -225,9 +245,11 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
     }
 
     public Ambiente actualizarAmbiente(Ambiente ambiente){
-        for(Ambiente ambienteActual : ambientes){
-            if(ambiente.getIdAmbiente().equals(ambienteActual.getIdAmbiente())){
-                return ambienteActual;
+        if (ambientes!=null) {
+            for (Ambiente ambienteActual : ambientes) {
+                if (ambiente.getIdAmbiente().equals(ambienteActual.getIdAmbiente())) {
+                    return ambienteActual;
+                }
             }
         }
         return null;
@@ -336,10 +358,11 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
 
     private void listenerApagarAmbiente(){
-        viewFragment.findViewById(R.id.control_bton_apagar).setOnClickListener(new View.OnClickListener() {
+
+       btonApagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                progressBarEstado(true);
                 if(rol.equals(InicioSesionActivity.ADMINISTRADOR_ROL) && !idUser.equals(ambiente.getIdUser())){
                     //entrara a este condicional siempre y cuando el id del usuario sea diference al id usuario del ambiente
                    // abrirListaAmbientes();
@@ -469,6 +492,20 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
     public void cerrarNotificacion(){
         NotificacionAmbiente not=new NotificacionAmbiente(activity);
         not.cerrar();
+    }
+
+    public void ambientesDisponibles(boolean estado){
+        LinearLayout contenedor=dgListaAmbientes.findViewById(R.id.m_ambientes_nada);
+        LinearLayout.LayoutParams llp;
+
+        if(estado){
+            llp=new LinearLayout.LayoutParams(0,0);
+        }else{
+
+            llp=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT);
+        }
+        contenedor.setLayoutParams(llp);
     }
 
 

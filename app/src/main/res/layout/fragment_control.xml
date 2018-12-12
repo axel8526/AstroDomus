@@ -10,6 +10,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
+        <ProgressBar
+            android:id="@+id/control_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:padding="100dp"/>
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:id="@+id/control_recycler"

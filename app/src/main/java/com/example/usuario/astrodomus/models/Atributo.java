@@ -8,6 +8,8 @@ public class Atributo {
     @SerializedName("id_atributo")
     @Expose
     private String idAtributo;
+    //para cargar el perfil en el atrituto id_atributo se guardara el id de ese estado en la tabla perfil
+
 
     @SerializedName("nombre_atributo")
     @Expose

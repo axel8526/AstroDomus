@@ -6,10 +6,31 @@
     android:layout_gravity="center"
     android:background="@android:color/white"
     android:layout_height="450dp">
-
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/m_ambientes_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/m_ambientes_nada"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/icon_ambiente_lista"/>
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+
+            android:text="No se encontraron ambientes disponibles"
+            android:textAlignment="center"/>
+    </LinearLayout>
+
+
+
 </LinearLayout>

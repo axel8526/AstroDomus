@@ -58,4 +58,6 @@
     <color name="color_app1">#0cb1a2</color>
     <color name="color_app2">#048377</color>
     <color name="color_app3">#076159</color>
+
+    <color name="color_fondo_componente">#c7202631</color>
 </resources>

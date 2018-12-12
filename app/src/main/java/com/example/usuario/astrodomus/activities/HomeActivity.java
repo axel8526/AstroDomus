@@ -28,6 +28,7 @@ import com.example.usuario.astrodomus.control.ControlAmbiente;
 import com.example.usuario.astrodomus.control.NotificacionAmbiente;
 import com.example.usuario.astrodomus.fragments.ControlFragment;
 import com.example.usuario.astrodomus.fragments.InicioUsuarioFragment;
+import com.example.usuario.astrodomus.fragments.PerfilFragment;
 import com.example.usuario.astrodomus.fragments.UsuariosFragment;
 import com.example.usuario.astrodomus.fragments.InicioFragment;
 import com.example.usuario.astrodomus.interfaces.ComunicaFragment;
@@ -232,7 +233,7 @@ public class HomeActivity extends AppCompatActivity
         switch (frag){
             case FRAG_USER:return new UsuariosFragment();
             case FRAG_CONTROL:return new ControlFragment();
-            case FRAG_PERFIL: return new UsuariosFragment();
+            case FRAG_PERFIL: return new PerfilFragment();
             case FRAG_COMPONENE: return new UsuariosFragment();
             case FRAG_REPORTE: return new UsuariosFragment();
 
