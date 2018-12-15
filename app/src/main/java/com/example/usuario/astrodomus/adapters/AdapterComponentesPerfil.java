@@ -54,7 +54,9 @@ public class AdapterComponentesPerfil extends RecyclerView.Adapter<HolderCompone
 
         listenerImage(holder.getvIcono(),componente);
         holder.getvSwitch().setChecked(componente.getAtributos().get(0).getEstadoAtributo().equals("0")?true:false);
-        listenerSwicth(holder.getvSwitch(),componente);
+        listenerSwicth(holder.getvSwitch(),componente, holder);
+
+        cambiarColorEstado(componente.getAtributos().get(0).getEstadoAtributo().equals("0")?true:false,holder);
     }
     public int getIdDrawable(ComponentePerfil componente){
         String nombre=componente.getNombreComponente().toLowerCase();
@@ -65,11 +67,22 @@ public class AdapterComponentesPerfil extends RecyclerView.Adapter<HolderCompone
         }
     }
 
-    public void listenerSwicth(Switch sw, final ComponentePerfil componente){
+    public void cambiarColorEstado(boolean estado, HolderComponente holder){
+        if(estado){
+            holder.getvIcono().setColorFilter(context.getResources().getColor(R.color.componente_estado_encendio));
+            holder.getvNombre().setTextColor(context.getResources().getColor(R.color.componente_estado_encendio));
+        }else{
+            holder.getvIcono().setColorFilter(context.getResources().getColor(R.color.titulos_letras_componente));
+            holder.getvNombre().setTextColor(context.getResources().getColor(R.color.titulos_letras_componente));
+        }
+    }
+
+    public void listenerSwicth(Switch sw, final ComponentePerfil componente, final HolderComponente holder){
         sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 ((ListenerPerfil)fragment).componenteOnOff(componente,b);
+                cambiarColorEstado(b,holder);
 
 
             }

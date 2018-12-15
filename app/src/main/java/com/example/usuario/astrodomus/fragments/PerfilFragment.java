@@ -9,8 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.usuario.astrodomus.R;
@@ -36,6 +38,7 @@ public class PerfilFragment extends Fragment implements ListenerPerfil {
 
     private View viewFragment;
     private RecyclerView rv;
+    private TextView textJornada;
     private ImageView[] btones;
     private Activity activity;
     private String rol, iduser;
@@ -56,6 +59,7 @@ public class PerfilFragment extends Fragment implements ListenerPerfil {
         viewFragment=inflater.inflate(R.layout.fragment_perfil, container, false);
         btones=new ImageView[3];
         findViews();
+        toolbar();
 
         if(getActivity()!=null && getArguments()!=null){
             activity=getActivity();
@@ -73,11 +77,26 @@ public class PerfilFragment extends Fragment implements ListenerPerfil {
 
     public void findViews(){
         rv=viewFragment.findViewById(R.id.rv_perfiles);
+        textJornada=viewFragment.findViewById(R.id.perfil_text_jornada);
         btones[0]=viewFragment.findViewById(R.id.perfil_bton_ma);
         btones[1]=viewFragment.findViewById(R.id.perfil_bton_tarde);
         btones[2]=viewFragment.findViewById(R.id.perfil_bton_noche);
 
 
+    }
+    public void toolbar(){
+        Button back=viewFragment.findViewById(R.id.toolbar_bton_back);
+        ImageView icono=viewFragment.findViewById(R.id.toobar_icono);
+        TextView titulo=viewFragment.findViewById(R.id.toolbar_titulo);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.onBackPressed();
+            }
+        });
+        icono.setImageResource(R.drawable.icon_boton_home5);
+        titulo.setText("Perfiles");
     }
     public void listenerBotones(){
         for(int i=0; i<btones.length;i++){
@@ -87,7 +106,7 @@ public class PerfilFragment extends Fragment implements ListenerPerfil {
                 public void onClick(View view) {
                     cargarPerfil(position+1);
 
-                    Toast.makeText(activity, getTextJornada(position), Toast.LENGTH_SHORT).show();
+
                 }
             });
         }
@@ -95,19 +114,25 @@ public class PerfilFragment extends Fragment implements ListenerPerfil {
 
     public String getTextJornada(int i){
         switch (i){
-            case 0: return "Mañana";
-            case 1:return "Tarde";
-            default:return "Noche";
+            case 0: return "MAÑANA";
+            case 1:return "TARDE";
+            default:return "NOCHE";
         }
     }
     public void cargarPerfil(int idJornada){
+        textJornada.setText(getTextJornada(idJornada-1));
         jornadaActiva=idJornada;
         ctrlPerfil.cargarPerfiles(iduser,idJornada+"");
         for(int i=0; i<btones.length;i++){
-            btones[i].setBackgroundColor(activity.getResources().getColor(R.color.color_app1));
+            btones[i].setBackgroundColor(activity.getResources().getColor(R.color.color_fondo_componente));
+
+            int padding=(int)(12*activity.getResources().getDisplayMetrics().density);
+            btones[i].setPadding(padding,padding,padding,padding);
 
         }
-        btones[idJornada-1].setBackgroundColor(activity.getResources().getColor(R.color.color_fondo_componente));
+        btones[idJornada-1].setBackgroundColor(activity.getResources().getColor(R.color.color_app1));
+        int padding=(int)(3*activity.getResources().getDisplayMetrics().density);
+        btones[idJornada-1].setPadding(padding,padding,padding,padding);
 
     }
 

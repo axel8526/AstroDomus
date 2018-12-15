@@ -88,7 +88,7 @@ public class HomeActivity extends AppCompatActivity
         //TextView viw=findViewById(R.id.nav_rol_user);
         //viw.setText("ADMINISTRADOR");
 
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+        toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrincipalOscuro));
 
 
 
@@ -276,6 +276,8 @@ public class HomeActivity extends AppCompatActivity
         }
 
     }
+
+
     public void iniciaMenu(){
         navigationView.getMenu().clear();
         navigationView.inflateMenu(R.menu.activity_home_drawer);

@@ -19,4 +19,9 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:backgroundTint">@color/colorPrincipalOscuro</item>
     </style>
+
+
+    <style name="theme_swicth" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:colorControlActivated">#7698d4</item>
+    </style>
 </resources>

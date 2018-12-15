@@ -1,15 +1,19 @@
 package com.example.usuario.astrodomus.activities;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Pair;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +35,7 @@ public class DatosPersonalesActivity extends Activity {
     private TextView textCorreo, textRol, textId;
     private String correo, rol, id;
     private int typeActivity;
+    private ImageView viewIcono;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +78,7 @@ public class DatosPersonalesActivity extends Activity {
         textCorreo=findViewById(R.id.dp_text_correo);
         textRol=findViewById(R.id.dp_text_rol);
         textId=findViewById(R.id.dp_text_cc);
+        viewIcono=findViewById(R.id.inicio_icon_user);
     }
     public void cargaDatosPrincipales(){
         Bundle datos=getIntent().getExtras();
@@ -180,23 +186,30 @@ public class DatosPersonalesActivity extends Activity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 inicioActivity();
-                Toast.makeText(DatosPersonalesActivity.this, "Datos actualizados", Toast.LENGTH_SHORT).show();
-            }
 
+                Toast.makeText(DatosPersonalesActivity.this, "Datos actualizados", Toast.LENGTH_SHORT).show();
+        }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
             }
         });
     }
+
+    @TargetApi(23)
     public void inicioActivity(){
 
 
-        Intent intent=new Intent(this,HomeActivity.class);
+        Intent intent=new Intent(this,InicioActivity.class);
         intent.putExtra(InicioSesionActivity.KEY_CORREO,correo);
         intent.putExtra(InicioSesionActivity.KEY_ID,id);
         intent.putExtra(InicioSesionActivity.KEY_ROL,rol);
-        startActivity(intent);
+
+        Pair pair=new Pair(viewIcono,"inicio_icon_user_t");
+
+        ActivityOptions op=ActivityOptions.makeSceneTransitionAnimation(this,pair);
+
+        startActivity(intent,op.toBundle());
         finish();
     }
 

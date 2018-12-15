@@ -87,7 +87,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         if(typeActivity==0){
             intent=new Intent(this,InicioSesionActivity.class);
         }else{
-            intent=new Intent(this,HomeActivity.class);
+            intent=new Intent(this,InicioActivity.class);
         }
 
 
@@ -97,6 +97,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
     public void cargaDatosPrincipales(){
         Bundle datos=getIntent().getExtras();
         if(datos!=null){

@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0cb1a2</color>
-    <color name="colorPrimaryDark">#048377</color>ro
-    <color name="colorPrincipalOscuro">#007469</color>
-    <!--#9ae4de color accent anterior-->
-    <color name="colorAccent">#55aca5</color>
-    <color name="colorGeneral1">#19ffe9</color>
-    <color name="colorGeneral">#00453e</color>
-    <color name="verde_transparente">#69022322</color>
-    <color name="negro_tranparente">#700a3a74</color>
-    <color name="color_barra_notificacion">#2c3239</color>
-    <color name="boton_basico">#08c4b3</color>
+    <color name="colorPrimary">#738ebe</color>
+    <color name="colorPrimaryDark">#0d0d0d</color>
 
-    <color name="icon_oscuro">#3b7974</color>
-    <color name="hint">#55aca5</color>
+    <color name="colorPrincipalOscuro">#273c66</color>
+
+    <!--#9ae4de color accent anterior
+     <color name="colorPrimaryDark">#5a6d8e</color>
+      <color name="colorPrimary">#0cb1a2</color>
+       <color name="colorAccent">#55aca5</color>
+    <color name="colorGeneral1">#19ffe9</color>
+    -->
+    <color name="colorAccent">#6f83a4</color>
+    <color name="colorGeneral1">#7698d4</color>
+    <color name="colorGeneral">#a660bfdf</color>
+    <color name="verde_transparente">#69022322</color>
+
+    <color name="color_barra_notificacion">#2c3239</color>
+    <color name="boton_basico">@color/colorGeneral1</color>
+
+    <color name="icon_oscuro">#5a6d8e</color>
+    <color name="hint">#b95a6d8e</color>
     <color name="fondo_dialog_oscuro">#18000000</color>
 
-    <color name="gris">#7bcec7</color>
+    <color name="gris">@color/colorGeneral1</color>
     <color name="ghost">#e4e4e4</color>
 
 
@@ -24,24 +31,29 @@
     <color name="c_letras_hin_formulario">#688380</color>
     <color name="c_text_boton">#FFF</color>
 
+    <color name="rojoT">#1bc61f1f</color>
     <color name="rojo1">#c61f1f</color>
-    <color name="rojo2">#df6060</color>
+    <color name="rojo2">#bfdf6060</color>
     <color name="rojo3">#932020</color>
 
+    <color name="amarilloT">#1fc6aa1f</color>
     <color name="amarillo1">#c6aa1f</color>
-    <color name="amarillo2">#dfc860</color>
+    <color name="amarillo2">#cddfc860</color>
     <color name="amarillo3">#97800a</color>
 
+    <color name="verdeT">#1c1fc665</color>
     <color name="verde1">#1fc665</color>
-    <color name="verde2">#60df75</color>
+    <color name="verde2">#b160df75</color>
     <color name="verde3">#25844d</color>
 
+    <color name="moradoT">#1b6d1fc6</color>
     <color name="morado1">#6d1fc6</color>
-    <color name="morado2">#9560df</color>
+    <color name="morado2">#a89560df</color>
     <color name="morado3">#452584</color>
 
+    <color name="azulT">#1a1f6ac6</color>
     <color name="azul1">#1f6ac6</color>
-    <color name="azul2">#60bfdf</color>
+    <color name="azul2">#a660bfdf</color>
     <color name="azul3">#0a3a74</color>
 
     <color name="gosth">#f5f5f5</color>
@@ -55,9 +67,28 @@
     <color name="comp_deshabilitado">#e8868686</color>
     <color name="comp_habilitado">#c7202631</color>
 
-    <color name="color_app1">#0cb1a2</color>
-    <color name="color_app2">#048377</color>
-    <color name="color_app3">#076159</color>
+    <color name="color_app1">#7698d4</color>
+    <color name="color_app2">#273c66</color>
+    <color name="color_app3">#1c2c4b</color>
 
     <color name="color_fondo_componente">#c7202631</color>
+
+    <color name="negro_tranparente">#3b000000</color>
+    <color name="tranparente">#00000000</color>
+
+    <color name="componente_estado_encendio">#f6f9ff</color>
+
+
+    <!--colores para nuevo header-->
+
+
+    <color name="H_fondo_principal">#6e121212</color>
+    <color name="H_fondo_secundario">#db1e1b1b</color>
+    <color name="H_color3">#db131313</color>
+    <color name="H_color_toolbar">#d6131313</color>
+    <color name="H_color_oscuro_link">#da060606</color>
+    <color name="H_letras_principal">#f7e2e2e2</color>
+    <color name="H_letras_secundario">#c8e9e9e9</color>
+
+
 </resources>

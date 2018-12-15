@@ -2,6 +2,7 @@ package com.example.usuario.astrodomus.fragments;
 
 
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
@@ -18,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -72,6 +74,7 @@ public class UsuariosFragment extends Fragment implements ListenerListaUsuarios,
         View v=inflater.inflate(R.layout.fragment_crear_usuario, container, false);
 
         findViews(v);
+        toolbar(v);
 
         if(getArguments()!=null){
             admin=getArguments().getString(InicioSesionActivity.KEY_CORREO);
@@ -81,16 +84,34 @@ public class UsuariosFragment extends Fragment implements ListenerListaUsuarios,
             setRoles();
             botones();
 
+
         }
 
         return v;
     }
+
+
     public void findViews(View v){
         sRol=v.findViewById(R.id.spinner_rol);
         linkCargaUsers=v.findViewById(R.id.link_lista_usuarios);
         editCorreo=v.findViewById(R.id.cu_correo);
         editId=v.findViewById(R.id.cu_id);
         btonCrearUsuario=v.findViewById(R.id.cu_bton_crear);
+    }
+
+    public void toolbar(View viewFragment){
+        Button back=viewFragment.findViewById(R.id.toolbar_bton_back);
+        ImageView icono=viewFragment.findViewById(R.id.toobar_icono);
+        TextView titulo=viewFragment.findViewById(R.id.toolbar_titulo);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
+        icono.setImageResource(R.drawable.icon_boton_home3);
+        titulo.setText("Usuarios");
     }
     public void botones(){
         linkCargaUsers.setOnClickListener(new View.OnClickListener() {

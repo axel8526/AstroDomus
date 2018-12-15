@@ -10,10 +10,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
+        <include layout="@layout/toolbar_m"/>
+
         <ProgressBar
             android:id="@+id/control_progress_bar"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="0"
             android:padding="100dp"/>
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
@@ -24,6 +27,7 @@
 
         </android.support.v7.widget.RecyclerView>
 
+
         <Button
             android:id="@+id/control_bton_apagar"
             android:layout_width="match_parent"
@@ -33,6 +37,28 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="@android:color/white"/>
+        <LinearLayout
+            android:id="@+id/id_con_correo"
+            android:transitionName="id_con_correo_t"
+
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:background="@color/H_fondo_principal">
+
+
+            <TextView
+
+                android:id="@+id/control_text_ambiente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AMBIENTE"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+
+                />
+        </LinearLayout>
     </LinearLayout>
     <!-- TODO: Update blank fragment layout -->
 

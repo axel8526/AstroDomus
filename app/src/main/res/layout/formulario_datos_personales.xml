@@ -3,15 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="@color/ghost"
+    android:background="@drawable/fondo_nav_user"
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:context=".activities.DatosPersonalesActivity">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
 
-        android:background="@drawable/fondo_toolbar_home"
-        android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/inicio_contenedor_datos_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/fondo_app2"
+
+        android:gravity="center_vertical|bottom"
+        android:orientation="vertical">
         <Button
             android:id="@+id/dp_bton_back"
             android:paddingLeft="12dp"
@@ -20,42 +24,82 @@
             android:layout_height="50dp"
             android:background="@android:color/transparent"
             android:drawableStart="@drawable/icon_back"/>
-
         <LinearLayout
-            android:layout_width="match_parent"
+
+            android:id="@+id/id_datos_user"
+            android:transitionName="id_datos_user_t"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:layout_height="200dp">
+            android:gravity="center"
+
+            android:layout_gravity="center"
+            >
 
             <ImageView
-                android:layout_width="90dp"
-                android:layout_marginTop="50dp"
-                android:layout_height="90dp"
-                android:src="@drawable/icon_cuenta"/>
-            <TextView
-                android:id="@+id/dp_text_correo"
-                android:layout_width="match_parent"
+                android:id="@+id/inicio_icon_user"
+                android:transitionName="inicio_icon_user_t"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/icon_usuario_lista_big"
+                android:src="@drawable/icon_user"
+                android:layout_gravity="center_vertical"
+                android:padding="18dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="18sp"
-                android:text="alexandercasanova.jr@gmail.com"
-                android:textColor="@android:color/white"/>
-            <TextView
-                android:id="@+id/dp_text_rol"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:text="INSTRUCTOR"
-                android:textColor="@android:color/white"/>
+                android:orientation="vertical"
+                android:layout_marginRight="18dp"
+                android:layout_gravity="center_vertical"
+                >
 
 
+                <TextView
+
+                    android:id="@+id/dp_text_rol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ADMINISTRADOR"
+                    android:layout_gravity="center"
+                    android:textColor="@color/H_letras_principal"
+                    android:textSize="14sp"
+                    />
+                <TextView
+                    android:id="@+id/dp_text_cc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1144102235"
+                    android:layout_gravity="center"
+                    android:textColor="@color/H_letras_principal"
+                    android:textSize="14sp"
+                    />
+            </LinearLayout>
 
         </LinearLayout>
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:background="@color/H_fondo_principal">
 
 
-    </android.support.constraint.ConstraintLayout>
+            <TextView
+
+
+                android:id="@+id/dp_text_correo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="alexandercasanova.jr@gmail.com"
+                android:textColor="@color/H_letras_secundario"
+
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 
 
@@ -88,34 +132,7 @@
 
                         android:layout_height="wrap_content">
 
-                        <LinearLayout
-                            android:padding="3dp"
-                            android:layout_marginBottom="25dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:background="@drawable/marco_delgado_negro"
-                            >
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:textSize="13sp"
-                                android:textStyle="bold"
-                                android:text="Identificacion"
-                                android:textColor="@android:color/darker_gray"/>
 
-                            <TextView
-                                android:id="@+id/dp_text_cc"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:textSize="15sp"
-                                android:textStyle="bold"
-                                android:text="1144102235"
-                                android:textColor="@android:color/darker_gray"/>
-
-                        </LinearLayout>
 
 
 

@@ -11,6 +11,7 @@
         card_view:cardElevation="2dp"
         card_view:cardCornerRadius="4dp"
         android:layout_margin="2dp"
+        card_view:cardBackgroundColor="@color/tranparente"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -23,6 +24,7 @@
         android:layout_height="@dimen/alto_item_componente">
         <ImageView
             android:id="@+id/comp_icono"
+
             android:layout_gravity="center_vertical"
             android:layout_width="100dp"
             android:padding="16dp"

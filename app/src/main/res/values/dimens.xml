@@ -34,4 +34,6 @@
 
     <dimen name="tam_boton_eliminar_user_list">30dp</dimen>
 
+    <dimen name="alto_toobar">50dp</dimen>
+
 </resources>

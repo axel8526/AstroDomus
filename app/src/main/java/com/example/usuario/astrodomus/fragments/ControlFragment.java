@@ -16,8 +16,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.usuario.astrodomus.R;
@@ -66,6 +68,7 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
     private String rol, idUser, correo;
     private Ambiente ambiente, ambienteCargado;
     private View viewFragment;
+    private TextView textAmbiente;
     private ControlAmbiente ctrolAmbiente;
     private EscogePerfilDialog dialogEscogePerfil;
 
@@ -98,6 +101,7 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
         viewFragment=inflater.inflate(R.layout.fragment_control, container, false);
         findViews();
+        toolbar();
 
         bListaAmbiente=false;
         if(getArguments()!=null){
@@ -130,6 +134,21 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
     public void findViews(){
         btonApagar=viewFragment.findViewById(R.id.control_bton_apagar);
         progressBar=viewFragment.findViewById(R.id.control_progress_bar);
+        textAmbiente=viewFragment.findViewById(R.id.control_text_ambiente);
+    }
+    public void toolbar(){
+        Button back=viewFragment.findViewById(R.id.toolbar_bton_back);
+        ImageView icono=viewFragment.findViewById(R.id.toobar_icono);
+        TextView titulo=viewFragment.findViewById(R.id.toolbar_titulo);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.onBackPressed();
+            }
+        });
+        icono.setImageResource(R.drawable.icon_boton_home1);
+        titulo.setText("Controles");
     }
     public void progressBarEstado(boolean estado){
 
@@ -153,6 +172,7 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
     public void ambienteAlojado(final Ambiente ambiente) {
             if(ambiente==null){
 
+
                 if(!bListaAmbiente) {
                     cerrarNotificacion();
                     abrirListaAmbientes();
@@ -165,6 +185,7 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
 
                 if(this.ambiente!=null && rol.equals(InicioSesionActivity.ADMINISTRADOR_ROL)){
+                    textAmbiente.setText(ambiente!=null?ambiente.getNombreAmbiente():"AMBIENTE");
                     this.ambiente=actualizarAmbiente(this.ambiente);
                     //si entra en este condicional es porque el administrador entro a un ambiente que ya estaba ocupado
                     //Toast.makeText(activity, this.ambiente.getIdUser()+"//"+this.ambiente.getIdAmbiente(), Toast.LENGTH_SHORT).show();
@@ -187,6 +208,7 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
 
             }else{
                 bListaAmbiente=false;
+                textAmbiente.setText(ambiente.getNombreAmbiente());
 
 
                 this.ambiente=ambiente;
@@ -282,6 +304,7 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
         }
 
         if(ambiente!=null) {
+
             //metodo nuevo... se comemnta para abrir el dialog de cargar perfil
            // ctrolAmbiente.consultarDatosComponentes(ambiente);
 

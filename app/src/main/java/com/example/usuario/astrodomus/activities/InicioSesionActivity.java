@@ -62,6 +62,7 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
     public static final String KEY_ACTIVITY="ACT";
     public static final String KEY_PASSWORD="PASS";
     public static final String KEY_RECORDAR="RECO";
+    public static final String KEY_NOMBRE="NOM";
 
 
 
@@ -210,19 +211,34 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
                 intent=new Intent(this,DatosPersonalesActivity.class);
 
             }else {
-                intent=new Intent(this,HomeActivity.class);
+                intent=new Intent(this,BienvenidaActivity.class);
 
             }
+
+            guardarDatosUsuarioPreferencias(user);
 
             intent.putExtra(KEY_CORREO,user.getCorreo());
             intent.putExtra(KEY_ID,user.getId());
             intent.putExtra(KEY_ROL,user.getRol());
+            intent.putExtra(KEY_NOMBRE,user.getNombre1());
             intent.putExtra(KEY_ACTIVITY,0);
 
             startActivity(intent);
             finish();
 
         }
+    }
+    public void guardarDatosUsuarioPreferencias(Usuario user){
+        SharedPreferences datos=PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor guarda=datos.edit();
+
+        guarda.putString(KEY_CORREO,user.getCorreo());
+        guarda.putString(KEY_ID,user.getId());
+        guarda.putString(KEY_ROL,user.getRol());
+        guarda.putString(KEY_NOMBRE,user.getNombre1());
+        guarda.putInt(KEY_ACTIVITY,0);
+
+        guarda.apply();
     }
 
     public void restablecerPassword(View v) {

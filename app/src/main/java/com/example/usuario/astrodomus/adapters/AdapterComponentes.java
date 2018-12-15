@@ -56,6 +56,8 @@ public class AdapterComponentes extends RecyclerView.Adapter<HolderComponente> {
         holder.getvSwitch().setChecked(componente.getPower().equals("0")?true:false);
         listenerSwicth(holder.getvSwitch(),componente);
 
+        cambiarColorEstado(componente.getPower().equals("0")?true:false,holder);
+
 
 
     }
@@ -92,6 +94,16 @@ public class AdapterComponentes extends RecyclerView.Adapter<HolderComponente> {
                 ((ListenerListaComponente)fragment).mostrarAtributos(componente);
             }
         });
+    }
+
+    public void cambiarColorEstado(boolean estado, HolderComponente holder){
+        if(estado){
+            holder.getvIcono().setColorFilter(context.getResources().getColor(R.color.componente_estado_encendio));
+            holder.getvNombre().setTextColor(context.getResources().getColor(R.color.componente_estado_encendio));
+        }else{
+            holder.getvIcono().setColorFilter(context.getResources().getColor(R.color.titulos_letras_componente));
+            holder.getvNombre().setTextColor(context.getResources().getColor(R.color.titulos_letras_componente));
+        }
     }
 
 

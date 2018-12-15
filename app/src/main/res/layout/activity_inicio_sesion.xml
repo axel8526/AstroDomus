@@ -15,7 +15,7 @@
         android:layout_height="200dp"
         android:onClick="cambiarIp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/astro_peque"
+        android:src="@drawable/logo_astrodomus"
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
         ></ImageView>
@@ -159,7 +159,7 @@
 
                         android:layout_gravity="end|center_vertical"
 
-                        android:text="login"/>
+                        android:text="ingresar"/>
                 </android.support.design.widget.CoordinatorLayout>
 
 

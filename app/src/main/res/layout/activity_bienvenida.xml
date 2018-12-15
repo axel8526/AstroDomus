@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_nav_user"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <android.support.design.widget.CoordinatorLayout android:id="@+id/inicio_contenedor_datos_user"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fondo_app2"
+
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <LinearLayout
+            android:id="@+id/id_datos_user"
+            android:transitionName="id_datos_user_t"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="30dp"
+            android:paddingLeft="12dp"
+            android:layout_gravity="center_vertical"
+            >
+
+            <ImageView
+                android:id="@+id/inicio_icon_user"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/icon_usuario_lista_big"
+                android:src="@drawable/icon_user"
+                android:layout_gravity="center_vertical"
+                android:padding="18dp"
+                android:layout_margin="12dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginRight="18dp"
+                android:layout_gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/inicio_text_bienvenido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bienvenido \n dfjdkkdf"
+                    android:textColor="@color/H_letras_principal"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="7dp"
+                    />
+                <TextView
+                    android:id="@+id/inicio_text_rol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ADMINISTRADOR"
+                    android:textColor="@color/H_letras_principal"
+                    android:textSize="14sp"
+                    />
+                <TextView
+                    android:id="@+id/inicio_text_cc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1144102235"
+                    android:textColor="@color/H_letras_principal"
+                    android:textSize="14sp"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+
+            android:id="@+id/id_con_correo"
+            android:transitionName="id_con_correo_t"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:background="@color/H_fondo_principal">
+
+
+            <TextView
+
+                android:id="@+id/inicio_text_correo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="alexandercasanova.jr@gmail.com"
+                android:textColor="@color/H_letras_secundario"
+
+                />
+        </LinearLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
