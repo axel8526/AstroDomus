@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -214,17 +215,17 @@ public class InicioActivity extends AppCompatActivity implements ComunicaFragmen
     public boolean abrirFramentAstroDomus(boolean home){
 
 
-        final LinearLayout.LayoutParams llm;
+        final FrameLayout.LayoutParams llm;
         Animation animation;
 
 
         if(!home){
-            llm=new LinearLayout.LayoutParams(0,0);
+            llm=new FrameLayout.LayoutParams(0,0);
             animation= AnimationUtils.loadAnimation(this,R.anim.desaparecer_top);
 
         }else{
-            int px=(int)(230*getResources().getDisplayMetrics().density);
-            llm=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,px);
+            int px=(int)(195*getResources().getDisplayMetrics().density);
+            llm=new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,px);
             animation=AnimationUtils.loadAnimation(this,R.anim.aparecer__top);
             contenedorDatos.setLayoutParams(llm);
         }

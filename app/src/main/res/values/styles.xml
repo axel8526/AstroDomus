@@ -75,23 +75,25 @@
 
     <style name="boton_home">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">match_parent</item>
+
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">#dedede</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:background">@color/color_app4</item>
+        <item name="android:textAlignment">textStart</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_gravity">center</item>
 
     </style>
 
     <style name="boton_home_icono">
-        <item name="android:background">@color/negro_transparente2</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:padding">23dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:src">@drawable/icon_boton_home6</item>
 
     </style>
 
@@ -100,15 +102,28 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:weightSum">10</item>
         <item name="android:gravity">center</item>
-        <item name="android:orientation">horizontal</item>
+        <item name="android:orientation">vertical</item>
     </style>
 
     <style name="boton_home_contenedor">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:layout_weight">5</item>
-        <item name="android:background">@color/negro_tranparente</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:background">@drawable/fondo_nav_user</item>
+        <item name="android:orientation">horizontal</item>
+
+
+
+       <!-- <item name="android:layout_weight">5</item>
+        <item name="android:layout_margin">2dp</item>
+         <item name="android:padding">20dp</item>-->
+
+
+
+
+    </style>
+    <style name="boton_home_contenedor_card">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
 
 
     </style>

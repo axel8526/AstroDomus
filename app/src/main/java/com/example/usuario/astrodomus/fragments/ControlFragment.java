@@ -189,7 +189,7 @@ public class ControlFragment extends Fragment implements ListenerListaAmbiente, 
                     this.ambiente=actualizarAmbiente(this.ambiente);
                     //si entra en este condicional es porque el administrador entro a un ambiente que ya estaba ocupado
                     //Toast.makeText(activity, this.ambiente.getIdUser()+"//"+this.ambiente.getIdAmbiente(), Toast.LENGTH_SHORT).show();
-                    if(this.ambiente.getEstado().equals(OCUP)) {
+                    if(this.ambiente!=null && this.ambiente.getEstado().equals(OCUP)) {
                         ctrolAmbiente.consultarDatosComponentes(this.ambiente);
                        // Toast.makeText(activity, "entro if", Toast.LENGTH_SHORT).show();
                     }else{

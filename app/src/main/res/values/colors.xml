@@ -32,28 +32,28 @@
     <color name="c_text_boton">#FFF</color>
 
     <color name="rojoT">#1bc61f1f</color>
-    <color name="rojo1">#c61f1f</color>
-    <color name="rojo2">#bfdf6060</color>
+    <color name="rojo1">#9f2b2b</color>
+    <color name="rojo2">#c63030</color>
     <color name="rojo3">#932020</color>
 
     <color name="amarilloT">#1fc6aa1f</color>
-    <color name="amarillo1">#c6aa1f</color>
-    <color name="amarillo2">#cddfc860</color>
+    <color name="amarillo1">#bfa835</color>
+    <color name="amarillo2">#ab9a4e</color>
     <color name="amarillo3">#97800a</color>
 
     <color name="verdeT">#1c1fc665</color>
-    <color name="verde1">#1fc665</color>
-    <color name="verde2">#b160df75</color>
+    <color name="verde1">#3d9f66</color>
+    <color name="verde2">#37a94a</color>
     <color name="verde3">#25844d</color>
 
     <color name="moradoT">#1b6d1fc6</color>
-    <color name="morado1">#6d1fc6</color>
-    <color name="morado2">#a89560df</color>
+    <color name="morado1">#7544ac</color>
+    <color name="morado2">#784ab7</color>
     <color name="morado3">#452584</color>
 
     <color name="azulT">#1a1f6ac6</color>
-    <color name="azul1">#1f6ac6</color>
-    <color name="azul2">#a660bfdf</color>
+    <color name="azul1">#315480</color>
+    <color name="azul2">#2a5993</color>
     <color name="azul3">#0a3a74</color>
 
     <color name="gosth">#f5f5f5</color>
@@ -68,6 +68,7 @@
     <color name="comp_habilitado">#c7202631</color>
 
     <color name="color_app1">#7698d4</color>
+    <color name="color_app4">#84a2d7</color>
     <color name="color_app2">#273c66</color>
     <color name="color_app3">#1c2c4b</color>
 
@@ -82,13 +83,19 @@
     <!--colores para nuevo header-->
 
 
-    <color name="H_fondo_principal">#6e121212</color>
-    <color name="H_fondo_secundario">#db1e1b1b</color>
+    <color name="H_fondo_principal">#5c5b5b</color>
+    <color name="H_fondo_secundario">@color/color_fondo_componente</color>
     <color name="H_color3">#db131313</color>
     <color name="H_color_toolbar">#d6131313</color>
     <color name="H_color_oscuro_link">#da060606</color>
     <color name="H_letras_principal">#f7e2e2e2</color>
     <color name="H_letras_secundario">#c8e9e9e9</color>
+
+    <color name="H_2_fondo_principal">#201e23</color>
+    <color name="H_2_fondo">#2d201e23</color>
+
+    <color name="boton_home1">#FFF</color>
+    <color name="boton_home2">#b3ffffff</color>
 
 
 </resources>
