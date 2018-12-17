@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_app"
+    android:background="@drawable/fondo_botones_home"
     android:paddingTop="40dp"
     tools:context=".activities.InicioSesionActivity">
 
@@ -18,164 +19,206 @@
         android:src="@drawable/logo_astrodomus"
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
+        android:tint="@color/blanco_transparente2"
         ></ImageView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        >
-
-        <ProgressBar
-            android:id="@+id/is_progress_bar"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-
-            android:backgroundTint="@android:color/white"
-            />
-
         <LinearLayout
-            android:id="@+id/is_contenedor_dato"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="25dp"
-            android:layout_margin="12dp"
+            android:gravity="center"
+            android:layout_marginBottom="62dp"
             >
 
+            <ProgressBar
+                android:id="@+id/is_progress_bar"
+                android:layout_width="50dp"
+                android:layout_height="1dp"
+
+                android:backgroundTint="@android:color/white"
+                />
+
             <LinearLayout
+                android:id="@+id/is_contenedor_dato"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="@drawable/fondo_edit_id"
-                android:paddingTop="3dp"
+                android:orientation="vertical"
+                android:padding="25dp"
                 >
 
-                <TextView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/icon_user"/>
-
-                <EditText
-
-
-                    android:id="@+id/is_id_user"
-                    android:layout_marginRight="22dp"
-                    android:textSize="14sp"
-                    android:textColorHint="@color/gris"
-
-                    android:textColor="@android:color/white"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:backgroundTint="@android:color/transparent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:hint="Correo electronico"/>
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
 
-            </LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gris"/>
+                    android:background="@drawable/fondo_negro_tranparente"
+                    android:paddingTop="3dp"
+                    >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="@drawable/fondo_edit_id"
+                    <ImageView
 
-                android:paddingTop="3dp"
-                android:layout_marginTop="10dp"
-                >
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:padding="8dp"
+                        android:src="@drawable/icon_user"
+                        android:background="@color/negro_transparente2"/>
 
+                    <EditText
+
+
+                        android:id="@+id/is_id_user"
+                        android:layout_marginRight="22dp"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/font_1"
+                        android:textColorHint="@color/blanco_transparente2"
+
+                        android:textColor="@android:color/white"
+                        android:layout_width="match_parent"
+                        android:backgroundTint="@android:color/transparent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:hint="Correo electronico"/>
+
+                </LinearLayout>
                 <TextView
-
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/icon_password"/>
-
-                <EditText
-
-                    android:id="@+id/is_clave_user"
-                    android:layout_marginRight="22dp"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/white"
+                    android:visibility="invisible"
                     android:layout_width="match_parent"
-                    android:backgroundTint="@android:color/transparent"
-                    android:layout_height="wrap_content"
-                    android:hint="Contraseña"
-                    android:textColorHint="@color/gris"
-                    android:inputType="textPassword"/>
-
-            </LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gris"/>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginTop="22dp"
-                android:layout_weight="10"
-                android:layout_height="wrap_content">
-
+                    android:layout_height="1dp"
+                    android:background="@color/gris"/>
 
                 <LinearLayout
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-
-
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
 
-                    >
-                    <CheckBox
-                        android:id="@+id/is_checkbox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
-                        android:buttonTint="@color/colorGeneral1"
-                        android:text="Recordarme"/>
 
+                    android:background="@drawable/fondo_negro_tranparente"
+
+                    android:paddingTop="3dp"
+                    android:layout_marginTop="10dp"
+                    >
+
+                    <ImageView
+
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:padding="8dp"
+                        android:src="@drawable/icon_password"
+                        android:background="@color/negro_transparente2"/>
+
+                    <EditText
+
+                        android:id="@+id/is_clave_user"
+                        android:layout_marginRight="5dp"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/font_1"
+                        android:textColor="@android:color/white"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:backgroundTint="@android:color/transparent"
+                        android:layout_height="wrap_content"
+                        android:hint="Contraseña"
+                        android:textColorHint="@color/blanco_transparente2"
+                        android:inputType="textPassword"/>
+
+                    <ImageView
+                        android:id="@+id/is_icon_show_password"
+                        android:layout_width="30dp"
+                        android:padding="5dp"
+                        android:visibility="invisible"
+                        android:onClick="iconShowPassword"
+
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon_visible_off"/>
+
+                </LinearLayout>
+                <TextView
+                    android:visibility="invisible"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/blanco_transparente2"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="22dp"
+                    android:layout_weight="10"
+                    android:layout_height="wrap_content">
+
+
+                    <RelativeLayout
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+
+
+                        android:gravity="center_vertical"
+
+                        >
+                        <CheckBox
+                            android:id="@+id/is_checkbox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/font_1"
+                            android:textColor="@android:color/white"
+                            android:buttonTint="@color/colorGeneral1"
+                            android:text="Recordarme"/>
+
+
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            style="@style/boton_1"
+                            android:onClick="iniciarSesion"
+                            android:fontFamily="@font/font_1"
+
+                            android:layout_alignParentEnd="true"
+
+                            android:text="ingresar"/>
+                    </RelativeLayout>
 
 
 
                 </LinearLayout>
 
-                <android.support.design.widget.CoordinatorLayout
-                    android:layout_width="match_parent"
 
-                    android:layout_height="wrap_content">
-
-                    <Button
-                        style="@style/boton_1"
-                        android:onClick="iniciarSesion"
-
-                        android:layout_gravity="end|center_vertical"
-
-                        android:text="ingresar"/>
-                </android.support.design.widget.CoordinatorLayout>
 
 
 
             </LinearLayout>
 
-
-            <TextView
-                style="@style/link_1"
-                android:text="¿Olvidaste tu contraseña?"
-                android:onClick="restablecerPassword"
-
-                />
-
         </LinearLayout>
-    </LinearLayout>
+
+
+    <TextView
+        style="@style/link_1"
+        android:layout_height="30dp"
+        android:layout_width="match_parent"
+
+
+        android:background="@color/H_color_toolbar"
+        android:textColor="@color/H_letras_principal"
+        android:textStyle="bold"
+
+        android:fontFamily="@font/font_1"
+        android:layout_margin="0dp"
+        android:text="¿Olvidaste tu contraseña?"
+        android:onClick="restablecerPassword"
+
+        />
 
 
 

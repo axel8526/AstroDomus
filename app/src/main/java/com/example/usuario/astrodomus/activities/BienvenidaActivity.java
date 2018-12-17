@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Pair;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,7 +20,8 @@ import com.example.usuario.astrodomus.R;
 public class BienvenidaActivity extends AppCompatActivity {
 
 
-    private LinearLayout conDatos, conCorreo;
+    private LinearLayout conCorreo;
+    private ImageView viewIcono;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +39,15 @@ public class BienvenidaActivity extends AppCompatActivity {
         Animation animation= AnimationUtils.loadAnimation(this,R.anim.aparecer_desvanecido);
         animation.setFillAfter(true);
 
-        conDatos.startAnimation(animation);
+        Animation animation2=AnimationUtils.loadAnimation(this,R.anim.transladar_desde_abajo);
+
+
+        viewIcono.startAnimation(animation);
+        textBienvenido.startAnimation(animation);
         conCorreo.startAnimation(animation);
+
+        textCC.startAnimation(animation2);
+        textRol.startAnimation(animation2);
 
     }
     public void iniciarCronometro(){
@@ -60,15 +69,18 @@ public class BienvenidaActivity extends AppCompatActivity {
         textRol.setText(rol);
         textCorreo.setText(correo);
         textCC.setText(id);
-        textBienvenido.setText("Bienvenido\n"+nombreUser(nombre));
+
+        String noms[]=nombre.split(" ");
+        textBienvenido.setText("Bienvenido\n"+nombreUser(noms[0]+" "+nombreUser(noms[1])));
     }
     public void findViews(){
-        conDatos=findViewById(R.id.id_datos_user);
+
         conCorreo=findViewById(R.id.id_con_correo);
         textBienvenido=findViewById(R.id.inicio_text_bienvenido);
         textCC=findViewById(R.id.inicio_text_cc);
         textCorreo=findViewById(R.id.inicio_text_correo);
         textRol=findViewById(R.id.inicio_text_rol);
+        viewIcono=findViewById(R.id.inicio_icon_user);
     }
     public String nombreUser(String nom){
         String n=nom.toLowerCase();
@@ -93,13 +105,17 @@ public class BienvenidaActivity extends AppCompatActivity {
     public void iniciarActividad(){
         Intent intent=new Intent(this, InicioActivity.class);
 
-        Pair[] pairs=new Pair[2];
+        Pair[] pairs=new Pair[5];
 
         pairs[0]=new Pair(conCorreo,"id_con_correo_t");
-        pairs[1]=new Pair(conDatos,"id_datos_user_t");
+        pairs[1]=new Pair(viewIcono,"inicio_icon_user_t");
+        pairs[2]=new Pair(textRol,"inicio_text_rol_t");
+        pairs[3]=new Pair(textCC,"inicio_text_cc");
+        pairs[4]=new Pair(conCorreo,"id_con_correo_t");
 
         ActivityOptions op=ActivityOptions.makeSceneTransitionAnimation(this,pairs);
 
         startActivity(intent,op.toBundle());
+        finish();
     }
 }

@@ -58,10 +58,13 @@
                         >
 
                         <TextView
+
                             android:id="@+id/inicio_text_bienvenido"
+                            android:transitionName="inicio_text_bientenido_t"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Bienvenido \n Alex"
+                            android:fontFamily="@font/font_1"
                             android:textColor="@color/H_letras_principal"
                             android:textSize="25sp"
                             android:textStyle="bold"
@@ -69,15 +72,19 @@
                             />
                         <TextView
                             android:id="@+id/inicio_text_rol"
+                            android:transitionName="inicio_text_rol_t"
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="ADMINISTRADOR"
+                            android:fontFamily="@font/font_1"
                             android:textColor="@color/H_letras_principal"
                             android:textSize="14sp"
                             />
                         <TextView
                             android:id="@+id/inicio_text_cc"
-
+                            android:fontFamily="@font/font_1"
+                            android:transitionName="inicio_text_cc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="1144102235"
@@ -96,15 +103,18 @@
                     android:layout_gravity="bottom"
                     android:gravity="center"
 
+
                     android:background="@color/H_fondo_secundario">
 
 
                     <TextView
 
                         android:id="@+id/inicio_text_correo"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
+                        android:fontFamily="@font/font_1"
                         android:text="alexandercasanova.jr@gmail.com"
                         android:textColor="@color/H_letras_secundario"
 
@@ -178,7 +188,7 @@
             android:onClick="botonesInicio"
             android:layout_weight="4"
             android:layout_height="match_parent"
-            android:src="@drawable/icon_salir_app"
+            android:src="@drawable/icon_cerrar_sesion"
             android:padding="7dp"
             />
 

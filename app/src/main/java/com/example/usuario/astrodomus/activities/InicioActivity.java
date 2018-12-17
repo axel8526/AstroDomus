@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.example.usuario.astrodomus.R;
 import com.example.usuario.astrodomus.control.ControlAmbiente;
 import com.example.usuario.astrodomus.control.NotificacionAmbiente;
+import com.example.usuario.astrodomus.dialogs.ConfirmarAccionDialog;
 import com.example.usuario.astrodomus.fragments.ControlFragment;
 import com.example.usuario.astrodomus.fragments.InicioFragment;
 import com.example.usuario.astrodomus.fragments.InicioUsuarioFragment;
@@ -89,12 +90,35 @@ public class InicioActivity extends AppCompatActivity implements ComunicaFragmen
         textRol.setText(rol);
         textCorreo.setText(correo);
         textCC.setText(id);
-        textBienvenido.setText("Bienvenido\n"+nombreUser(nombre));
+
+        String noms[]=nombre.split(" ");
+        textBienvenido.setText("Bienvenido\n"+nombreUser(noms[0]));
     }
 
     public String nombreUser(String nom){
         String n=nom.toLowerCase();
         return (n.charAt(0)+"").toUpperCase()+n.substring(1,n.length());
+    }
+
+    public void abrirDialogCerrarSesion(){
+        String noms[]=nombre.split(" ");
+
+        final ConfirmarAccionDialog dialog=new ConfirmarAccionDialog(this,
+                "¿Cerrar sesion?","Se cerrara la sesion del usuario "+nombreUser(noms[0])+" "+nombreUser(noms[1]),false);
+
+        dialog.abrirDialog();
+        dialog.setTextBtonConfirmar("confirmar");
+        dialog.setTheme(R.drawable.icon_dialog_bien,R.drawable.icon_user,R.color.colorPrimary);
+
+        dialog.cerrarDialog2();
+
+        dialog.getBtonConfirmar().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cerrarSesion();
+                dialog.cerrarDialog();
+            }
+        });
     }
 
     @Override
@@ -193,7 +217,7 @@ public class InicioActivity extends AppCompatActivity implements ComunicaFragmen
 
                 break;
             case R.id.inicio_bton_salir_app:
-                cerrarSesion();
+                abrirDialogCerrarSesion();
                 break;
 
         }

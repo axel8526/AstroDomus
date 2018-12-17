@@ -128,6 +128,8 @@ public class ConfirmarAccionDialog {
         viewIcono.setBackgroundResource(fondoIcono);
         viewIcono.setImageResource(icon);
 
+
+
         viewBarraSuperior.setBackgroundColor(context.getResources().getColor(color));
         viewBarraInferior.setBackgroundColor(context.getResources().getColor(color));
         btonConfirmar.setBackgroundColor(context.getResources().getColor(color));

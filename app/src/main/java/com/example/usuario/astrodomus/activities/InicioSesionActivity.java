@@ -9,11 +9,17 @@ import android.graphics.drawable.ColorDrawable;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -52,6 +58,7 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
     private CheckBox checkBox;
     private TextView textOlvidoPassword;
     private String codigoVerificar, textRol, textIdentificacion;
+    private ImageView iconShowPassword;
 
 
 
@@ -79,6 +86,8 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
 
         progressBar.getIndeterminateDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY);
         mostrarDatos();
+
+        comprobarEditTextPassword();
 
 
     }
@@ -141,6 +150,7 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
         progressBar=findViewById(R.id.is_progress_bar);
         contenedorDatos=findViewById(R.id.is_contenedor_dato);
         checkBox=findViewById(R.id.is_checkbox);
+        iconShowPassword=findViewById(R.id.is_icon_show_password);
     }
     public void mostrarProgressBar(){
 
@@ -217,11 +227,7 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
 
             guardarDatosUsuarioPreferencias(user);
 
-            intent.putExtra(KEY_CORREO,user.getCorreo());
-            intent.putExtra(KEY_ID,user.getId());
-            intent.putExtra(KEY_ROL,user.getRol());
-            intent.putExtra(KEY_NOMBRE,user.getNombre1());
-            intent.putExtra(KEY_ACTIVITY,0);
+
 
             startActivity(intent);
             finish();
@@ -235,7 +241,7 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
         guarda.putString(KEY_CORREO,user.getCorreo());
         guarda.putString(KEY_ID,user.getId());
         guarda.putString(KEY_ROL,user.getRol());
-        guarda.putString(KEY_NOMBRE,user.getNombre1());
+        guarda.putString(KEY_NOMBRE,user.getNombre1()+" "+user.getApellido1());
         guarda.putInt(KEY_ACTIVITY,0);
 
         guarda.apply();
@@ -356,6 +362,7 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
         intent.putExtra(InicioSesionActivity.KEY_ROL,textRol);
         intent.putExtra(InicioSesionActivity.KEY_ACTIVITY,0);
 
+
         startActivity(intent);
         finish();
     }
@@ -393,6 +400,49 @@ public class InicioSesionActivity extends AppCompatActivity implements MensajeEn
         } catch (Exception e) {
             return false;
         }
+    }
+
+
+    private boolean showPassword;
+    public void iconShowPassword(View view){
+        if(showPassword){
+            showPassword=false;
+            password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            iconShowPassword.setImageResource(R.drawable.icon_visible_off);
+        }else{
+            showPassword=true;
+            password.setInputType(InputType.TYPE_CLASS_TEXT);
+            iconShowPassword.setImageResource(R.drawable.icon_visible_on);
+        }
+        password.setSelection(password.getText().length());
+
+    }
+
+    public void comprobarEditTextPassword(){
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String pass=password.getText().toString();
+
+                if(pass.equalsIgnoreCase("")){
+                    iconShowPassword.setVisibility(View.INVISIBLE);
+                    iconShowPassword.setEnabled(false);
+                }else{
+                    iconShowPassword.setVisibility(View.VISIBLE);
+                    iconShowPassword.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
 }
