@@ -3,15 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
+    android:background="@drawable/fondo_nav_user"
+
 
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view_datos_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="@color/tranparente"
+        card_view:cardElevation="12dp">
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="#5a6d8e"
+        android:background="@drawable/fondo_app2"
         android:orientation="vertical"
-        android:layout_height="150dp">
+        android:layout_height="160dp">
         <Button
             android:layout_marginLeft="10dp"
             android:layout_width="40dp"
@@ -20,10 +29,12 @@
             android:id="@+id/ui_bton_atras"
             android:background="@android:color/transparent"/>
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:background="@drawable/icon_usuario_lista_big"
+            android:src="@drawable/icon_user"
+            android:padding="12dp"
             android:layout_marginBottom="10dp"
 
             />
@@ -36,6 +47,7 @@
             >
             <TextView
                 android:id="@+id/ui_nombre"
+                android:fontFamily="@font/font_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
@@ -47,6 +59,7 @@
                 android:id="@+id/ui_rol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/font_1"
                 android:textSize="10sp"
                 android:layout_gravity="center"
 
@@ -70,6 +83,7 @@
 
 
     </LinearLayout>
+    </android.support.v7.widget.CardView>
 
     <RelativeLayout
         android:layout_width="match_parent"

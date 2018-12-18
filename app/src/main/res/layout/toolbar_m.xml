@@ -19,6 +19,7 @@
         android:src="@drawable/icon_boton_home1"
         android:padding="9dp"/>
     <TextView
+        android:fontFamily="@font/font_1"
         android:id="@+id/toolbar_titulo"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

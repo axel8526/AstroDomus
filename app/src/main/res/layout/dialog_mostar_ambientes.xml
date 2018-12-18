@@ -4,7 +4,7 @@
     android:id="@+id/dg_cont_ctrol_ambientes"
     android:layout_width="300dp"
     android:layout_gravity="center"
-    android:background="@android:color/white"
+    android:background="@drawable/fondo_negro_transparente_2"
     android:layout_height="450dp">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/m_ambientes_recycler"
@@ -17,6 +17,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
+        android:background="@color/tranparente"
         android:layout_gravity="center">
 
         <ImageView

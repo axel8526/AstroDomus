@@ -28,6 +28,7 @@
                 <LinearLayout
                     android:layout_marginBottom="12dp"
                     android:id="@+id/id_datos_user"
+                    android:onClick="botonesInicio"
                     android:transitionName="id_datos_user_t"
 
                     android:layout_width="wrap_content"
@@ -39,7 +40,7 @@
 
                     <ImageView
                         android:id="@+id/inicio_icon_user"
-                        android:onClick="botonesInicio"
+
                         android:transitionName="inicio_icon_user_t"
                         android:layout_width="100dp"
                         android:layout_height="100dp"

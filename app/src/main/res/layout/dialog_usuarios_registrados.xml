@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="300dp"
     android:layout_gravity="center"
     android:id="@+id/dg_contenedor_usuarios"
-    android:background="@color/ghost"
+    android:background="@drawable/fondo_negro_transparente_2"
     android:layout_height="450dp">
 
 
@@ -33,6 +33,8 @@
                 <EditText
                     android:id="@+id/lu_edit_buscar"
                     android:layout_width="match_parent"
+                    android:textColor="@color/H_letras_principal"
+                    android:fontFamily="@font/font_1"
                     android:layout_height="40dp"
                     android:inputType="text"
                     android:layout_weight="1"

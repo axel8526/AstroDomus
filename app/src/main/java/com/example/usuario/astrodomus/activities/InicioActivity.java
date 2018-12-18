@@ -84,7 +84,7 @@ public class InicioActivity extends AppCompatActivity implements ComunicaFragmen
         btonPassword=findViewById(R.id.inicio_bton_clave);
         btonSalir=findViewById(R.id.inicio_bton_salir_app);
         contenedorDatos=findViewById(R.id.inicio_contenedor_datos_user);
-        conDatosAnim=findViewById(R.id.id_datos_user);
+        conDatosAnim=findViewById(R.id.id_con_correo);
     }
     public void cargarDatosUsuario(){
         textRol.setText(rol);
@@ -197,7 +197,7 @@ public class InicioActivity extends AppCompatActivity implements ComunicaFragmen
 
     public void botonesInicio(View v){
         switch (v.getId()){
-            case R.id.inicio_icon_user:
+            case R.id.id_datos_user:
                 abrirActivity(DatosPersonalesActivity.class);
                 break;
             case R.id.inicio_bton_home:
@@ -212,6 +212,7 @@ public class InicioActivity extends AppCompatActivity implements ComunicaFragmen
                 break;
             case R.id.inicio_bton_info:
                 colorFondoBotones(btonInfo,btonHome,btonPassword);
+                abrirActivity(DatosPersonalesActivity.class);
 
 
 
@@ -233,8 +234,6 @@ public class InicioActivity extends AppCompatActivity implements ComunicaFragmen
         bton2.setBackgroundColor(getResources().getColor(R.color.tranparente));
         bton3.setBackgroundColor(getResources().getColor(R.color.tranparente));
     }
-
-
 
     public boolean abrirFramentAstroDomus(boolean home){
 
@@ -303,11 +302,12 @@ public class InicioActivity extends AppCompatActivity implements ComunicaFragmen
         intent.putExtra(InicioSesionActivity.KEY_ACTIVITY,1);
 
 
-        Pair[] pairs=new Pair[2];
+        Pair[] pairs=new Pair[4];
 
-
-        pairs[0]=new Pair(conDatosAnim,"id_datos_user_t");
+        pairs[0]=new Pair(textRol,"inicio_text_rol_t");
         pairs[1]=new Pair(btonIcono,"inicio_icon_user_t");
+        pairs[2]=new Pair(textCC,"inicio_text_cc_t");
+        pairs[3]=new Pair(conDatosAnim,"id_con_correo_t");
 
         abrirFramentAstroDomus(false);
 

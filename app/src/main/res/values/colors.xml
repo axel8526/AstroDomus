@@ -60,6 +60,7 @@
 
     <color name="negro_transparente2">#22000000</color>
     <color name="blanco_transparente2">#adffffff</color>
+    <color name="blanco_transparente1">#74ffffff</color>
     <color name="texto_info">#688380</color>
 
     <color name="titulos_letras_componente">#acacac</color>

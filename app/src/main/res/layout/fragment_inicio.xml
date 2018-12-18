@@ -126,13 +126,6 @@
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
-            </LinearLayout>
-
-
-            <LinearLayout
-                style="@style/contenedor_botones_home2"
-                >
-
                 <android.support.v7.widget.CardView
                     style="@style/boton_home_contenedor_card"
                     card_view:cardCornerRadius="2dp"
@@ -169,6 +162,15 @@
 
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                style="@style/contenedor_botones_home2"
+                >
+
+
 
                 <android.support.v7.widget.CardView
                     style="@style/boton_home_contenedor_card"

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/fondo_nav_user"
+    android:background="@drawable/fondo_botones_home"
     tools:context=".fragments.UsuariosFragment">
 
     <include layout="@layout/toolbar_m"/>
@@ -17,8 +17,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center">
-
-
 
 
             <android.support.design.widget.CoordinatorLayout
@@ -72,6 +70,7 @@
 
 
                             <EditText
+                                android:fontFamily="@font/font_1"
                                 android:id="@+id/cu_correo"
                                 style="@style/edit_text_1"
                                 android:inputType="textEmailAddress"
@@ -100,6 +99,7 @@
 
 
                             <EditText
+                                android:fontFamily="@font/font_1"
                                 android:id="@+id/cu_id"
                                 style="@style/edit_text_1"
                                 android:inputType="number"
@@ -128,6 +128,7 @@
                 <Button
                     android:id="@+id/cu_bton_crear"
                     style="@style/boton_1"
+                    android:fontFamily="@font/font_1"
 
                     android:text="crear usuario"
                     android:layout_gravity="bottom|center"
@@ -147,18 +148,27 @@
 
 
 
-        <TextView
-            android:id="@+id/link_lista_usuarios"
-            style="@style/link_1"
 
-            android:layout_margin="0dp"
-            android:paddingTop="10dp"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:text="Ver usuarios registrados"/>
 
 
     </LinearLayout>
+    <TextView
+        android:id="@+id/link_lista_usuarios"
+        style="@style/link_1"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_margin="0dp"
+        android:layout_height="30dp"
+        android:background="@color/blanco_transparente2"
+        android:fontFamily="@font/major_mono_display"
+        android:textStyle="bold"
+
+
+
+
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:text="Ver usuarios registrados"/>
 
 
 

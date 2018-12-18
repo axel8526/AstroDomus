@@ -1,18 +1,25 @@
 package com.example.usuario.astrodomus.activities;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.usuario.astrodomus.R;
 import com.example.usuario.astrodomus.control.ManagerRetrofit;
+import com.example.usuario.astrodomus.control.NotificacionAmbiente;
+import com.example.usuario.astrodomus.dialogs.ConfirmarAccionDialog;
 import com.example.usuario.astrodomus.interfaces.ConsumoServicios;
 import com.example.usuario.astrodomus.models.Usuario;
 
@@ -27,8 +34,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     private TextView tCorreo, tRol, tId;
     private EditText editPass1, editPass2, editPass3;
-    private String correo, id, rol;
+    private String correo, id, rol, nombre;
+
+    private ImageView btonIcono, btonHome, btonPassword, btonInfo,btonSalir;
     private int typeActivity;
+    private LinearLayout conCorreo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,24 +46,31 @@ public class ChangePasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_change_password);
 
         findViews();
-        cargaDatosPrincipales();
+        datosUsuario();
         comprobarActividad();
+        colorFondoBotones(btonPassword,btonInfo,btonHome);
     }
     private void comprobarActividad(){
         if(typeActivity==0){
-            findViewById(R.id.cp_bton_back).setEnabled(false);
-            findViewById(R.id.cp_bton_back).setVisibility(View.INVISIBLE);
+            //findViewById(R.id.cp_bton_back).setEnabled(false);
+            //findViewById(R.id.cp_bton_back).setVisibility(View.INVISIBLE);
             editPass1.setEnabled(false);
         }
     }
 
     public void findViews(){
-        tCorreo=findViewById(R.id.cp_text_correo);
-        tRol=findViewById(R.id.cp_text_rol);
-        tId=findViewById(R.id.cp_text_cc);
+        tCorreo=findViewById(R.id.inicio_text_correo);
+        tRol=findViewById(R.id.inicio_text_rol);
+        tId=findViewById(R.id.inicio_text_cc);
         editPass1=findViewById(R.id.cp_password);
         editPass2=findViewById(R.id.cp_edit_clave2);
         editPass3=findViewById(R.id.cp_edit_clave3);
+        btonHome=findViewById(R.id.inicio_bton_home);
+        btonInfo=findViewById(R.id.inicio_bton_info);
+        btonPassword=findViewById(R.id.inicio_bton_clave);
+        btonSalir=findViewById(R.id.inicio_bton_salir_app);
+        conCorreo=findViewById(R.id.id_con_correo);
+        btonIcono=findViewById(R.id.inicio_icon_user);
     }
     public void onBackPressed(){
         inicioActivity();
@@ -62,10 +79,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
     public void botones(View v){
 
         switch (v.getId()){
-            case R.id.cp_bton_back:
 
-                inicioActivity();
-                break;
             case R.id.cp_bton_cambiar:
 
                 if(comprobarDatos()){
@@ -98,23 +112,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
         finish();
     }
 
-    public void cargaDatosPrincipales(){
-        Bundle datos=getIntent().getExtras();
-        if(datos!=null){
-            correo=datos.getString(InicioSesionActivity.KEY_CORREO);
-            rol=datos.getString(InicioSesionActivity.KEY_ROL);
-            id=datos.getString(InicioSesionActivity.KEY_ID);
-            typeActivity=datos.getInt(InicioSesionActivity.KEY_ACTIVITY);
 
 
-            tCorreo.setText(correo);
-            tId.setText(id);
-            tRol.setText(rol);
-
-            //Toast.makeText(this, correo, Toast.LENGTH_SHORT).show();
-
-        }
-    }
 
     private boolean comprobarDatos(){
         boolean comprobar=true;
@@ -198,4 +197,113 @@ public class ChangePasswordActivity extends AppCompatActivity {
     }
 
 
+
+    public void botonesInicio(View v){
+        switch (v.getId()){
+            case R.id.inicio_icon_user:
+
+                break;
+            case R.id.inicio_bton_home:
+
+               abrirActivity(InicioActivity.class);
+
+                break;
+            case R.id.inicio_bton_clave:
+
+
+                break;
+            case R.id.inicio_bton_info:
+                colorFondoBotones(btonInfo,btonHome,btonPassword);
+                abrirActivity(DatosPersonalesActivity.class);
+
+
+
+                break;
+            case R.id.inicio_bton_salir_app:
+                abrirDialogCerrarSesion();
+                break;
+
+        }
+    }
+    public void colorFondoBotones(View bton1, View bton2, View bton3){
+
+        bton1.setBackgroundColor(getResources().getColor(R.color.H_color_oscuro_link));
+        bton2.setBackgroundColor(getResources().getColor(R.color.tranparente));
+        bton3.setBackgroundColor(getResources().getColor(R.color.tranparente));
+    }
+    public void cerrarSesion(){
+        SharedPreferences datos= PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor guarda=datos.edit();
+
+        guarda.putBoolean(InicioSesionActivity.KEY_RECORDAR,false);
+        guarda.apply();
+
+
+        NotificacionAmbiente not=new NotificacionAmbiente(this);
+        not.cerrar();
+
+        startActivity(new Intent(this,InicioSesionActivity.class));
+        finish();
+    }
+    public void abrirDialogCerrarSesion(){
+        String noms[]=nombre.split(" ");
+
+        final ConfirmarAccionDialog dialog=new ConfirmarAccionDialog(this,
+                "¿Cerrar sesion?","Se cerrara la sesion del usuario "+nombreUser(noms[0])+" "+nombreUser(noms[1]),false);
+
+        dialog.abrirDialog();
+        dialog.setTextBtonConfirmar("confirmar");
+        dialog.setTheme(R.drawable.icon_dialog_bien,R.drawable.icon_user,R.color.colorPrimary);
+
+        dialog.cerrarDialog2();
+
+        dialog.getBtonConfirmar().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cerrarSesion();
+                dialog.cerrarDialog();
+            }
+        });
+    }
+
+    @TargetApi(23)
+    public void abrirActivity(Class clase){
+
+        Intent intent=new Intent(this,clase);
+
+
+        Pair[] pairs=new Pair[4];
+
+        pairs[0]=new Pair(tRol,"inicio_text_rol_t");
+        pairs[1]=new Pair(btonIcono,"inicio_icon_user_t");
+        pairs[2]=new Pair(tId,"inicio_text_cc_t");
+        pairs[3]=new Pair(conCorreo,"id_con_correo_t");
+
+
+        ActivityOptions op=ActivityOptions.makeSceneTransitionAnimation(this,pairs);
+
+        startActivity(intent,op.toBundle());
+        finish();
+
+    }
+    public void datosUsuario(){
+        SharedPreferences datos=PreferenceManager.getDefaultSharedPreferences(this);
+        //Bundle datos=getIntent().getExtras();
+        if(datos!=null){
+            correo=datos.getString(InicioSesionActivity.KEY_CORREO,"correo vacio");
+            rol=datos.getString(InicioSesionActivity.KEY_ROL,"rol vacio");
+            id=datos.getString(InicioSesionActivity.KEY_ID,"id vacio");
+            nombre=datos.getString(InicioSesionActivity.KEY_NOMBRE, "nom vacio");
+
+            tCorreo.setText(correo);
+            tId.setText(id);
+            tRol.setText(rol);
+
+
+        }
+    }
+    public String nombreUser(String nom){
+        String n=nom.toLowerCase();
+        return (n.charAt(0)+"").toUpperCase()+n.substring(1,n.length());
+    }
 }
