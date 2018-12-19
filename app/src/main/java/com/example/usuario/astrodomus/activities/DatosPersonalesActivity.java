@@ -80,8 +80,6 @@ public class DatosPersonalesActivity extends Activity {
         editDireccion=findViewById(R.id.dp_direccion);
         editPassword=findViewById(R.id.dp_confirmar_clave);
         textCorreo=findViewById(R.id.inicio_text_correo);
-        textRol=findViewById(R.id.inicio_text_rol);
-        textId=findViewById(R.id.inicio_text_cc);
         viewIcono=findViewById(R.id.inicio_icon_user);
         conCorreo=findViewById(R.id.id_con_correo);
     }
@@ -94,6 +92,9 @@ public class DatosPersonalesActivity extends Activity {
                 if (comprobarDatos()){
                     comprobarClave();
                 }
+                break;
+            case R.id.toolbar_bton_back:
+                onBackPressed();
                 break;
         }
     }
@@ -298,12 +299,10 @@ public class DatosPersonalesActivity extends Activity {
         intent.putExtra(InicioSesionActivity.KEY_ACTIVITY,1);
 
 
-        Pair[] pairs=new Pair[4];
+        Pair[] pairs=new Pair[1];
 
-        pairs[0]=new Pair(textRol,"inicio_text_rol_t");
-        pairs[1]=new Pair(viewIcono,"inicio_icon_user_t");
-        pairs[2]=new Pair(textId,"inicio_text_cc_t");
-        pairs[3]=new Pair(conCorreo,"id_con_correo_t");
+
+        pairs[0]=new Pair(viewIcono,"inicio_icon_user_t");
 
 
 
@@ -326,8 +325,7 @@ public class DatosPersonalesActivity extends Activity {
             typeActivity=datos.getInt(InicioSesionActivity.KEY_ACTIVITY,1);
 
             textCorreo.setText(correo);
-            textId.setText(id);
-            textRol.setText(rol);
+
 
 
         }

@@ -44,6 +44,7 @@ public class InicioActivity extends AppCompatActivity implements ComunicaFragmen
     public static final int FRAG_USER=1;
     public static final int FRAG_HOME=0;
 
+
     private int fragActivo;
     private String correo,id,rol, nombre;
 
@@ -124,14 +125,14 @@ public class InicioActivity extends AppCompatActivity implements ComunicaFragmen
     @Override
     public void activarFragment(int fragment) {
 
-            iniciarFragment(fragment);
+        fragActivo=fragment;
+        boolean a=fragment!=0?abrirFramentAstroDomus(false,false):abrirFramentAstroDomus(true,false);
 
 
 
     }
 
     public void iniciarFragment(int frag){
-        fragActivo=frag;
         FragmentManager fm=getSupportFragmentManager();
         FragmentTransaction transaction=fm.beginTransaction();
         Fragment fragment=getFragment(frag);
@@ -161,7 +162,7 @@ public class InicioActivity extends AppCompatActivity implements ComunicaFragmen
     }
 
     public Fragment getFragment(int frag){
-        boolean a=frag!=0?abrirFramentAstroDomus(false):abrirFramentAstroDomus(true);
+
         colorFondoBotones(btonHome,btonInfo,btonPassword);
 
         switch (frag){
@@ -203,7 +204,7 @@ public class InicioActivity extends AppCompatActivity implements ComunicaFragmen
             case R.id.inicio_bton_home:
                 colorFondoBotones(btonHome,btonInfo,btonPassword);
                 activarFragment(FRAG_HOME);
-                abrirFramentAstroDomus(true);
+
 
                 break;
             case R.id.inicio_bton_clave:
@@ -221,6 +222,8 @@ public class InicioActivity extends AppCompatActivity implements ComunicaFragmen
                 abrirDialogCerrarSesion();
                 break;
 
+
+
         }
     }
     public void colorFondoBotones(View bton1, View bton2, View bton3){
@@ -235,26 +238,34 @@ public class InicioActivity extends AppCompatActivity implements ComunicaFragmen
         bton3.setBackgroundColor(getResources().getColor(R.color.tranparente));
     }
 
-    public boolean abrirFramentAstroDomus(boolean home){
+    public boolean abrirFramentAstroDomus(final boolean home, final boolean actividad){
 
 
         final FrameLayout.LayoutParams llm;
-        Animation animation;
+        Animation animation, animation2;
 
 
         if(!home){
+
             llm=new FrameLayout.LayoutParams(0,0);
             animation= AnimationUtils.loadAnimation(this,R.anim.desaparecer_top);
+            animation2=AnimationUtils.loadAnimation(this,R.anim.desaparecer_bottom);
 
         }else{
+            iniciarFragment(fragActivo);
+
+
             int px=(int)(195*getResources().getDisplayMetrics().density);
             llm=new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,px);
+
             animation=AnimationUtils.loadAnimation(this,R.anim.aparecer__top);
+            animation2=AnimationUtils.loadAnimation(this,R.anim.aparecer_bottom);
             contenedorDatos.setLayoutParams(llm);
         }
 
         animation.setFillAfter(true);
         contenedorDatos.startAnimation(animation);
+        findViewById(R.id.contenedor_fragment).startAnimation(animation2);
 
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -265,6 +276,9 @@ public class InicioActivity extends AppCompatActivity implements ComunicaFragmen
             @Override
             public void onAnimationEnd(Animation animation) {
                 contenedorDatos.setLayoutParams(llm);
+                if(!home & !actividad){
+                    iniciarFragment(fragActivo);
+                }
             }
 
             @Override
@@ -296,20 +310,19 @@ public class InicioActivity extends AppCompatActivity implements ComunicaFragmen
     @TargetApi(23)
     public void abrirActivity(Class clase){
         Intent intent=new Intent(this,clase);
-        intent.putExtra(InicioSesionActivity.KEY_CORREO,correo);
-        intent.putExtra(InicioSesionActivity.KEY_ID,id);
-        intent.putExtra(InicioSesionActivity.KEY_ROL,rol);
-        intent.putExtra(InicioSesionActivity.KEY_ACTIVITY,1);
+
+        SharedPreferences datos=PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor guarda=datos.edit();
+        guarda.putInt(InicioSesionActivity.KEY_ACTIVITY,1);
+        guarda.apply();
 
 
-        Pair[] pairs=new Pair[4];
+        Pair[] pairs=new Pair[1];
 
-        pairs[0]=new Pair(textRol,"inicio_text_rol_t");
-        pairs[1]=new Pair(btonIcono,"inicio_icon_user_t");
-        pairs[2]=new Pair(textCC,"inicio_text_cc_t");
-        pairs[3]=new Pair(conDatosAnim,"id_con_correo_t");
 
-        abrirFramentAstroDomus(false);
+        pairs[0]=new Pair(btonIcono,"inicio_icon_user_t");
+
+        abrirFramentAstroDomus(false,true);
 
 
 

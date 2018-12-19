@@ -209,6 +209,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">@font/font_1</item>
         <item name="android:textColor">@android:color/black</item>
 
     </style>
@@ -220,6 +221,7 @@
         <item name="android:layout_marginLeft">9dp</item>
         <item name="android:layout_marginRight">9dp</item>
         <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:fontFamily">@font/font_1</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/c_letras_hin_formulario</item>
 
@@ -230,6 +232,7 @@
         <item name="android:background">@color/color_app1</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">30dp</item>
+        <item name="android:fontFamily">@font/font_1</item>
         <item name="android:text">listo</item>
         <item name="android:paddingRight">6dp</item>
         <item name="android:paddingLeft">6dp</item>
@@ -260,18 +263,31 @@
 
 
     <!--Estilos para dialog
-     <ImageView
-                    android:id="@+id/perfil_bton_noche"
-                    style="@style/dg_atrituboos_bton_listo"
-                    android:layout_margin="0dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+    android:layout_marginRight="22dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/font_1"
+            android:textColorHint="@color/blanco_transparente2"
 
-                    android:src="@drawable/icon_jornada_noche"
-                    android:gravity="center"
-                    android:text="-"
-                    android:textSize="40sp"/>
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="Correo electronico"
      -->
+
+
+
+    <style name="edit_text_new">
+        <item name="android:layout_marginRight">22dp</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/font_1</item>
+        <item name="android:textColorHint">@color/blanco_transparente2</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:inputType">text</item>
+    </style>
 
 
 </resources>

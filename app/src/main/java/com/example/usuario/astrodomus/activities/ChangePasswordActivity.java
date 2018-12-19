@@ -60,8 +60,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     public void findViews(){
         tCorreo=findViewById(R.id.inicio_text_correo);
-        tRol=findViewById(R.id.inicio_text_rol);
-        tId=findViewById(R.id.inicio_text_cc);
+
         editPass1=findViewById(R.id.cp_password);
         editPass2=findViewById(R.id.cp_edit_clave2);
         editPass3=findViewById(R.id.cp_edit_clave3);
@@ -91,6 +90,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     }
                 }
                 break;
+
+            case R.id.toolbar_bton_back:
+                onBackPressed();
+                break;
+
         }
 
     }
@@ -272,12 +276,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
         Intent intent=new Intent(this,clase);
 
 
-        Pair[] pairs=new Pair[4];
+        Pair[] pairs=new Pair[1];
 
-        pairs[0]=new Pair(tRol,"inicio_text_rol_t");
-        pairs[1]=new Pair(btonIcono,"inicio_icon_user_t");
-        pairs[2]=new Pair(tId,"inicio_text_cc_t");
-        pairs[3]=new Pair(conCorreo,"id_con_correo_t");
+
+        pairs[0]=new Pair(btonIcono,"inicio_icon_user_t");
 
 
         ActivityOptions op=ActivityOptions.makeSceneTransitionAnimation(this,pairs);
@@ -294,10 +296,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
             rol=datos.getString(InicioSesionActivity.KEY_ROL,"rol vacio");
             id=datos.getString(InicioSesionActivity.KEY_ID,"id vacio");
             nombre=datos.getString(InicioSesionActivity.KEY_NOMBRE, "nom vacio");
+            typeActivity=datos.getInt(InicioSesionActivity.KEY_ACTIVITY,1);
 
             tCorreo.setText(correo);
-            tId.setText(id);
-            tRol.setText(rol);
+
 
 
         }
