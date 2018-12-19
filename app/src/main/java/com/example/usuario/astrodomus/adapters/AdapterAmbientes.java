@@ -72,13 +72,13 @@ public class AdapterAmbientes extends RecyclerView.Adapter<HolderAmbiente> {
         }else if(ambiente.getEstado().equalsIgnoreCase(ControlFragment.DISP)){
 
             holder.getBtonSwitch().setChecked(true);
-            holder.getViewEstado().setTextColor(context.getResources().getColor(R.color.gris));
+            holder.getViewEstado().setTextColor(context.getResources().getColor(R.color.letras_recalcar));
             holder.getBtonSwitch().setEnabled(true);
             holder.getBtonPower().setVisibility(View.INVISIBLE);
 
         }else{
             holder.getBtonSwitch().setChecked(true);
-            holder.getViewEstado().setTextColor(context.getResources().getColor(R.color.gris));
+            holder.getViewEstado().setTextColor(context.getResources().getColor(R.color.letras_recalcar));
             holder.getBtonSwitch().setEnabled(false);
             holder.getBtonPower().setVisibility(View.VISIBLE);
         }

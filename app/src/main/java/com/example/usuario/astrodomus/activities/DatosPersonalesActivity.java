@@ -314,6 +314,8 @@ public class DatosPersonalesActivity extends Activity {
 
     }
     public void datosUsuario(){
+
+
         SharedPreferences datos=PreferenceManager.getDefaultSharedPreferences(this);
         //Bundle datos=getIntent().getExtras();
         if(datos!=null){
@@ -321,6 +323,7 @@ public class DatosPersonalesActivity extends Activity {
             rol=datos.getString(InicioSesionActivity.KEY_ROL,"rol vacio");
             id=datos.getString(InicioSesionActivity.KEY_ID,"id vacio");
             nombre=datos.getString(InicioSesionActivity.KEY_NOMBRE, "nom vacio");
+            typeActivity=datos.getInt(InicioSesionActivity.KEY_ACTIVITY,1);
 
             textCorreo.setText(correo);
             textId.setText(id);

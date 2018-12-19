@@ -31,10 +31,11 @@
 
                 <ImageView
                     android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:background="@drawable/icon_ambiente_lista"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/icon_ambiente_lista"
+                    android:background="@color/negro_transparente2"
+                    android:padding="12dp"
 
                     />
                 <LinearLayout
@@ -53,7 +54,8 @@
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
-                        android:textSize="15sp"
+                        android:fontFamily="@font/font_1"
+                        android:textSize="17sp"
                         android:text="AMBIENTE B"/>
 
                     <LinearLayout
@@ -67,8 +69,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="10sp"
+                            android:fontFamily="@font/font_1"
                             android:textStyle="bold"
-                            android:textColor="@color/gris"
+                            android:textColor="@color/letras_recalcar"
 
                             android:text="DISPONIBLE"/>
 

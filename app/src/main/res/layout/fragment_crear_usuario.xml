@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/fondo_botones_home"
+    android:paddingBottom="15dp"
     tools:context=".fragments.UsuariosFragment">
 
     <include layout="@layout/toolbar_m"/>
@@ -14,12 +15,123 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_marginTop="22dp"
         android:orientation="vertical"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
         android:layout_gravity="center">
 
+        <Spinner
+            android:padding="5dp"
+            android:layout_marginBottom="12dp"
 
-            <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/spinner_rol"
+            android:background="@drawable/fondo_spinner"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></Spinner>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="7dp"
+
+            android:background="@drawable/fondo_negro_tranparente"
+            android:paddingTop="3dp"
+            >
+
+            <ImageView
+
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:padding="8dp"
+                android:src="@drawable/icon_user"
+                android:background="@color/negro_transparente2"/>
+
+            <EditText
+
+
+
+                android:id="@+id/cu_correo"
+                android:layout_marginRight="22dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/font_1"
+                android:textColorHint="@color/blanco_transparente2"
+
+                android:textColor="@android:color/white"
+                android:layout_width="match_parent"
+                android:backgroundTint="@android:color/transparent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="Correo electronico"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+
+            android:background="@drawable/fondo_negro_tranparente"
+            android:paddingTop="3dp"
+            >
+
+            <ImageView
+
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:padding="8dp"
+                android:src="@drawable/icon_id_"
+                android:tint="@android:color/white"
+                android:background="@color/negro_transparente2"/>
+
+            <EditText
+
+
+
+                android:id="@+id/cu_id"
+                android:layout_marginRight="22dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/font_1"
+                android:textColorHint="@color/blanco_transparente2"
+
+                android:textColor="@android:color/white"
+                android:layout_width="match_parent"
+                android:backgroundTint="@android:color/transparent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="Correo electronico"/>
+
+
+
+        </LinearLayout>
+
+
+
+        <Button
+            android:layout_marginTop="42dp"
+            android:id="@+id/cu_bton_crear"
+            style="@style/boton_1"
+            android:fontFamily="@font/font_1"
+            android:layout_width="match_parent"
+            android:text="crear usuario"
+            android:layout_gravity="bottom|center"
+
+            />
+
+
+
+       <!--No coloco el logo porque al abrirse el teclado
+       tapa todo3
+
+          <android.support.design.widget.CoordinatorLayout
                 android:layout_width="match_parent"
 
 
@@ -114,12 +226,6 @@
 
 
 
-
-
-
-
-
-
                 </LinearLayout>
 
 
@@ -135,9 +241,7 @@
 
                     />
             </android.support.design.widget.CoordinatorLayout>
-
-       <!--No coloco el logo porque al abrirse el teclado
-       tapa todo3-->
+       -->
 
 
 
@@ -159,14 +263,14 @@
         android:layout_width="match_parent"
         android:layout_margin="0dp"
         android:layout_height="30dp"
-        android:background="@color/blanco_transparente2"
-        android:fontFamily="@font/major_mono_display"
+        android:background="@color/H_color_toolbar"
+        android:fontFamily="@font/font_1"
         android:textStyle="bold"
 
 
 
 
-        android:textColor="@android:color/black"
+        android:textColor="@color/H_letras_principal"
         android:textSize="18sp"
         android:text="Ver usuarios registrados"/>
 

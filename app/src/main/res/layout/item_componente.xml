@@ -25,6 +25,7 @@
         <ImageView
             android:id="@+id/comp_icono"
 
+
             android:layout_gravity="center_vertical"
             android:layout_width="100dp"
             android:padding="16dp"
@@ -49,8 +50,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/titulos_letras_componente"
-
-                android:textSize="17sp"
+                android:fontFamily="@font/font_1"
+                android:textSize="18sp"
                 android:text="Ventilador"/>
 
             <LinearLayout
@@ -64,6 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="10sp"
+                    android:fontFamily="@font/font_1"
                     android:textStyle="bold"
                     android:visibility="invisible"
 

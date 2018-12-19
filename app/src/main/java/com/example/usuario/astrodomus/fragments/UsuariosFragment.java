@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +57,7 @@ public class UsuariosFragment extends Fragment implements ListenerListaUsuarios,
 
     private Spinner sRol;
     private TextView linkCargaUsers;
-    private EditText editId, editCorreo;
+    private EditText editId, editCorreo, editConsulta;
     private Button btonCrearUsuario;
     private Dialog dialogLoading, dgListUser;
     private String admin, busqueda;
@@ -127,27 +129,55 @@ public class UsuariosFragment extends Fragment implements ListenerListaUsuarios,
                 busqueda="";
                 abrirLista();
 
-                final EditText editConsulta=dgListUser.findViewById(R.id.lu_edit_buscar);
+                 editConsulta=dgListUser.findViewById(R.id.lu_edit_buscar);
                 final TextView tClear=dgListUser.findViewById(R.id.lu_bton_clear);
 
 
-                dgListUser.findViewById(R.id.lu_bton_buscar).setOnClickListener(new View.OnClickListener() {
+                editConsulta.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        String pass=editConsulta.getText().toString();
+
+                        if(pass.equalsIgnoreCase("")){
+                            tClear.setVisibility(View.INVISIBLE);
+                            tClear.setEnabled(false);
+                        }else{
+                            tClear.setVisibility(View.VISIBLE);
+                            tClear.setEnabled(true);
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        busqueda=editConsulta.getText().toString().trim();
+                        abrirLista();
+                        //cerrarTeclado(editConsulta);
+                    }
+                });
+
+
+                /*dgListUser.findViewById(R.id.lu_bton_buscar).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        tClear.setText("X");
+                        //tClear.setText("X");
                         busqueda=editConsulta.getText().toString().trim();
                         abrirLista();
                         cerrarTeclado(editConsulta);
 
                     }
-                });
+                });*/
 
                 tClear.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         editConsulta.setText("");
                         busqueda="";
-                        tClear.setText("");
+                        //tClear.setText("");
                         abrirLista();
 
                     }
@@ -364,6 +394,8 @@ public class UsuariosFragment extends Fragment implements ListenerListaUsuarios,
 
     @Override
     public void clickItem(final Usuario usuario) {
+
+       cerrarTeclado(editConsulta);
         LinearLayout conInfo=dgListUser.findViewById(R.id.ui_contenedor_datos);
         TextView tNombre,tRol,tId, tCorreo, tMovil, tDireccion;
 

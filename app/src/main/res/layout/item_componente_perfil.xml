@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/titulos_letras_componente"
 
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:text="Ventilador"/>
 
                 <LinearLayout

@@ -10,8 +10,9 @@
       <color name="colorPrimary">#0cb1a2</color>
        <color name="colorAccent">#55aca5</color>
     <color name="colorGeneral1">#19ffe9</color>
+     <color name="colorAccent">#6f83a4</color>
     -->
-    <color name="colorAccent">#6f83a4</color>
+    <color name="colorAccent">#6ebbdc</color>
     <color name="colorGeneral1">#7698d4</color>
     <color name="colorGeneral">#a660bfdf</color>
     <color name="verde_transparente">#69022322</color>
@@ -78,7 +79,7 @@
     <color name="negro_tranparente">#3b000000</color>
     <color name="tranparente">#00000000</color>
 
-    <color name="componente_estado_encendio">#f6f9ff</color>
+    <color name="componente_estado_encendio">@color/letras_recalcar</color>
 
 
     <!--colores para nuevo header-->
@@ -97,6 +98,8 @@
 
     <color name="boton_home1">#FFF</color>
     <color name="boton_home2">#b3ffffff</color>
+
+    <color name="letras_recalcar">#92deff</color>
 
 
 </resources>

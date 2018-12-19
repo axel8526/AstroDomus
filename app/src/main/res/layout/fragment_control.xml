@@ -35,6 +35,7 @@
             android:layout_height="70dp"
             android:background="@drawable/anim_boton"
             android:text="apagar todo"
+            android:fontFamily="@font/font_1"
             android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="@android:color/white"/>
@@ -55,6 +56,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="AMBIENTE"
+
+                android:fontFamily="@font/font_1"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
 
